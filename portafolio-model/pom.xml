@@ -26,6 +26,9 @@
         </plugins>
     </build>
 
+    <properties>
+        <app.root>${project.basedir}/..</app.root>
+    </properties>
 
     <dependencies>
         <!-- dependencias de log4j -->
@@ -131,9 +134,9 @@
         <!-- Base de datos -->
         <!-- PostgreSQL -->
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${postgresql.jdbc.version}</version>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>${oracle.jdbc.version}</version>
         </dependency>
 
         <!-- PERSISTENCE -->
