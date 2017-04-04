@@ -7,12 +7,14 @@ package cl.duoc.portafolio.repository;
 
 import cl.duoc.portafolio.model.Place;
 import java.util.List;
+import javax.annotation.Resource;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
  * @author CETECOM
  */
+@Resource(name = "placeRepository")
 public interface PlaceRepository extends CrudRepository<Place, Long>{
     
     public List<Place> findAll();

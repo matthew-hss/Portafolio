@@ -7,12 +7,14 @@ package cl.duoc.portafolio.repository;
 
 import cl.duoc.portafolio.model.Role;
 import java.util.List;
+import javax.annotation.Resource;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
  * @author CETECOM
  */
+@Resource(name = "roleRepository")
 public interface RoleRepository extends CrudRepository<Role, Long>{
     
     public List<Role> findAll();

@@ -7,12 +7,14 @@ package cl.duoc.portafolio.repository;
 
 import cl.duoc.portafolio.model.Function;
 import java.util.List;
+import javax.annotation.Resource;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
  * @author CETECOM
  */
+@Resource(name = "functionRepository")
 public interface FunctionRepository extends CrudRepository<Function, Long>{
     
     public List<Function> findAll();

@@ -9,12 +9,14 @@ import cl.duoc.portafolio.model.Function;
 import cl.duoc.portafolio.model.Service;
 import cl.duoc.portafolio.model.VoucherAmount;
 import java.util.List;
+import javax.annotation.Resource;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
  * @author CETECOM
  */
+@Resource(name = "voucherAmountRepository")
 public interface VoucherAmountRepository extends CrudRepository<VoucherAmount, Long>{
     
     public List<VoucherAmount> findAll();

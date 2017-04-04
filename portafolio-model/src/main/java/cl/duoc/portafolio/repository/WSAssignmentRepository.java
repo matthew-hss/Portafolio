@@ -9,12 +9,14 @@ import cl.duoc.portafolio.model.Functionary;
 import cl.duoc.portafolio.model.WSAssignment;
 import cl.duoc.portafolio.model.Workshift;
 import java.util.List;
+import javax.annotation.Resource;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
  * @author CETECOM
  */
+@Resource(name = "wsAssignmentRepository")
 public interface WSAssignmentRepository extends CrudRepository<WSAssignment, Long>{
     
     public List<WSAssignment> findAll();

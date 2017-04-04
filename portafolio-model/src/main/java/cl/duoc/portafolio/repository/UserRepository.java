@@ -8,12 +8,14 @@ package cl.duoc.portafolio.repository;
 import cl.duoc.portafolio.model.Role;
 import cl.duoc.portafolio.model.User;
 import java.util.List;
+import javax.annotation.Resource;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
  * @author CETECOM
  */
+@Resource(name = "userRepository")
 public interface UserRepository extends CrudRepository<User, Long>{
     
     public List<User> findAll();

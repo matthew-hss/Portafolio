@@ -9,12 +9,14 @@ import cl.duoc.portafolio.model.Product;
 import cl.duoc.portafolio.model.Sale;
 import cl.duoc.portafolio.model.SaleItem;
 import java.util.List;
+import javax.annotation.Resource;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
  * @author CETECOM
  */
+@Resource(name = "saleItemRepository")
 public interface SaleItemRepository extends CrudRepository<SaleItem, Long>{
     
     public List<SaleItem> findAll();
