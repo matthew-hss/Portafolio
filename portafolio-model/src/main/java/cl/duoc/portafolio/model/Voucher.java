@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -32,6 +33,10 @@ public class Voucher implements Serializable{
     private String code = null;
     @Column(name = "used", nullable = false)
     private boolean used = true;
+    @JoinColumn(name = "functionary_id", referencedColumnName = "id" ,nullable = false)
+    private Functionary functionary = null;
+    @JoinColumn(name = "sale_id", referencedColumnName = "id", nullable = false)
+    private Sale sale = null;
 
     public Long getId() {
         return id;
@@ -56,4 +61,22 @@ public class Voucher implements Serializable{
     public void setUsed(boolean used) {
         this.used = used;
     }
+
+    public Functionary getFunctionary() {
+        return functionary;
+    }
+
+    public void setFunctionary(Functionary functionary) {
+        this.functionary = functionary;
+    }
+
+    public Sale getSale() {
+        return sale;
+    }
+
+    public void setSale(Sale sale) {
+        this.sale = sale;
+    }
+    
+    
 }

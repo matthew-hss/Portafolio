@@ -33,7 +33,7 @@ public class WSAssignment implements Serializable{
     @JoinColumn(name = "workshift_id", referencedColumnName = "id", nullable = false)
     private Workshift workshift = null;
     @JoinColumn(name = "funcionary_id", referencedColumnName = "id", nullable = false)
-    private Funcionary funcionary = null;
+    private Functionary functionary = null;
     @Column(name = "startDate", nullable = false)
     private Date startDate = null;
     @Column(name = "endDate", nullable = false)
@@ -55,12 +55,12 @@ public class WSAssignment implements Serializable{
         this.workshift = workshift;
     }
 
-    public Funcionary getFuncionary() {
-        return funcionary;
+    public Functionary getFunctionary() {
+        return functionary;
     }
 
-    public void setFuncionary(Funcionary funcionary) {
-        this.funcionary = funcionary;
+    public void setFunctionary(Functionary functionary) {
+        this.functionary = functionary;
     }
 
     public Date getStartDate() {
