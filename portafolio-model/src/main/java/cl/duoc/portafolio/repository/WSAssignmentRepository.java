@@ -16,7 +16,7 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author CETECOM
  */
-@Resource(name = "wsAssignmentRepository")
+@Resource(name = "wsassignmentRepository")
 public interface WSAssignmentRepository extends CrudRepository<WSAssignment, Long>{
     
     public List<WSAssignment> findAll();
