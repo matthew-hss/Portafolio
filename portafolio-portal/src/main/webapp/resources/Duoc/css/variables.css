@@ -1,0 +1,197 @@
+/* 
+    Author     : Javier González M | jgonzalez@experti.cl
+*/
+* {
+  font-family: Play, Verdana, sans-serif !important;
+  font-size: 14px !important;
+  line-height: 1.2em;
+  border-radius: 0 !important;
+}
+body {
+  background: #ffffff;
+  color: #333333;
+}
+a {
+  color: #333333;
+}
+.ui-radiobutton .ui-radiobutton-box:before {
+  color: #333333;
+}
+.ui-chkbox .ui-chkbox-box:before {
+  color: #333333;
+}
+button,
+input[type="submit"] {
+  background: #ff9900;
+  color: #ffffff;
+  font-family: Play;
+}
+button:hover,
+input[type="submit"]:hover {
+  background: #333333;
+}
+.ui-message-info,
+.ui-message-warn,
+.ui-message-error,
+.ui-message-fatal,
+.ui-messages-info,
+.ui-messages-warn,
+.ui-messages-error,
+.ui-messages-fatal {
+  background: #ffffff;
+}
+.ui-message-info,
+.ui-messages-info {
+  color: #488214;
+  border-color: #488214;
+}
+.ui-message-info-icon:before,
+.ui-messages-info-icon:before {
+  content: "\f058";
+  color: #488214;
+}
+.ui-message-warn-icon:before,
+.ui-messages-warn-icon:before {
+  content: "\f06a";
+}
+.ui-message-error-icon:before,
+.ui-messages-error-icon:before {
+  content: "\f057";
+  color: #b94a48;
+}
+.ui-message-fatal-icon:before,
+.ui-messages-fatal-icon:before {
+  content: "";
+}
+.ui-state-error,
+.ui-widget-content .ui-state-error,
+.ui-widget-header .ui-state-error,
+.ui-state-warn,
+.ui-widget-content .ui-state-warn,
+.ui-widget-header .ui-state-warn,
+.ui-state-info,
+.ui-widget-content .ui-state-info,
+.ui-widget-header .ui-state-info,
+.ui-state-fatal,
+.ui-widget-content .ui-state-fatal,
+.ui-widget-header .ui-state-fatal {
+  color: #333333;
+}
+input.ui-state-error,
+.ui-widget-content input.ui-state-error,
+.ui-widget-header input.ui-state-error {
+  border: 1px solid #b94a48;
+}
+.ui-fileupload-simple .ui-button {
+  background: #ff9900;
+  color: #ffffff;
+}
+.ui-fileupload-simple .ui-button.ui-state-hover {
+  background: #333333;
+}
+/* CONTENT */
+#header #menuBar .ui-menubar .ui-menu-child {
+  border-top: 3px solid #ff9900;
+}
+#header #menuBar .ui-menubar .ui-menu-child .ui-menuitem {
+  background: #cacaca;
+}
+#header #menuBar .ui-menubar .ui-menu-child .ui-menuitem:nth-child(even) {
+  background: #cfcfcf;
+}
+#header #menuBar .ui-menubar .ui-menuitem-link.ui-state-hover {
+  color: #333333;
+  border-bottom: 3px solid #ff9900;
+}
+#header #menuBar .ui-menubar .ui-menu-child .ui-menuitem.ui-menuitem-active {
+  background: #ff9900;
+  color: #ffffff;
+  border-left: 3px solid #333333;
+}
+#header #menuBar .ui-menubar .ui-menu-child .ui-menuitem-link.ui-state-hover {
+  color: #ffffff;
+}
+.ui-panel {
+  border: 1px solid #cccccc;
+  background: #f2f2f2;
+}
+.ui-panel-titlebar {
+  background: #333333;
+  color: #ffffff;
+  font-weight: bold;
+}
+.ui-datepicker {
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  color: #333333;
+}
+.ui-datepicker-unselectable {
+  color: #cccccc;
+}
+.ui-datepicker-current-day a {
+  background: #eeeeee;
+  border: 1px solid #cccccc;
+}
+.ui-datepicker-prev:before {
+  color: #333333;
+}
+.ui-datepicker-next:before {
+  color: #333333;
+}
+.ui-selectonemenu {
+  background: #ffffff;
+  border: 1px solid #cccccc;
+}
+.ui-selectonemenu.ui-state-disabled {
+  background: #cccccc;
+}
+.ui-selectonemenu-panel .ui-selectonemenu-items-wrapper,
+.ui-confirm-dialog {
+  background: #ffffff;
+  border: 1px solid #cccccc;
+}
+.ui-selectonemenu .ui-selectonemenu-item.ui-state-hover {
+  background: #ff9900;
+  color: #ffffff;
+}
+.ui-selectonemenu .ui-selectonemenu-item.ui-state-highlight {
+  background: #cccccc;
+  color: #ffffff;
+}
+.ui-selectonemenu .ui-selectonemenu.ui-state-disabled {
+  color: #cccccc;
+}
+.ui-selectonemenu-panel .ui-selectonemenu-list {
+  background: #ffffff;
+}
+.ui-confirm-dialog .ui-dialog-titlebar {
+  font-weight: bold;
+}
+.ui-confirm-dialog .ui-button-text-icon-left .ui-button-text {
+  padding: 0;
+}
+.ui-spinner-button {
+  border-left: 1px solid #cccccc;
+}
+.ui-spinner-up {
+  border-bottom: 1px solid #cccccc;
+}
+.ui-datatable table td:last-child a:hover {
+  color: #ff9900;
+}
+.ui-paginator span.ui-state-hover:before {
+  color: #ff9900;
+}
+.ui-paginator span.ui-state-disabled:before {
+  color: #cccccc;
+}
+#footer {
+  background: #333333;
+  color: #ffffff;
+  border-top: 5px solid #ff9900;
+}
+.ui-dialog {
+  background: #ffffff;
+  border: 1px solid #cccccc;
+}
+/*# sourceMappingURL=variables.css.map */

@@ -10,8 +10,8 @@
     
     <modules>
         <module>portafolio-model</module>
-<!--        <module>portafolio-portal</module>
-        <module>portafolio-webapp</module>-->
+        <!--<module>portafolio-webapp</module>-->
+        <module>portafolio-portal</module>
     </modules>
 
     <properties>

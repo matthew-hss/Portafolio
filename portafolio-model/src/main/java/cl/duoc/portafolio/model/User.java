@@ -30,11 +30,17 @@ public class User implements Serializable{
     @XmlTransient
     @Column(name = "id", nullable = false)
     private Long id = null;
+    @Column(name = "rut", nullable = false)
+    private Integer rut = null;
+    @Column(name = "name", nullable = false)
+    private String name = null;
     @Column(name="password")
     private String password = null;
     @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private Role role = null;
+    @Column(name = "active", nullable = false)
+    private boolean active = false;
 
     public Long getId() {
         return id;
@@ -56,7 +62,33 @@ public class User implements Serializable{
         return role;
     }
 
-    public void setRole_id(Role role) {
+    public void setRole(Role role) {
         this.role = role;
     }
+
+    public Integer getRut() {
+        return rut;
+    }
+
+    public void setRut(Integer rut) {
+        this.rut = rut;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+    
+    
 }

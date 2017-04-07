@@ -22,9 +22,13 @@ public interface UserRepository extends CrudRepository<User, Long>{
     
     public User findById(Long id);
     
+    public User findByRut(Integer rut);
+    
     public boolean deleteById(Long id);
     
     public User save(User user);
     
     public List<User> findByRole(Role role);
+    
+    public User findByRutAndPassword(Integer rut, String password);
 }
