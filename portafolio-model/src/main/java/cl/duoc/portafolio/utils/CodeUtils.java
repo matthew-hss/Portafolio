@@ -5,7 +5,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 /**
  *
- * @author matthew
+ * @author Sebastián Salazar Molina.
  */
 public class CodeUtils implements Serializable {
 

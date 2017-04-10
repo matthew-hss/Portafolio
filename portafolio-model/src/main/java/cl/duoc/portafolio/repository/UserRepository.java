@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cl.duoc.portafolio.repository;
 
 import cl.duoc.portafolio.model.Role;
@@ -13,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 
 /**
  *
- * @author CETECOM
+ * @author Matthew
  */
 @Resource(name = "userRepository")
 public interface UserRepository extends CrudRepository<User, Long>{

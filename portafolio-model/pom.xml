@@ -132,7 +132,7 @@
         </dependency>
 
         <!-- Base de datos -->
-        <!-- PostgreSQL -->
+        <!-- ORACLE -->
         <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc6</artifactId>

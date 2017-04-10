@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author Sebastián Salazar Molina <sebasalazar@gmail.com>
+ * @author Sebastián Salazar Molina
  */
 public class RutUtils implements Serializable {
 

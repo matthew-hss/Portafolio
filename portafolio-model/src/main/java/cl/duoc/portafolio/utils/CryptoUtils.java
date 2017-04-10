@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author Sebastián Salazar Molina
+ * @author Sebastián Salazar Molina.
  */
 public class CryptoUtils implements Serializable {
 

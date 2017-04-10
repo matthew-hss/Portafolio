@@ -1,7 +1,7 @@
 package cl.duoc.portafolio.portal.converter;
 
 import cl.duoc.portafolio.portal.utils.FacesUtils;
-import cl.experti.benefits.vo.Gender;
+import cl.duoc.portafolio.vo.Gender;
 import java.io.Serializable;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;

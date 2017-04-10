@@ -1,8 +1,8 @@
-package cl.experti.benefits.vo;
+package cl.duoc.portafolio.vo;
 
 /**
  *
- * @author Sebastián Salazar Molina.
+ * @author Javier González M.
  */
 public enum Gender {
     FEMALE, MALE;
