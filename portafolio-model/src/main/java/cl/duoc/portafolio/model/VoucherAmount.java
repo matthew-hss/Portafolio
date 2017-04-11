@@ -29,7 +29,7 @@ public class VoucherAmount implements Serializable{
     @JoinColumn(name = "function_id", referencedColumnName = "id", nullable = false)
     private Function function = null;
     @JoinColumn(name = "service_id", referencedColumnName = "id", nullable = false)
-    private Service service = null;
+    private MealService service = null;
 
     public Long getId() {
         return id;
@@ -55,11 +55,11 @@ public class VoucherAmount implements Serializable{
         this.function = function;
     }
 
-    public Service getService() {
+    public MealService getService() {
         return service;
     }
 
-    public void setService(Service service) {
+    public void setService(MealService service) {
         this.service = service;
     }
     

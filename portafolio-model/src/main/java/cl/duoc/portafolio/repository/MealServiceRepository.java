@@ -1,7 +1,7 @@
 package cl.duoc.portafolio.repository;
 
 import cl.duoc.portafolio.model.Product;
-import cl.duoc.portafolio.model.Service;
+import cl.duoc.portafolio.model.MealService;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.data.repository.CrudRepository;
@@ -10,16 +10,16 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author Matthew
  */
-@Resource(name = "serviceRepository")
-public interface ServiceRepository extends CrudRepository<Service, Long>{
+@Resource(name = "mealServiceRepository")
+public interface MealServiceRepository extends CrudRepository<MealService, Long>{
     
-    public List<Service> findAll();
+    public List<MealService> findAll();
     
-    public Service findById(Long id);
+    public MealService findById(Long id);
     
     public boolean deleteById(Long id);
     
-    public Service save(Service role);  
+    public MealService save(MealService role);  
     
-    public Service findByProduct(Product product);
+    public MealService findByProduct(Product product);
 }

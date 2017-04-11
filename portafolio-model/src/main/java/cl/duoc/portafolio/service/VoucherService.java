@@ -3,7 +3,7 @@ package cl.duoc.portafolio.service;
 import cl.duoc.portafolio.model.Function;
 import cl.duoc.portafolio.model.Functionary;
 import cl.duoc.portafolio.model.Sale;
-import cl.duoc.portafolio.model.Service;
+import cl.duoc.portafolio.model.MealService;
 import cl.duoc.portafolio.model.Voucher;
 import cl.duoc.portafolio.model.VoucherAmount;
 import java.util.List;
@@ -32,7 +32,7 @@ public interface VoucherService {
     
     public List<VoucherAmount> getVouchersAmount(final Function function);
     
-    public List<VoucherAmount> getVouchersAmount(final Service service);
+    public List<VoucherAmount> getVouchersAmount(final MealService service);
     
     public VoucherAmount save(final VoucherAmount voucherAmount);
     
