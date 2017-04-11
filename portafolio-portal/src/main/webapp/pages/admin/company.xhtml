@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/templates/main.xhtml">
+        <ui:define name="content">
+
+            <p:panel id="panelCompany" header="${msg.companies}">
+                <div class="col-xs-12 col-sm-4">
+                    <p:outputPanel id="panelForm">
+                        <h:form id="formCompany">
+                            <h3>
+                                <h:outputText value="${msg.add}" rendered="#{!companyAdminBean.edit}" />
+                                <h:outputText value="${msg.edit}" rendered="#{companyAdminBean.edit}" />
+                            </h3>
+
+                            <p:outputLabel for="legalName" value="${msg.legalName}" />
+                            <p:inputText id="legalName" value="#{companyAdminBean.company.legalName}" converter="TrimConverter"
+                                         required="true" />
+                            <p:message for="legalName" display="tooltip"/>
+
+                            <p:outputLabel for="fantasyName" value="${msg.fantasyName}" />
+                            <p:inputText id="fantasyName" value="#{companyAdminBean.company.fantasyName}" converter="TrimConverter"
+                                         required="true" />
+                            <p:message for="fantasyName" display="tooltip"/>
+
+                            <p:outputLabel for="rut" value="${msg.rut}" />
+                            <p:inputText id="rut" value="#{companyAdminBean.company.rut}" converter="RutConverter"
+                                         required="true">
+                                <p:ajax event="change" update="@this msgRut" />
+                            </p:inputText>
+                            <p:message id="msgRut" for="rut" display="tooltip"/>
+
+                            <p:outputLabel for="email" value="${msg.email}" />
+                            <p:inputText id="email" value="#{companyAdminBean.company.email}" converter="TrimConverter"
+                                         required="true" validatorMessage="${msg.invalidEmail}">
+                                <f:validateRegex pattern="#{regexBean.email}" />
+                            </p:inputText>
+                            <p:message for="email" display="tooltip"/>
+
+                            <p:outputLabel for="active" value="${msg.active}" style="display: inline-block; margin-right: 10px;" />
+                            <p:selectBooleanCheckbox id="active" value="#{companyAdminBean.company.active}" />
+                            <p:message for="active" display="tooltip"/>
+
+                            <p:commandButton action="#{companyAdminBean.process}" value="${msg.save}" update=":formCompany :panelData" />
+                        </h:form>
+                    </p:outputPanel>
+                </div>
+                <div class="col-xs-12 col-sm-8">
+
+                    <p:outputPanel id="panelData">
+                        <h:form>
+                            <p:dataTable value="#{companyAdminBean.companies}" var="currentRow" rows="10" paginator="true" paginatorPosition="bottom">
+
+                                <p:column headerText="${msg.legalName}" filterBy="#{currentRow.legalName}" filterMatchMode="contains">
+                                    <h:outputText value="#{currentRow.legalName}" />
+                                </p:column>
+
+                                <p:column headerText="${msg.rut}">
+                                    <h:outputText value="#{currentRow.rut}" converter="RutConverter" />
+                                </p:column>
+
+                                <p:column headerText="${msg.email}" >
+                                    <h:outputText value="#{currentRow.email}" />
+                                </p:column>
+
+                                <p:column headerText="${msg.actions}">
+                                    <p:commandLink ajax="false" update=":formCompany :panelData" actionListener="#{companyAdminBean.editCompany}" title="Editar">
+                                        <f:setPropertyActionListener value="#{currentRow}" target="#{companyAdminBean.company}" />
+                                        <i class="fa fa-edit" aria-hidden="true"></i>
+                                    </p:commandLink>
+                                    
+                                    <p:commandLink title="Eliminar">
+                                        <f:setPropertyActionListener value="#{currentRow}" target="#{companyAdminBean.company}"/>
+                                        <p:ajax event="click" oncomplete="PF('deletePopUp').show();" />
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </p:commandLink>
+                                </p:column>
+                            </p:dataTable>
+
+                            <p:dialog id="dialogoEliminar" widgetVar="deletePopUp" header="${msg.delete}" modal="true">
+                                <h:outputText value="${msg.deleteCompany}" />
+                                <br/>
+                                <p:commandButton value="${msg.yes}" action="#{companyAdminBean.deleteCompany}" update=":formCompany :panelData" />
+
+                                <p:commandButton value="${msg.no}">
+                                    <p:ajax event="click" oncomplete="PF('deletePopUp').hide();" />
+                                </p:commandButton>
+                            </p:dialog>
+
+                        </h:form>
+                    </p:outputPanel>
+                </div>
+                            
+                <div class="col-xs-12 col-sm-6 col-sm-offset-right-3 col-sm-offset-3">
+                    <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+                </div>
+            </p:panel>
+
+        </ui:define>
+    </ui:composition>
+</html>

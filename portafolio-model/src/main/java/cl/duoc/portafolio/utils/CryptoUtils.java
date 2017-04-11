@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
  */
 public class CryptoUtils implements Serializable {
 
-    private static final String BASE_KEY = "ExperTI.2017";
+    private static final String BASE_KEY = "Duoc.2017";
     private static final String ALGORITHM = "Blowfish";
     private static final String OPERATION_MODE = "Blowfish/CBC/PKCS5Padding";
     private static final Logger LOGGER = LoggerFactory.getLogger(CryptoUtils.class);

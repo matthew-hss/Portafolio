@@ -22,7 +22,7 @@ public class UserUtils implements Serializable {
     /**
      *
      * @param user Usuario cuyo password será hasheado antes de persistir.
-     * @return Objeto de clase cl.experti.benefits.model.User con contraseña
+     * @return Objeto de clase cl.duoc.portafolio.model.User con contraseña
      * hasheada en SHA512 con salto aleatorio en función al RUT del usuario.
      */
     public static User hashPasswd(User user) {
@@ -40,7 +40,7 @@ public class UserUtils implements Serializable {
      *
      * @param user Usuario cuyo password será hasheado antes de persistir.
      * @param password Password a usar
-     * @return Objeto de clase cl.experti.benefits.model.User con contraseña
+     * @return Objeto de clase cl.duoc.portafolio.model.User con contraseña
      * hasheada en SHA512 con salto aleatorio en función al RUT del usuario.
      */
     public static User hashPasswd(final User user, final String password) {

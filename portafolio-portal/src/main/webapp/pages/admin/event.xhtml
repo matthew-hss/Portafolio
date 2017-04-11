@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/templates/main.xhtml">
+        <ui:define name="content">
+            <!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCe61qLjdd5cb7dOvLTwU4CS8NzCBaaqds"></script>-->
+            <script type="text/javascript" src="#{eventAdminBean.googleMapsScript}" />
+            <script type="text/javascript">
+                function geocode() {
+                    PF('geoMap').geocode(document.getElementById('formEvent:place').value);
+                }
+
+                function reverseGeocode() {
+                    var lat = document.getElementById('latitude').value,
+                            lng = document.getElementById('longitude').value;
+
+                    PF('GeoMap').reverseGeocode(lat, lng);
+                }
+            </script>
+            <p:panel id="panelEvent" header="${msg.events}">
+                <div>
+                    <p:outputPanel id="panelForm">
+                        <h:form id="formEvent" enctype="multipart/form-data">
+                            <div class="col-xs-12">
+                                <h3>
+                                    <h:outputText value="${msg.add}" rendered="#{!eventAdminBean.edit}" />
+                                    <h:outputText value="${msg.edit}" rendered="#{eventAdminBean.edit}" />
+                                </h3>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <p:outputLabel for="company" value="${msg.company}" />
+                                <p:selectOneMenu id="company" value="#{eventAdminBean.event.company}" converter="BaseBeanConverter" required="true">
+                                    <f:selectItem itemLabel="${msg.selectCompany}" itemValue="#{null}" noSelectionOption="true" />
+                                    <f:selectItems value="#{eventAdminBean.companies}" var="c" itemLabel="#{c.legalName}" itemValue="#{c}"/>
+                                </p:selectOneMenu>
+                                <p:message for="company" display="tooltip"/>
+
+                                <p:outputLabel for="place" value="${msg.place}" />
+                                <p:inputText id="place" value="#{eventAdminBean.event.place}" onblur="geocode()" converter="TrimConverter" validatorMessage="${msg.invalidAdress}">
+                                    <f:validateRegex pattern="#{regexBean.adress}" />
+                                </p:inputText>
+                                <p:message for="place" display="tooltip"/>
+
+                                <p:outputLabel for="latitude" value="${msg.latitude}" style="display: none;"/>
+                                <p:inputText id="latitude" value="#{eventAdminBean.event.latitude}" converter="TrimConverter" style="display: none;"/>
+                                <p:message for="latitude" display="tooltip"/>
+
+                                <p:outputLabel for="longitude" value="${msg.longitude}" style="display: none;"/>
+                                <p:inputText id="longitude" value="#{eventAdminBean.event.longitude}" converter="TrimConverter" style="display: none;"/>
+                                <p:message for="longitude" display="tooltip"/>
+
+                                <p:outputLabel for="title" value="${msg.eventTitle}" />
+                                <p:inputText id="title" value="#{eventAdminBean.event.title}" converter="TrimConverter" required="true"/>
+                                <p:message for="title" display="tooltip"/>
+
+                                <p:outputLabel for="eventDate" value="${msg.eventDate}" />
+                                <p:calendar id="eventDate" value="#{eventAdminBean.event.eventDate}" required="true"/>
+                                <p:message for="eventDate" display="tooltip"/>
+
+                                <p:outputLabel for="image" value="${msg.image}" />
+                                <p:fileUpload id="image" value="#{eventAdminBean.upFile}" mode="simple" skinSimple="true" />
+                                <p:message for="image" display="tooltip"/>
+                            </div>
+                            <div class="col-xs-12 col-sm-8">
+                                <p:outputLabel for="eventMap" value="${msg.map}" />
+                                <p:gmap id="eventMap" widgetVar="geoMap" center="#{eventAdminBean.centerGeoMap}" zoom="17" type="ROADMAP" 
+                                        model="#{eventAdminBean.geoModel}" style="width:100%; height:292px;" >
+                                    <p:ajax event="geocode" listener="#{eventAdminBean.onGeocode}" update=":formEvent:eventMap :formEvent:longitude :formEvent:latitude :formEvent:place" />
+                                    <p:ajax event="reverseGeocode" listener="#{eventAdminBean.onReverseGeocode}" update=":formEvent:eventMap :formEvent:place" />
+                                    <p:ajax event="pointSelect" listener="#{eventAdminBean.onPointSelect}" update=":formEvent:longitude :formEvent:latitude :formEvent:place :formEvent:eventMap" />
+                                </p:gmap>
+                                <p:message for="eventMap" display="tooltip"/>
+                            </div>
+                            <div class="col-xs-12">
+                                <p:outputLabel for="description" value="${msg.description}" />
+                                <p:editor id="description" value="#{eventAdminBean.event.description}" converter="TrimConverter" required="true" height="200" maxlength="255" 
+                                          controls="bold italic underline strikethrough">
+                                </p:editor>
+                                <p:message for="description" display="tooltip"/> 
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-sm-offset-right-8">
+                                <p:commandButton action="#{eventAdminBean.process}" value="${msg.save}" update=":formEvent :panelData" ajax="false"/>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-sm-offset-right-3 col-sm-offset-3">
+                                <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+                            </div>
+                        </h:form>
+                    </p:outputPanel>
+                </div>
+
+                <div class="col-xs-12">
+                    <p:outputPanel id="panelData">
+                        <h:form>
+                            <p:dataTable value="#{eventAdminBean.events}" var="currentRow" rows="10" paginator="true" paginatorPosition="bottom">
+                                <p:column headerText="${msg.image}">
+                                    <h:outputLink value="#{currentRow.img}">
+                                        <p:graphicImage value="#{currentRow.img}" height="100 px" width ="100 px" />
+                                    </h:outputLink>
+                                </p:column>
+                                <p:column headerText="${msg.company}" filterBy="#{currentRow.company.legalName}" filterMatchMode="contains">
+                                    <h:outputText value="#{currentRow.company.legalName}" />
+                                </p:column>
+
+                                <p:column headerText="${msg.place}" filterBy="#{currentRow.place}" filterMatchMode="contains">
+                                    <h:outputText value="#{currentRow.place}" />
+                                </p:column>
+
+                                <p:column headerText="${msg.latitude}">
+                                    <h:outputText value="#{currentRow.latitude}" />
+                                </p:column>
+
+                                <p:column headerText="${msg.longitude}">
+                                    <h:outputText value="#{currentRow.longitude}" />
+                                </p:column>
+
+                                <p:column headerText="${msg.eventTitle}">
+                                    <h:outputText value="#{currentRow.title}" />
+                                </p:column>
+
+                                <p:column headerText="${msg.eventDate}">
+                                    <h:outputText value="#{currentRow.eventDate}" converter="DateCLConverter" />
+                                </p:column>
+
+                                <p:column headerText="${msg.actions}">
+                                    <p:commandLink update=":formEvent :panelData" actionListener="#{eventAdminBean.editEvent}" title="${msg.edit}"
+                                                   oncomplete="geocode();">
+                                        <f:setPropertyActionListener value="#{currentRow}" target="#{eventAdminBean.event}" />
+                                        <i class="fa fa-edit" aria-hidden="true"></i>
+                                    </p:commandLink>
+
+                                    <p:commandLink title="${msg.delete}">
+                                        <f:setPropertyActionListener value="#{currentRow}" target="#{eventAdminBean.event}"/>
+                                        <p:ajax event="click" oncomplete="PF('deletePopUp').show();" />
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </p:commandLink>
+                                </p:column>
+                            </p:dataTable>
+
+                            <p:dialog id="dialogoEliminar" widgetVar="deletePopUp" header="${msg.delete}" modal="true">
+                                <h:outputText value="${msg.deleteEvent}" />
+                                <br/>
+                                <p:commandButton value="${msg.yes}" action="#{eventAdminBean.deleteEvent}" update=":formEvent :panelData" />
+
+                                <p:commandButton value="${msg.no}">
+                                    <p:ajax event="click" oncomplete="PF('deletePopUp').hide();" />
+                                </p:commandButton>
+                            </p:dialog>
+                        </h:form>
+                    </p:outputPanel>
+                </div>
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+</html>

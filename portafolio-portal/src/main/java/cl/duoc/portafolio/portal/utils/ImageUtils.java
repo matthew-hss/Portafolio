@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author matthew
+ * @author Matthew
  */
 public class ImageUtils implements Serializable {
 

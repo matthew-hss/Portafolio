@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/templates/main.xhtml">
+        <ui:define name="content">
+            <p:panel id="panelBeneficiary" header="${msg.beneficiaries}">
+                <p:outputPanel id="panelForm" style="border:none;">
+                    <h:form id="formBeneficiary" enctype="multipart/form-data">
+                        <div class="col-xs-12">
+                            <h3>
+                                <h:outputText value="${msg.add}" rendered="#{!beneficiaryMassiveStaffBean.edit}" />
+                                <h:outputText value="${msg.edit}" rendered="#{beneficiaryMassiveStaffBean.edit}" />
+                            </h3>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <p:outputLabel for="file" value="${msg.file}" />
+                            <p:fileUpload id="file" value="#{beneficiaryMassiveStaffBean.upFile}" mode="simple" skinSimple="true" />
+                            <p:message for="file" display="tooltip" />
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-sm-offset-right-8">
+                            <p:commandButton action="#{beneficiaryMassiveStaffBean.massiveLoad}" value="${msg.save}" update=":formBeneficiary :formData" ajax="false"/>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-sm-offset-right-3 col-sm-offset-3">
+                            <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+                        </div>
+                    </h:form>
+                </p:outputPanel>
+                <div class="col-xs-12">
+                    <p:outputPanel id="dataPanel">
+                        <h:form id="formData">
+                            <p:dataTable id="dataTable" value="#{beneficiaryMassiveStaffBean.beneficiaries}" var="currentRow" rows="10" paginator="true" paginatorPosition="bottom">
+
+                                <p:column headerText="${msg.name}" filterBy="#{currentRow.names}" filterMatchMode="contains">
+                                    <h:outputText value="#{currentRow.names}" />
+                                </p:column>
+
+                                <p:column headerText="${msg.surname}" filterBy="#{currentRow.surnames}" filterMatchMode="contains">
+                                    <h:outputText value="#{currentRow.surnames}" />
+                                </p:column>
+
+                                <p:column headerText="${msg.rut}"  filterBy="#{currentRow.rut}" filterMatchMode="contains" >
+                                    <h:outputText value="#{currentRow.rut}"  converter="RutConverter"/>
+                                </p:column>
+
+                                <p:column headerText="${msg.birthday}">
+                                    <h:outputText value="#{currentRow.birthday}" converter="DateCLConverter" />
+                                </p:column>
+
+                                <p:column headerText="${msg.gender}">
+                                    <h:outputText value="#{currentRow.gender}" />
+                                </p:column>
+
+                                <p:column headerText="${msg.phone}">
+                                    <h:outputText value="#{currentRow.phone}" />
+                                </p:column>
+
+                                <p:column headerText="${msg.email}" >
+                                    <h:outputText value="#{currentRow.email}" />
+                                </p:column>
+
+                                <p:column headerText="${msg.delete}">
+                                    <p:commandLink title="${msg.delete}">
+                                        <f:setPropertyActionListener value="#{currentRow}" target="#{beneficiaryMassiveStaffBean.beneficiary}"/>
+                                        <p:ajax event="click" oncomplete="PF('deletePopUp').show();" />
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </p:commandLink>
+                                </p:column>
+                            </p:dataTable>
+
+                            <p:dialog id="dialogoEliminar" widgetVar="deletePopUp" header="${msg.delete}" modal="true">
+                                <h:outputText value="${msg.deleteBeneficiary}" />
+                                <p:commandButton value="${msg.yes}" action="#{beneficiaryMassiveStaffBean.deleteBeneficiary()}" update=":formBeneficiary :dataPanel" />
+
+                                <p:commandButton value="${msg.no}">
+                                    <p:ajax event="click" oncomplete="PF('deletePopUp').hide();" />
+                                </p:commandButton>
+                            </p:dialog>
+                        </h:form>
+                    </p:outputPanel>
+                </div>
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+</html>

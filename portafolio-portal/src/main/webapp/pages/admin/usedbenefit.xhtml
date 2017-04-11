@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/templates/main.xhtml">
+        <ui:define name="content">
+            <p:panel id="panelUsedBenefit" header="${msg.usedBenefits}">
+                <div>
+                    <p:outputPanel id="panelForm">
+                        <h:form id="formUsedBenefit">
+                            <div class="col-xs-12 col-sm-12">
+                                <h3>
+                                    <h:outputText value="${msg.usedBenefit}" />
+                                </h3>
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                <p:outputLabel for="company" value="${msg.company}" />
+                                <p:selectOneMenu id="company" value="#{usedBenefitAdminBean.company}" converter="BaseBeanConverter" required="true">
+                                    <f:selectItem itemLabel="${msg.selectCompany}" itemValue="#{null}" noSelectionOption="true" />
+                                    <f:selectItems value="#{usedBenefitAdminBean.companies}" var="c" itemLabel="#{c.legalName}" itemValue="#{c}"/>
+                                </p:selectOneMenu>
+                                <p:message for="company" display="tooltip"/>
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                <p:outputLabel for="beneficiaryRut" value="${msg.beneficiary}" />
+                                <p:inputText id="beneficiaryRut" value="#{usedBenefitAdminBean.beneficiaryRut}" converter="RutConverter"/>
+                                <p:message for="beneficiaryRut" display="tooltip"/>
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                <p:outputLabel for="initDate" value="${msg.dateBegin}" />
+                                <p:calendar id="initDate" value="#{usedBenefitAdminBean.initDate}" pattern="dd/MM/yyyy" mask="true" />
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                <p:outputLabel for="actualDate" value="${msg.dateEnd}" />
+                                <p:calendar id="actualDate" value="#{usedBenefitAdminBean.actualDate}" pattern="dd/MM/yyyy" mask="true" />
+                            </div>
+                            <div class="col-xs-12 col-sm-3 col-sm-offset-9">
+                                <p:commandButton action="#{usedBenefitAdminBean.search}" value="${msg.search}" update=":panelData :formUsedBenefit" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-sm-offset-right-3 col-sm-offset-3">
+                                <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+                            </div>
+                        </h:form>
+                    </p:outputPanel>
+                </div>
+                <div class="col-xs-12">
+                    <p:outputPanel>
+                        <h:form id="panelData">
+                            <p:dataTable  value="#{usedBenefitAdminBean.usedBenefits}" selection="#{usedBenefitAdminBean.selectedUsedBenefits}" 
+                                          var="currentRow" rowKey="#{currentRow.id}" rows="10" paginator="true" paginatorPosition="bottom">
+
+                                <p:column selectionMode="multiple" style="width:32px;text-align:center"/>
+
+                                <p:column headerText="${msg.beneficiary}" filterMatchMode="contains">
+                                    <h:outputText value="#{currentRow.beneficiary.names} #{currentRow.beneficiary.surnames}" />
+                                </p:column>
+
+                                <p:column headerText="${msg.benefit}">
+                                    <h:outputText value="#{currentRow.benefit.title}" />
+                                </p:column>
+
+                                <p:column headerText="${msg.usedDate}">
+                                    <h:outputText value="#{currentRow.usedDate}" converter="DateCLConverter"/>
+                                </p:column>
+
+                                <p:column headerText="${msg.code}">
+                                    <h:outputText value="#{currentRow.code}" />
+                                </p:column>
+
+                                <p:column headerText="${msg.status}">
+                                    <p:selectBooleanCheckbox value="#{currentRow.active}">
+                                        <p:ajax update=":formUsedBenefit :panelData" listener="#{usedBenefitAdminBean.swap(currentRow)}"  />
+                                    </p:selectBooleanCheckbox>
+                                </p:column>
+                            </p:dataTable>
+                            <div class="col-xs-12 col-sm-2">
+                                <p:commandButton action="#{usedBenefitAdminBean.volumeChangeActivate}" value="${msg.activate}" update=":panelData" />
+                            </div>
+                            <div class="col-xs-12 col-sm-2">
+                                <p:commandButton action="#{usedBenefitAdminBean.volumeChangeDeactivate}" value="${msg.deactivate}" update=":panelData" />
+                            </div>
+                        </h:form>
+                    </p:outputPanel>
+                </div>
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+</html>

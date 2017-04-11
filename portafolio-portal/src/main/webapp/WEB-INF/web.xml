@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-    <description>Benefits Portal</description>
-    <display-name>Benefits Portal</display-name>
+    <description>Portafolio Portal</description>
+    <display-name>Portafolio Portal</display-name>
     <!-- Remove Primefaces Default Theme -->
     <context-param>
         <param-name>primefaces.THEME</param-name>
@@ -10,11 +10,11 @@
     </context-param>
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:benefits-model-context.xml, classpath:benefits-portal-context.xml</param-value>
+        <param-value>classpath:portafolio-model-context.xml, classpath:portafolio-portal-context.xml</param-value>
     </context-param>
     <context-param>
         <param-name>contextClass</param-name>
-        <param-value>cl.experti.benefits.portal.spring.CustomXmlWebApplicationContext</param-value>
+        <param-value>cl.duoc.portafolio.portal.spring.CustomXmlWebApplicationContext</param-value>
     </context-param>
     <context-param>
         <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
@@ -58,7 +58,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>ImageServlet</servlet-name>
-        <servlet-class>cl.experti.benefits.portal.servlet.ImageServlet</servlet-class>
+        <servlet-class>cl.duoc.portafolio.portal.servlet.ImageServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ImageServlet</servlet-name>

@@ -1,4 +1,4 @@
-package cl.experti.benefits.portal.vo;
+package cl.duoc.portafolio.portal.vo;
 
 /**
  *

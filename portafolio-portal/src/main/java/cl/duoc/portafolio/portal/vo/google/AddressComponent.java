@@ -1,4 +1,4 @@
-package cl.experti.benefits.portal.vo.google;
+package cl.duoc.portafolio.portal.vo.google;
 
 import java.util.HashMap;
 import java.util.List;

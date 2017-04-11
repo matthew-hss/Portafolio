@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 public class HttpClientUtils implements Serializable {
 
     private static final long serialVersionUID = 4248381502250151936L;
-    private static final String USER_AGENT = "ExperTI/1.0";
+    private static final String USER_AGENT = "Duoc/1.0";
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpClientUtils.class);
 
     public static HttpVO post(final String url) {

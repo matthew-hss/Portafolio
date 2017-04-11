@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/templates/main.xhtml">
+        <ui:define name="content">
+
+            <p:panel id="panelUser" style="overflow: hidden;" header="${msg.users}">
+                <div>
+                    <p:outputPanel id="panelForm">
+                        <h:form id="formUser">
+                            <div class="col-xs-12">
+                                <h3>
+                                    <h:outputText value="${msg.add}" rendered="#{!userAdminBean.edit}" />
+                                    <h:outputText value="${msg.edit}" rendered="#{userAdminBean.edit}" />
+                                </h3>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <p:outputLabel for="company" value="${msg.company}" />
+                                <p:selectOneMenu id="company" value="#{userAdminBean.user.company}" converter="BaseBeanConverter">
+                                    <f:selectItem itemLabel="${msg.selectCompany}" noSelectionOption="true" value="#{null}"/>
+                                    <f:selectItems value="#{userAdminBean.companies}" var="c" itemLabel="#{c.legalName}" itemValue="#{c}"/>
+                                </p:selectOneMenu>
+                                <p:message for="company" display="tooltip"/>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <p:outputLabel for="name" value="${msg.name}" />
+                                <p:inputText id="name" value="#{userAdminBean.user.name}" converter="TrimConverter"
+                                             required="true" validatorMessage="${msg.invalidName}">
+                                    <f:validateRegex pattern="#{regexBean.name}"/>
+                                </p:inputText>
+                                <p:message for="name" display="tooltip"/>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <p:outputLabel for="rut" value="${msg.rut}" />
+                                <p:inputText id="rut" value="#{userAdminBean.user.rut}" converter="RutConverter"
+                                             required="true">
+                                    <p:ajax event="change" update="@this msgRut" />
+                                </p:inputText>
+                                <p:message id="msgRut" for="rut" display="tooltip"/>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <p:outputLabel for="role" value="${msg.role}" />
+                                <p:selectOneMenu id="role" value="#{userAdminBean.user.rol}" converter="BaseBeanConverter">
+                                    <f:selectItems value="#{userAdminBean.roles}" var="r" itemLabel="#{r}" itemValue="#{r}"/>
+                                </p:selectOneMenu>
+                                <p:message for="role" display="tooltip"/>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <p:outputLabel for="passOne" value="${msg.password}" />
+                                <p:password id="passOne" value="#{userAdminBean.passOne}" converter="TrimConverter"
+                                            required="#{!userAdminBean.edit}" />
+                                <p:message for="passOne" display="tooltip"/>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <p:outputLabel for="passTwo" value="${msg.passwordRepeat}" />
+                                <p:password id="passTwo" value="#{userAdminBean.passTwo}" converter="TrimConverter"
+                                            required="#{!userAdminBean.edit}"  />
+                                <p:message for="passTwo" display="tooltip"/>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <p:outputLabel for="active" value="${msg.active}" style="display: inline-block; margin-right: 10px;" />
+                                <p:selectBooleanCheckbox id="active" value="#{userAdminBean.user.active}" />
+                                <p:message for="active" display="tooltip"/>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-sm-offset-right-8">
+                                <p:commandButton action="#{userAdminBean.process}" value="${msg.save}" update=":formUser :panelData" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-sm-offset-right-3 col-sm-offset-3">
+                                <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+                            </div>
+                        </h:form>
+                    </p:outputPanel>
+                </div>
+                <div class="col-xs-12">
+                    <p:outputPanel>
+                        <h:form id="panelData">
+                            <p:dataTable value="#{userAdminBean.users}" var="currentRow" rows="10" paginator="true" paginatorPosition="bottom">
+
+                                <p:column headerText="${msg.name}" filterBy="#{currentRow.name}" filterMatchMode="contains">
+                                    <h:outputText value="#{currentRow.name}" />
+                                </p:column>
+
+                                <p:column headerText="${msg.rut}">
+                                    <h:outputText value="#{currentRow.rut}" converter="RutConverter" />
+                                </p:column>
+
+                                <p:column headerText="${msg.actions}">
+                                    <p:commandLink ajax="false" update=":formUser :panelData" actionListener="#{userAdminBean.editUser}" title="Editar">
+                                        <f:setPropertyActionListener value="#{currentRow}" target="#{userAdminBean.user}" />
+                                        <i class="fa fa-edit" aria-hidden="true"></i>
+                                    </p:commandLink>
+
+                                    <p:commandLink title="Eliminar">
+                                        <f:setPropertyActionListener value="#{currentRow}" target="#{userAdminBean.user}"/>
+                                        <p:ajax event="click" oncomplete="PF('deletePopUp').show();" />
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </p:commandLink>
+                                </p:column>
+                            </p:dataTable>
+
+                            <p:dialog id="dialogoEliminar" widgetVar="deletePopUp" header="${msg.delete}" modal="true">
+                                <h:outputText value="${msg.deleteUser}" />
+                                <p:commandButton value="${msg.yes}" action="#{userAdminBean.deleteUser}" update=":formUser :panelData" />
+
+                                <p:commandButton value="${msg.no}">
+                                    <p:ajax event="click" oncomplete="PF('deletePopUp').hide();" />
+                                </p:commandButton>
+                            </p:dialog>
+
+                        </h:form>
+                    </p:outputPanel>
+                </div>
+            </p:panel>
+
+        </ui:define>
+    </ui:composition>
+</html>

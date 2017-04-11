@@ -12,7 +12,7 @@
                            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
                            http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd">
 
-    <bean id="benefitsPlaceholderConfigPortal"
+    <bean id="portafolioPlaceholderConfigPortal"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="ignoreResourceNotFound" value="true" />
         <property name="systemPropertiesMode" value="2" />
@@ -70,6 +70,6 @@
     </security:http>
 
     <security:authentication-manager alias="authenticationManager">
-        <security:authentication-provider ref="benefitAuthenticationProvider" />
+        <security:authentication-provider ref="portafolioAuthenticationProvider" />
     </security:authentication-manager>
 </beans>

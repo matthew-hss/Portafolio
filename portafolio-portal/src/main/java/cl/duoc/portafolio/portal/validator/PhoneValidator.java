@@ -11,7 +11,7 @@ import javax.faces.validator.ValidatorException;
 
 /**
  *
- * @author shinkiro
+ * @author Javier González M.
  */
 public class PhoneValidator implements Validator {
 

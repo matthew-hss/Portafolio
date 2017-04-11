@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/templates/main.xhtml">
+        <ui:define name="content">
+            <p:panel id="panelCategory" header="${msg.category}">
+                <div>
+                    <p:outputPanel id="panelForm">
+                        <h:form id="formCategory" enctype="multipart/form-data">
+                            <div class="col-xs-12">
+                                <h3>
+                                    <h:outputText value="${msg.add}" rendered="#{!categoryStaffBean.edit}" />
+                                    <h:outputText value="${msg.edit}" rendered="#{categoryStaffBean.edit}" />
+                                </h3>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <p:outputLabel for="categoryName" value="${msg.categoryName}" />
+                                <p:inputText id="categoryName" value="#{categoryStaffBean.category.name}" converter="TrimConverter"
+                                             required="true" validatorMessage="${msg.invalidName}">
+                                    <f:validateRegex pattern="#{regexBean.name}"/>
+                                </p:inputText>
+                                <p:message for="categoryName" display="tooltip" />
+                                
+                                <p:outputLabel for="image" value="${msg.image}" />
+                                <p:fileUpload id="image" value="#{categoryStaffBean.upFile}" mode="simple" skinSimple="true" />
+                                <p:message for="image" display="tooltip" />
+                            </div>
+                            <div class="col-xs-12 col-sm-8">
+                                <p:outputLabel for="categoryDescription" value="${msg.description}" />
+                                <p:editor id="categoryDescription" value="#{categoryStaffBean.category.description}" converter="TrimConverter" required="true" height="160"
+                                          controls="bold italic underline strikethrough">
+                                </p:editor>
+                                <p:message for="categoryDescription" display="tooltip"/>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-sm-offset-right-8">
+                                <p:commandButton action="#{categoryStaffBean.processCategory}" value="${msg.save}" update=":formCategory :panelData" ajax="false"/>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-sm-offset-right-3 col-sm-offset-3">
+                                <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+                            </div>
+                        </h:form>
+                    </p:outputPanel>
+                </div>
+                <div class="col-xs-12">
+                    <p:outputPanel>
+                        <h:form id="panelData">
+                            <p:dataTable value="#{categoryStaffBean.categories}" var="currentRow" rows="10" paginator="true" paginatorPosition="bottom">
+
+                                <p:column headerText="${msg.image}">
+                                    <h:outputLink value="#{currentRow.image}">
+                                        <p:graphicImage value="#{currentRow.image}" height="100 px" width ="100 px" />
+                                    </h:outputLink>
+                                </p:column>
+                                <p:column headerText="${msg.categoryName}">
+                                    <h:outputText value="#{currentRow.name}" />
+                                </p:column>
+                                <p:column headerText="${msg.company}">
+                                    <h:outputText value="#{currentRow.company.fantasyName}" />
+                                </p:column>
+                                <p:column headerText="${msg.actions}">
+                                    <p:commandLink ajax="false" update=":formCategory :panelData" actionListener="#{categoryStaffBean.editCategory}" title="${msg.edit}">
+                                        <f:setPropertyActionListener value="#{currentRow}" target="#{categoryStaffBean.category}" />
+                                        <i class="fa fa-edit" aria-hidden="true"></i>
+                                    </p:commandLink>
+
+                                    <p:commandLink title="${msg.delete}">
+                                        <f:setPropertyActionListener value="#{currentRow}" target="#{categoryStaffBean.category}"/>
+                                        <p:ajax event="click" oncomplete="PF('deletePopUp').show();" />
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </p:commandLink>
+                                </p:column>
+                            </p:dataTable>
+
+                            <p:dialog id="dialogoEliminar" widgetVar="deletePopUp" header="${msg.delete}" modal="true">
+                                <h:outputText value="${msg.deleteCategory}" />
+                                <p:commandButton value="${msg.yes}" action="#{categoryStaffBean.deleteCategory()}" update=":formCategory :panelData" />
+
+                                <p:commandButton value="${msg.no}">
+                                    <p:ajax event="click" oncomplete="PF('deletePopUp').hide();" />
+                                </p:commandButton>
+                            </p:dialog>
+
+                        </h:form>
+                    </p:outputPanel>
+                </div>
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+</html>

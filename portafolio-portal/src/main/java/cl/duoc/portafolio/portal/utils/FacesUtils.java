@@ -30,7 +30,7 @@ import org.springframework.web.jsf.FacesContextUtils;
 
 /**
  *
- * @author Sebastián Salazar Molina <sebasalazar@gmail.cl>
+ * @author Sebastián Salazar Molina.
  */
 public abstract class FacesUtils implements Serializable {
 

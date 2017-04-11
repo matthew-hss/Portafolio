@@ -18,14 +18,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
-@Service("benefitAuthenticationProvider")
-public class BenefitAuthenticationProvider implements AuthenticationProvider {
+@Service("portafolioAuthenticationProvider")
+public class PortafolioAuthenticationProvider implements AuthenticationProvider {
 
     @Resource(name = "userService")
     private UserService userService;
     private final static String BAD_USER = "Invalid user or password";
     private final static String INVALID_ACCESS = "You do not have privileges to access the system.";
-    private final static Logger LOGGER = LoggerFactory.getLogger(BenefitAuthenticationProvider.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(PortafolioAuthenticationProvider.class);
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
