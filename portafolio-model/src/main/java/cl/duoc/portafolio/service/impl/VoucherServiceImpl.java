@@ -4,7 +4,7 @@ import cl.duoc.portafolio.model.Function;
 import cl.duoc.portafolio.model.Functionary;
 import cl.duoc.portafolio.model.Sale;
 import cl.duoc.portafolio.model.Voucher;
-import cl.duoc.portafolio.model.Service;
+import cl.duoc.portafolio.model.MealService;
 import cl.duoc.portafolio.model.VoucherAmount;
 import cl.duoc.portafolio.repository.VoucherAmountRepository;
 import cl.duoc.portafolio.repository.VoucherRepository;
@@ -16,12 +16,13 @@ import javax.annotation.Resource;
 import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author matthew
  */
-@org.springframework.stereotype.Service("functionaryService")
+@Service("voucherService")
 public class VoucherServiceImpl implements VoucherService, Serializable {
 
     private static final long serialVersionUID = 7419845182456767534L;
@@ -168,7 +169,7 @@ public class VoucherServiceImpl implements VoucherService, Serializable {
     }
 
     @Override
-    public List<VoucherAmount> getVouchersAmount(Service service) {
+    public List<VoucherAmount> getVouchersAmount(MealService service) {
         List<VoucherAmount> vouchersAmounts = new ArrayList<>();
         try {
             if (service != null) {

@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
  *
  * @author matthew
  */
-@Service("functionaryService")
+@Service("saleService")
 public class SaleServiceImpl implements SaleService, Serializable {
 
     private static final long serialVersionUID = 7419845182456041234L;
