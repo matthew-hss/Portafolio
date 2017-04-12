@@ -13,6 +13,10 @@
     <packaging>war</packaging>
     <name>Portafolio Portal</name>
 
+    <properties>
+        <app.root>${project.basedir}/..</app.root>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
