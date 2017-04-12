@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author matthew
  */
 @Entity
-@Table(name = "function")
+@Table(name = "charge")
 public class Function implements Serializable{
     private static final long serialVersionUID = 7226055427557870592L;
     
