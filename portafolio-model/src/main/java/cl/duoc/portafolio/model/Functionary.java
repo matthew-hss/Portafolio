@@ -1,6 +1,5 @@
 package cl.duoc.portafolio.model;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +15,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "functionary")
-public class Functionary implements Serializable{
+public class Functionary extends BaseBean{
     private static final long serialVersionUID = 7226055427557870592L;
     
     @Id
@@ -32,8 +31,8 @@ public class Functionary implements Serializable{
     private String name = null;
     @Column(name = "surname", nullable =false)
     private String surname = null;
-    @JoinColumn(name = "function_id", referencedColumnName = "pk", nullable =false)
-    private Function function = null;
+    @JoinColumn(name = "jobtitle_id", referencedColumnName = "id", nullable =false)
+    private JobTitle jobTitle = null;
 
     public Long getId() {
         return id;
@@ -75,12 +74,12 @@ public class Functionary implements Serializable{
         this.surname = surname;
     }
 
-    public Function getFunction() {
-        return function;
+    public JobTitle getJobTitle() {
+        return jobTitle;
     }
 
-    public void setFunction(Function function) {
-        this.function = function;
+    public void setJobTitle(JobTitle jobTitle) {
+        this.jobTitle = jobTitle;
     }
     
     

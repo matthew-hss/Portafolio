@@ -1,6 +1,6 @@
 package cl.duoc.portafolio.repository;
 
-import cl.duoc.portafolio.model.Function;
+import cl.duoc.portafolio.model.JobTitle;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,13 +10,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Matthew
  */
 @Resource(name = "functionRepository")
-public interface FunctionRepository extends JpaRepository<Function, Long>{
+public interface FunctionRepository extends JpaRepository<JobTitle, Long>{
     
-    public List<Function> findAll();
+    public List<JobTitle> findAll();
     
-    public Function findById(Long id);
+    public JobTitle findById(Long id);
     
-//    public boolean delete(Function function);
+//    public boolean delete(JobTitle function);
     
-    public Function save(Function role);  
+    public JobTitle save(JobTitle role);  
 }

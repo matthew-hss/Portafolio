@@ -1,6 +1,5 @@
 package cl.duoc.portafolio.model;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,8 +15,9 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author matthew
  */
 @Entity
-@Table(name="user")
-public class User implements Serializable{
+@Table(name="users")
+public class User extends BaseBean{
+    
     private static final long serialVersionUID = 7226055427557870592L;
     
     @Id

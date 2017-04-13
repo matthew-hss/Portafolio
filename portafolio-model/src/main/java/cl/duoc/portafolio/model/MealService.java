@@ -1,6 +1,5 @@
 package cl.duoc.portafolio.model;
 
-import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +16,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "mealservice")
-public class MealService implements Serializable{
+public class MealService extends BaseBean{
     private static final long serialVersionUID = 7226055427557870592L;
     
     @Id

@@ -1,6 +1,6 @@
 package cl.duoc.portafolio.service.impl;
 
-import cl.duoc.portafolio.model.Function;
+import cl.duoc.portafolio.model.JobTitle;
 import cl.duoc.portafolio.model.Functionary;
 import cl.duoc.portafolio.model.WSAssignment;
 import cl.duoc.portafolio.model.Workshift;
@@ -67,7 +67,7 @@ public class FunctionaryServiceImpl implements FunctionaryService, Serializable 
     }
 
     @Override
-    public List<Functionary> getFunctionaries(Function function) {
+    public List<Functionary> getFunctionaries(JobTitle function) {
         List<Functionary> functionaries = new ArrayList<>();
         try {
             if (function != null) {
@@ -267,8 +267,8 @@ public class FunctionaryServiceImpl implements FunctionaryService, Serializable 
     }
 
     @Override
-    public Function getFunction(Long id) {
-        Function function = null;
+    public JobTitle getFunction(Long id) {
+        JobTitle function = null;
         try {
             if (id != null && id > 0) {
                 function = functionRepository.findById(id);
@@ -282,8 +282,8 @@ public class FunctionaryServiceImpl implements FunctionaryService, Serializable 
     }
 
     @Override
-    public List<Function> getFunctions() {
-        List<Function> functions = new ArrayList<>();
+    public List<JobTitle> getFunctions() {
+        List<JobTitle> functions = new ArrayList<>();
         try {
             functions = functionRepository.findAll();
         } catch (Exception e) {
@@ -296,8 +296,8 @@ public class FunctionaryServiceImpl implements FunctionaryService, Serializable 
 
     @Override
     @Transactional
-    public Function save(Function function) {
-        Function saved = null;
+    public JobTitle save(JobTitle function) {
+        JobTitle saved = null;
         try {
             if (function != null) {
                 saved = functionRepository.save(function);
@@ -312,7 +312,7 @@ public class FunctionaryServiceImpl implements FunctionaryService, Serializable 
 
     @Override
     @Transactional
-    public boolean delete(Function function) {
+    public boolean delete(JobTitle function) {
         boolean deleted = false;
         try {
             functionRepository.delete(function);

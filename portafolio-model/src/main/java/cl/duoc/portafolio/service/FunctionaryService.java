@@ -1,6 +1,6 @@
 package cl.duoc.portafolio.service;
 
-import cl.duoc.portafolio.model.Function;
+import cl.duoc.portafolio.model.JobTitle;
 import cl.duoc.portafolio.model.Functionary;
 import cl.duoc.portafolio.model.WSAssignment;
 import cl.duoc.portafolio.model.Workshift;
@@ -16,7 +16,7 @@ public interface FunctionaryService {
     
     public List<Functionary> getFunctionaries();
     
-    public List<Functionary> getFunctionaries(final Function function);
+    public List<Functionary> getFunctionaries(final JobTitle function);
     
     public Functionary save(final Functionary functionary);
     
@@ -42,11 +42,11 @@ public interface FunctionaryService {
     
     public boolean delete(final WSAssignment wsassignment);
     
-    public Function getFunction(final Long id);
+    public JobTitle getFunction(final Long id);
     
-    public List<Function> getFunctions();
+    public List<JobTitle> getFunctions();
     
-    public Function save(final Function function);
+    public JobTitle save(final JobTitle function);
     
-    public boolean delete(final Function function);
+    public boolean delete(final JobTitle function);
 }

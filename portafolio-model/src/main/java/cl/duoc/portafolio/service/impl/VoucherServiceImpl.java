@@ -1,6 +1,6 @@
 package cl.duoc.portafolio.service.impl;
 
-import cl.duoc.portafolio.model.Function;
+import cl.duoc.portafolio.model.JobTitle;
 import cl.duoc.portafolio.model.Functionary;
 import cl.duoc.portafolio.model.Sale;
 import cl.duoc.portafolio.model.Voucher;
@@ -154,7 +154,7 @@ public class VoucherServiceImpl implements VoucherService, Serializable {
     }
 
     @Override
-    public List<VoucherAmount> getVouchersAmount(Function function) {
+    public List<VoucherAmount> getVouchersAmount(JobTitle function) {
         List<VoucherAmount> vouchersAmounts = new ArrayList<>();
         try {
             if (function != null) {

@@ -1,6 +1,6 @@
 package cl.duoc.portafolio.repository;
 
-import cl.duoc.portafolio.model.Function;
+import cl.duoc.portafolio.model.JobTitle;
 import cl.duoc.portafolio.model.Functionary;
 import java.util.List;
 import javax.annotation.Resource;
@@ -21,5 +21,5 @@ public interface FunctionaryRepository extends CrudRepository<Functionary, Long>
     
     public Functionary save(Functionary functionary);  
     
-    public List<Functionary> findByFunction(Function function);
+    public List<Functionary> findByFunction(JobTitle function);
 }

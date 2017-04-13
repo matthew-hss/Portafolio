@@ -1,6 +1,6 @@
 package cl.duoc.portafolio.portal.jsf.admin;
 
-import cl.duoc.portafolio.model.Function;
+import cl.duoc.portafolio.model.JobTitle;
 import cl.duoc.portafolio.model.Functionary;
 import cl.duoc.portafolio.portal.utils.FacesUtils;
 import cl.duoc.portafolio.service.FunctionaryService;
@@ -32,7 +32,7 @@ public class FunctionaryAdminBean implements Serializable {
     private Functionary functionary = null;
     private List<Functionary> functionaries = null;
     private boolean edit = false;
-    private List<Function> functions = null;
+    private List<JobTitle> functions = null;
     private static final Logger LOGGER = LoggerFactory.getLogger(FunctionaryAdminBean.class);
 
     @PostConstruct
@@ -108,7 +108,7 @@ public class FunctionaryAdminBean implements Serializable {
         this.edit = edit;
     }
 
-    public List<Function> getFunctions() {
+    public List<JobTitle> getFunctions() {
         return functions;
     }
 }

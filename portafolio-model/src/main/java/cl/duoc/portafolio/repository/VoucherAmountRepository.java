@@ -1,6 +1,6 @@
 package cl.duoc.portafolio.repository;
 
-import cl.duoc.portafolio.model.Function;
+import cl.duoc.portafolio.model.JobTitle;
 import cl.duoc.portafolio.model.MealService;
 import cl.duoc.portafolio.model.VoucherAmount;
 import java.util.List;
@@ -22,7 +22,7 @@ public interface VoucherAmountRepository extends CrudRepository<VoucherAmount, L
     
     public VoucherAmount save(VoucherAmount role);  
     
-    public List<VoucherAmount> findByFunction(Function function);
+    public List<VoucherAmount> findByFunction(JobTitle function);
     
     public List<VoucherAmount> findByService(MealService service);
 }

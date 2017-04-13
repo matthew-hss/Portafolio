@@ -1,6 +1,6 @@
 package cl.duoc.portafolio.service;
 
-import cl.duoc.portafolio.model.Function;
+import cl.duoc.portafolio.model.JobTitle;
 import cl.duoc.portafolio.model.Functionary;
 import cl.duoc.portafolio.model.Sale;
 import cl.duoc.portafolio.model.MealService;
@@ -30,7 +30,7 @@ public interface VoucherService {
     
     public List<VoucherAmount> getVouchersAmount();
     
-    public List<VoucherAmount> getVouchersAmount(final Function function);
+    public List<VoucherAmount> getVouchersAmount(final JobTitle function);
     
     public List<VoucherAmount> getVouchersAmount(final MealService service);
     
