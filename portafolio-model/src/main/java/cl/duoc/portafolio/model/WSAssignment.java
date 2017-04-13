@@ -26,7 +26,7 @@ public class WSAssignment extends BaseBean{
     private Long id = null;
     @JoinColumn(name = "workshift_id", referencedColumnName = "id", nullable = false)
     private Workshift workshift = null;
-    @JoinColumn(name = "funcionary_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "funcionary_id", referencedColumnName = "id", nullable = false, unique = true)
     private Functionary functionary = null;
     @Column(name = "startDate", nullable = false)
     private Date startDate = null;

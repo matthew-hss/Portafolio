@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author matthew
  */
 @Entity
-@Table(name = "saleItem")
+@Table(name = "saleitem")
 public class SaleItem extends BaseBean{
     private static final long serialVersionUID = 7226055427557870592L;
     

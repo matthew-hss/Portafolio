@@ -23,7 +23,7 @@ public class JobTitle implements Serializable{
     @XmlTransient
     @Column(name = "id", nullable = false)
     private Long id = null;
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     private String name = null;
 
     public Long getId() {

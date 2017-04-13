@@ -22,7 +22,7 @@ public class Product extends BaseBean{
     @XmlTransient
     @Column(name = "id", nullable = false)
     private Long id = null;
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     private String name = null;
     @Column(name = "price", nullable = false)
     private Integer price = null;

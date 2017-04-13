@@ -27,7 +27,7 @@ public class Sale extends BaseBean{
     private Long total = null;
     @JoinColumn(name = "place_id", referencedColumnName = "id", nullable = false)
     private Place place = null;
-    @JoinColumn(name = "voucher_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "voucher_id", referencedColumnName = "id")
     private Voucher voucher = null;
 
     public Long getId() {

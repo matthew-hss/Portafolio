@@ -23,13 +23,13 @@ public class Voucher extends BaseBean{
     @XmlTransient
     @Column(name = "id", nullable = false)
     private Long id = null;
-    @Column(name = "code", nullable = false)
+    @Column(name = "code", nullable = false, unique = true)
     private String code = null;
     @Column(name = "used", nullable = false)
     private boolean used = true;
     @JoinColumn(name = "functionary_id", referencedColumnName = "id" ,nullable = false)
     private Functionary functionary = null;
-    @JoinColumn(name = "sale_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "sale_id", referencedColumnName = "id")
     private Sale sale = null;
 
     public Long getId() {

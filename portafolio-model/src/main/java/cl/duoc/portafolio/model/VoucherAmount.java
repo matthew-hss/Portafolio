@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author matthew
  */
 @Entity
-@Table(name = "voucherAmount", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"jobtitle_id", "service_id"})
-})
+@Table(name = "voucheramount", uniqueConstraints = 
+    @UniqueConstraint(columnNames = {"jobtitle_id", "mealservice_id"})
+)
 public class VoucherAmount extends BaseBean{
     private static final long serialVersionUID = 7226055427557870592L;
     
@@ -30,8 +30,8 @@ public class VoucherAmount extends BaseBean{
     private Long amount = null;
     @JoinColumn(name = "jobtitle_id", referencedColumnName = "id", nullable = false)
     private JobTitle jobTitle = null;
-    @JoinColumn(name = "service_id", referencedColumnName = "id", nullable = false)
-    private MealService service = null;
+    @JoinColumn(name = "mealservice_id", referencedColumnName = "id", nullable = false)
+    private MealService mealservice = null;
 
     public Long getId() {
         return id;
@@ -57,12 +57,12 @@ public class VoucherAmount extends BaseBean{
         this.jobTitle = jobTitle;
     }
 
-    public MealService getService() {
-        return service;
+    public MealService getMealservice() {
+        return mealservice;
     }
 
-    public void setService(MealService service) {
-        this.service = service;
+    public void setMealservice(MealService mealservice) {
+        this.mealservice = mealservice;
     }
     
     

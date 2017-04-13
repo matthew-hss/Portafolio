@@ -25,7 +25,7 @@ public class Functionary extends BaseBean{
     private Long id = null;
     @Column(name = "password", nullable =false)
     private String password = null;
-    @Column(name = "rut", nullable =false)
+    @Column(name = "rut", nullable =false, unique = true)
     private Integer rut = null;
     @Column(name = "name", nullable =false)
     private String name = null;

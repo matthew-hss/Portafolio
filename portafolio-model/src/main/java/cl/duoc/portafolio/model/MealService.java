@@ -24,9 +24,9 @@ public class MealService extends BaseBean{
     @XmlTransient
     @Column(name = "id", nullable = false)
     private Long id = null;
-    @Column(name = "startTime", nullable = false)
+    @Column(name = "starttime", nullable = false)
     private Date startTime = null;
-    @Column(name = "endTime", nullable = false)
+    @Column(name = "endtime", nullable = false)
     private Date endTime = null;
     @JoinColumn(name = "product_id",referencedColumnName = "id" ,nullable = false)
     private Product product = null;
