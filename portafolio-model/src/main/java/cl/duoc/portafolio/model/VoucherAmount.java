@@ -1,5 +1,6 @@
 package cl.duoc.portafolio.model;
 
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +17,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "voucheramount", uniqueConstraints = 
-    @UniqueConstraint(columnNames = {"jobtitle_id", "mealservice_id"})
+    @UniqueConstraint(columnNames = {"mealservice_id","jobtitle_id"})
 )
 public class VoucherAmount extends BaseBean{
     private static final long serialVersionUID = 7226055427557870592L;
@@ -63,6 +64,34 @@ public class VoucherAmount extends BaseBean{
 
     public void setMealservice(MealService mealservice) {
         this.mealservice = mealservice;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final VoucherAmount other = (VoucherAmount) obj;
+        if (!Objects.equals(this.jobTitle, other.jobTitle)) {
+            return false;
+        }
+        if (!Objects.equals(this.mealservice, other.mealservice)) {
+            return false;
+        }
+        return true;
     }
     
     
