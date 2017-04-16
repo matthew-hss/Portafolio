@@ -4,7 +4,6 @@ import cl.duoc.portafolio.model.JobTitle;
 import cl.duoc.portafolio.model.Functionary;
 import cl.duoc.portafolio.model.WSAssignment;
 import cl.duoc.portafolio.model.Workshift;
-import cl.duoc.portafolio.repository.FunctionRepository;
 import cl.duoc.portafolio.repository.FunctionaryRepository;
 import cl.duoc.portafolio.repository.WSAssignmentRepository;
 import cl.duoc.portafolio.repository.WorkshiftRepository;
@@ -17,6 +16,7 @@ import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import cl.duoc.portafolio.repository.JobTitleRepository;
 
 /**
  *
@@ -33,8 +33,8 @@ public class FunctionaryServiceImpl implements FunctionaryService, Serializable 
     private WorkshiftRepository workshiftRepository;
     @Resource(name = "wsassignmentRepository")
     private WSAssignmentRepository wsassignmentRepository;
-    @Resource(name = "functionRepository")
-    private FunctionRepository functionRepository;
+    @Resource(name = "jobTitleRepository")
+    private JobTitleRepository jobTitleRepository;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FunctionaryServiceImpl.class);
 
@@ -267,40 +267,40 @@ public class FunctionaryServiceImpl implements FunctionaryService, Serializable 
     }
 
     @Override
-    public JobTitle getFunction(Long id) {
-        JobTitle function = null;
+    public JobTitle getJobTitle(Long id) {
+        JobTitle jobTitle = null;
         try {
             if (id != null && id > 0) {
-                function = functionRepository.findById(id);
+                jobTitle = jobTitleRepository.findById(id);
             }
         } catch (Exception e) {
-            function = null;
+            jobTitle = null;
             LOGGER.error("Error al obtener función: {}", e.toString());
             LOGGER.debug("Error al obtener función: {}", e.toString());
         }
-        return function;
+        return jobTitle;
     }
 
     @Override
-    public List<JobTitle> getFunctions() {
-        List<JobTitle> functions = new ArrayList<>();
+    public List<JobTitle> getJobTitles() {
+        List<JobTitle> jobTitles = new ArrayList<>();
         try {
-            functions = functionRepository.findAll();
+            jobTitles = jobTitleRepository.findAll();
         } catch (Exception e) {
-            functions = new ArrayList<>();
+            jobTitles = new ArrayList<>();
             LOGGER.error("Error al obtener funciones: {}", e.toString());
             LOGGER.debug("Error al obtener funciones: {}", e.toString());
         }
-        return functions;
+        return jobTitles;
     }
 
     @Override
     @Transactional
-    public JobTitle save(JobTitle function) {
+    public JobTitle save(JobTitle jobTitle) {
         JobTitle saved = null;
         try {
-            if (function != null) {
-                saved = functionRepository.save(function);
+            if (jobTitle != null) {
+                saved = jobTitleRepository.save(jobTitle);
             }
         } catch (Exception e) {
             saved = null;
@@ -312,10 +312,10 @@ public class FunctionaryServiceImpl implements FunctionaryService, Serializable 
 
     @Override
     @Transactional
-    public boolean delete(JobTitle function) {
+    public boolean delete(JobTitle jobTitle) {
         boolean deleted = false;
         try {
-            functionRepository.delete(function);
+            jobTitleRepository.delete(jobTitle);
             deleted = true;
         } catch (Exception e) {
             deleted = false;

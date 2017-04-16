@@ -30,9 +30,9 @@ public interface VoucherService {
     
     public List<VoucherAmount> getVouchersAmount();
     
-    public List<VoucherAmount> getVouchersAmount(final JobTitle function);
+    public List<VoucherAmount> getVouchersAmount(final JobTitle jobTitle);
     
-    public List<VoucherAmount> getVouchersAmount(final MealService service);
+    public List<VoucherAmount> getVouchersAmount(final MealService mealService);
     
     public VoucherAmount save(final VoucherAmount voucherAmount);
     

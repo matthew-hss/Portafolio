@@ -32,12 +32,12 @@ public class FunctionaryAdminBean implements Serializable {
     private Functionary functionary = null;
     private List<Functionary> functionaries = null;
     private boolean edit = false;
-    private List<JobTitle> functions = null;
+    private List<JobTitle> jobTitles = null;
     private static final Logger LOGGER = LoggerFactory.getLogger(FunctionaryAdminBean.class);
 
     @PostConstruct
     public void initBean() {
-        functions = functionaryService.getFunctions();
+        jobTitles = functionaryService.getJobTitles();
         refresh();
     }
 
@@ -108,7 +108,7 @@ public class FunctionaryAdminBean implements Serializable {
         this.edit = edit;
     }
 
-    public List<JobTitle> getFunctions() {
-        return functions;
+    public List<JobTitle> getJobTitles() {
+        return jobTitles;
     }
 }

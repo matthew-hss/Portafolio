@@ -9,8 +9,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author Matthew
  */
-@Resource(name = "functionRepository")
-public interface FunctionRepository extends JpaRepository<JobTitle, Long>{
+@Resource(name = "jobTitleRepository")
+public interface JobTitleRepository extends JpaRepository<JobTitle, Long>{
     
     public List<JobTitle> findAll();
     

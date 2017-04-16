@@ -22,7 +22,7 @@ public interface VoucherAmountRepository extends CrudRepository<VoucherAmount, L
     
     public VoucherAmount save(VoucherAmount role);  
     
-    public List<VoucherAmount> findByFunction(JobTitle function);
+    public List<VoucherAmount> findByJobTitle(JobTitle function);
     
-    public List<VoucherAmount> findByService(MealService service);
+    public List<VoucherAmount> findByMealService(MealService service);
 }

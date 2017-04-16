@@ -154,11 +154,11 @@ public class VoucherServiceImpl implements VoucherService, Serializable {
     }
 
     @Override
-    public List<VoucherAmount> getVouchersAmount(JobTitle function) {
+    public List<VoucherAmount> getVouchersAmount(JobTitle jobTitle) {
         List<VoucherAmount> vouchersAmounts = new ArrayList<>();
         try {
-            if (function != null) {
-                vouchersAmounts = voucherAmountRepository.findByFunction(function);
+            if (jobTitle != null) {
+                vouchersAmounts = voucherAmountRepository.findByJobTitle(jobTitle);
             }
         } catch (Exception e) {
             vouchersAmounts = new ArrayList<>();
@@ -169,11 +169,11 @@ public class VoucherServiceImpl implements VoucherService, Serializable {
     }
 
     @Override
-    public List<VoucherAmount> getVouchersAmount(MealService service) {
+    public List<VoucherAmount> getVouchersAmount(MealService mealService) {
         List<VoucherAmount> vouchersAmounts = new ArrayList<>();
         try {
-            if (service != null) {
-                vouchersAmounts = voucherAmountRepository.findByService(service);
+            if (mealService != null) {
+                vouchersAmounts = voucherAmountRepository.findByMealService(mealService);
             }
         } catch (Exception e) {
             vouchersAmounts = new ArrayList<>();

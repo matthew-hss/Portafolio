@@ -42,11 +42,11 @@ public interface FunctionaryService {
     
     public boolean delete(final WSAssignment wsassignment);
     
-    public JobTitle getFunction(final Long id);
+    public JobTitle getJobTitle(final Long id);
     
-    public List<JobTitle> getFunctions();
+    public List<JobTitle> getJobTitles();
     
-    public JobTitle save(final JobTitle function);
+    public JobTitle save(final JobTitle jobTitle);
     
-    public boolean delete(final JobTitle function);
+    public boolean delete(final JobTitle jobTitle);
 }

@@ -32,7 +32,7 @@ public class VoucherAmount extends BaseBean{
     @JoinColumn(name = "jobtitle_id", referencedColumnName = "id", nullable = false)
     private JobTitle jobTitle = null;
     @JoinColumn(name = "mealservice_id", referencedColumnName = "id", nullable = false)
-    private MealService mealservice = null;
+    private MealService mealService = null;
 
     public Long getId() {
         return id;
@@ -58,12 +58,12 @@ public class VoucherAmount extends BaseBean{
         this.jobTitle = jobTitle;
     }
 
-    public MealService getMealservice() {
-        return mealservice;
+    public MealService getMealService() {
+        return mealService;
     }
 
-    public void setMealservice(MealService mealservice) {
-        this.mealservice = mealservice;
+    public void setMealService(MealService mealService) {
+        this.mealService = mealService;
     }
 
     @Override
@@ -88,7 +88,7 @@ public class VoucherAmount extends BaseBean{
         if (!Objects.equals(this.jobTitle, other.jobTitle)) {
             return false;
         }
-        if (!Objects.equals(this.mealservice, other.mealservice)) {
+        if (!Objects.equals(this.mealService, other.mealService)) {
             return false;
         }
         return true;
