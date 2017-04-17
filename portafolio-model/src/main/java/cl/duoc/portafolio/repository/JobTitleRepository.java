@@ -12,11 +12,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @Resource(name = "jobTitleRepository")
 public interface JobTitleRepository extends JpaRepository<JobTitle, Long>{
     
-    public List<JobTitle> findAll();
-    
-    public JobTitle findById(Long id);
-    
-//    public boolean delete(JobTitle function);
-    
-    public JobTitle save(JobTitle role);  
+    public JobTitle findByName(String name);
 }

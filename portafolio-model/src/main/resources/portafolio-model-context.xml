@@ -46,12 +46,13 @@
           p:dataSource-ref="dataSource"
           p:jpaVendorAdapter-ref="jpaAdapter">
         <property name="persistenceUnitName" value="portafolioPU" />
-        <property name="persistenceXmlLocation" value="classpath*:META-INF/portafolio-pu.xml" />
+        <property name="persistenceXmlLocation" value="classpath*:META-INF/persistence.xml" />
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.format_sql">${jpa.format.sql}</prop>
                 <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
                 <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.implicit_naming_strategy">legacy-jpa</prop>
             </props>
         </property>
     </bean>

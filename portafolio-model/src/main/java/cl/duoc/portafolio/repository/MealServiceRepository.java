@@ -4,22 +4,14 @@ import cl.duoc.portafolio.model.Product;
 import cl.duoc.portafolio.model.MealService;
 import java.util.List;
 import javax.annotation.Resource;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author Matthew
  */
 @Resource(name = "mealServiceRepository")
-public interface MealServiceRepository extends CrudRepository<MealService, Long>{
-    
-    public List<MealService> findAll();
-    
-    public MealService findById(Long id);
-    
-    public boolean deleteById(Long id);
-    
-    public MealService save(MealService role);  
+public interface MealServiceRepository extends JpaRepository<MealService, Long>{
     
     public MealService findByProduct(Product product);
 }

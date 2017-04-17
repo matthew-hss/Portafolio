@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -14,22 +15,24 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Matthew
  */
 @Entity
-@Table(name = "voucher")
+@Table(name = "VOUCHER",schema = "PORTAFOLIO")
 public class Voucher extends BaseBean{
     private static final long serialVersionUID = 7226055427557870592L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @XmlTransient
-    @Column(name = "id", nullable = false)
+    @Column(name = "ID", nullable = false)
     private Long id = null;
-    @Column(name = "code", nullable = false, unique = true)
+    @Column(name = "CODE", nullable = false, unique = true)
     private String code = null;
-    @Column(name = "used", nullable = false)
+    @Column(name = "USED", nullable = false)
     private boolean used = true;
-    @JoinColumn(name = "functionary_id", referencedColumnName = "id" ,nullable = false)
+    @JoinColumn(name = "FUNCTIONARY_ID", referencedColumnName = "ID" ,nullable = false)
+    @ManyToOne(optional = false)
     private Functionary functionary = null;
-    @JoinColumn(name = "sale_id", referencedColumnName = "id")
+    @JoinColumn(name = "SALE_ID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
     private Sale sale = null;
 
     public Long getId() {

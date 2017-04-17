@@ -15,8 +15,8 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author matthew
  */
 @Entity
-@Table(name = "workshift", uniqueConstraints = 
-    @UniqueConstraint(columnNames = {"starttime", "endtime"})
+@Table(name = "WORKSHIFT",schema = "PORTAFOLIO", uniqueConstraints = 
+    @UniqueConstraint(columnNames = {"STARTTIME", "ENDTIME"})
 )
 public class Workshift extends BaseBean{
     private static final long serialVersionUID = 7226055427557870592L;
@@ -24,11 +24,11 @@ public class Workshift extends BaseBean{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @XmlTransient
-    @Column(name = "id", nullable = false)
+    @Column(name = "ID", nullable = false)
     private Long id = null;
-    @Column(name = "starttime", nullable = false)
+    @Column(name = "STARTTIME", nullable = false)
     private Long startTime = null;
-    @Column(name = "endtime", nullable = false)
+    @Column(name = "ENDTIME", nullable = false)
     private Long endTime = null;
 
     public Long getId() {

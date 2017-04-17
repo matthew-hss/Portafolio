@@ -13,16 +13,16 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Matthew
  */
 @Entity
-@Table(name = "place")
+@Table(name = "PLACE",schema = "PORTAFOLIO")
 public class Place extends BaseBean{
     private static final long serialVersionUID = 7226055427557870592L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @XmlTransient
-    @Column(name = "id", nullable = false)
+    @Column(name = "ID", nullable = false)
     private Long id = null;
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "NAME", nullable = false, unique = true)
     private String name = null;
 
     public Long getId() {

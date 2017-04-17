@@ -4,22 +4,14 @@ import cl.duoc.portafolio.model.JobTitle;
 import cl.duoc.portafolio.model.Functionary;
 import java.util.List;
 import javax.annotation.Resource;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author Matthew
  */
 @Resource(name = "functionaryRepository")
-public interface FunctionaryRepository extends CrudRepository<Functionary, Long>{
+public interface FunctionaryRepository extends JpaRepository<Functionary, Long>{
     
-    public List<Functionary> findAll();
-    
-    public Functionary findById(Long id);
-    
-    public boolean deleteById(Long id);
-    
-    public Functionary save(Functionary functionary);  
-    
-    public List<Functionary> findByFunction(JobTitle function);
+    public List<Functionary> findByJobTitle(JobTitle jobTitle);
 }

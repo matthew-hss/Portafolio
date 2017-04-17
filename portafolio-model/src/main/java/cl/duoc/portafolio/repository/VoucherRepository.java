@@ -5,22 +5,14 @@ import cl.duoc.portafolio.model.Sale;
 import cl.duoc.portafolio.model.Voucher;
 import java.util.List;
 import javax.annotation.Resource;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author Matthew
  */
 @Resource(name = "voucherRepository")
-public interface VoucherRepository extends CrudRepository<Voucher, Long>{
-    
-    public List<Voucher> findAll();
-    
-    public Voucher findById(Long id);
-    
-    public boolean deleteById(Long id);
-    
-    public Voucher save(Voucher role);  
+public interface VoucherRepository extends JpaRepository<Voucher, Long>{
     
     public List<Voucher> findByFunctionary(Functionary functionary);
     

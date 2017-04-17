@@ -15,22 +15,22 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author matthew
  */
 @Entity
-@Table(name = "wsassignment")
+@Table(name = "WSASSIGNMENT",schema = "PORTAFOLIO")
 public class WSAssignment extends BaseBean{
     private static final long serialVersionUID = 7226055427557870592L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @XmlTransient
-    @Column(name = "id", nullable = false)
+    @Column(name = "ID", nullable = false)
     private Long id = null;
-    @JoinColumn(name = "workshift_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "WORKSHIFT_ID", referencedColumnName = "ID", nullable = false)
     private Workshift workshift = null;
-    @JoinColumn(name = "funcionary_id", referencedColumnName = "id", nullable = false, unique = true)
+    @JoinColumn(name = "FUNCTIONARY_ID", referencedColumnName = "ID", nullable = false, unique = true)
     private Functionary functionary = null;
-    @Column(name = "startDate", nullable = false)
+    @Column(name = "STARTDATE", nullable = false)
     private Date startDate = null;
-    @Column(name = "endDate", nullable = false)
+    @Column(name = "ENDDATE", nullable = false)
     private Date endDate = null;
 
     public Long getId() {

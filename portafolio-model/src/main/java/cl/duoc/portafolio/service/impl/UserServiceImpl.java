@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService, Serializable {
         User user = null;
         try {
             if (id != null && id > 0) {
-                user = userRepository.findById(id);
+                user = userRepository.findOne(id);
             }
         } catch (Exception e) {
             user = null;
@@ -128,7 +128,7 @@ public class UserServiceImpl implements UserService, Serializable {
         Role role = null;
         try {
             if (id != null && id > 0) {
-                role = roleRepository.findById(id);
+                role = roleRepository.findOne(id);
             }
         } catch (Exception e) {
             role = null;

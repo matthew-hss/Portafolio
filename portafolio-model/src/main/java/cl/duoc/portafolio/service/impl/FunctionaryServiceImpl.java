@@ -43,7 +43,7 @@ public class FunctionaryServiceImpl implements FunctionaryService, Serializable 
         Functionary functionary = null;
         try {
             if (id != null && id > 0) {
-                functionary = functionaryRepository.findById(id);
+                functionary = functionaryRepository.findOne(id);
             }
         } catch (Exception e) {
             functionary = null;
@@ -67,11 +67,11 @@ public class FunctionaryServiceImpl implements FunctionaryService, Serializable 
     }
 
     @Override
-    public List<Functionary> getFunctionaries(JobTitle function) {
+    public List<Functionary> getFunctionaries(JobTitle jobTitle) {
         List<Functionary> functionaries = new ArrayList<>();
         try {
-            if (function != null) {
-                functionaries = functionaryRepository.findByFunction(function);
+            if (jobTitle != null) {
+                functionaries = functionaryRepository.findByJobTitle(jobTitle);
             }
         } catch (Exception e) {
             functionaries = new ArrayList<>();
@@ -119,7 +119,7 @@ public class FunctionaryServiceImpl implements FunctionaryService, Serializable 
         Workshift workshift = null;
         try {
             if (id != null && id > 0) {
-                workshift = workshiftRepository.findById(id);
+                workshift = workshiftRepository.findOne(id);
             }
         } catch (Exception e) {
             workshift = null;
@@ -180,7 +180,7 @@ public class FunctionaryServiceImpl implements FunctionaryService, Serializable 
         WSAssignment wsa = null;
         try {
             if (id != null && id > 0) {
-                wsa = wsassignmentRepository.findById(id);
+                wsa = wsassignmentRepository.findOne(id);
             }
         } catch (Exception e) {
             wsa = null;
@@ -271,7 +271,7 @@ public class FunctionaryServiceImpl implements FunctionaryService, Serializable 
         JobTitle jobTitle = null;
         try {
             if (id != null && id > 0) {
-                jobTitle = jobTitleRepository.findById(id);
+                jobTitle = jobTitleRepository.findOne(id);
             }
         } catch (Exception e) {
             jobTitle = null;

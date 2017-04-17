@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlTransient;
@@ -16,22 +17,24 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author matthew
  */
 @Entity
-@Table(name = "voucheramount", uniqueConstraints = 
-    @UniqueConstraint(columnNames = {"mealservice_id","jobtitle_id"})
-)
+@Table(name = "VOUCHERAMOUNT", schema = "PORTAFOLIO", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"MEALSERVICE_ID","JOBTITLE_ID"})
+})
 public class VoucherAmount extends BaseBean{
     private static final long serialVersionUID = 7226055427557870592L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @XmlTransient
-    @Column(name = "id", nullable = false)
+    @Column(name = "ID", nullable = false)
     private Long id = null;
-    @Column(name = "amount", nullable = false)
+    @Column(name = "AMOUNT", nullable = false)
     private Long amount = null;
-    @JoinColumn(name = "jobtitle_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "JOBTITLE_ID", referencedColumnName = "ID", nullable = false)
+    @ManyToOne(optional = false)
     private JobTitle jobTitle = null;
-    @JoinColumn(name = "mealservice_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "MEALSERVICE_ID", referencedColumnName = "ID", nullable = false)
+    @ManyToOne(optional = false)
     private MealService mealService = null;
 
     public Long getId() {

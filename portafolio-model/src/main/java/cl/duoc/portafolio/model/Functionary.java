@@ -14,24 +14,24 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author matthew
  */
 @Entity
-@Table(name = "functionary")
+@Table(name = "FUNCTIONARY",schema = "PORTAFOLIO")
 public class Functionary extends BaseBean{
     private static final long serialVersionUID = 7226055427557870592L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @XmlTransient
-    @Column(name = "id", nullable = false)
+    @Column(name = "ID", nullable = false)
     private Long id = null;
-    @Column(name = "password", nullable =false)
+    @Column(name = "PASSWORD", nullable =false)
     private String password = null;
-    @Column(name = "rut", nullable =false, unique = true)
+    @Column(name = "RUT", nullable =false, unique = true)
     private Integer rut = null;
-    @Column(name = "name", nullable =false)
+    @Column(name = "NAME", nullable =false)
     private String name = null;
-    @Column(name = "surname", nullable =false)
+    @Column(name = "SURNAME", nullable =false)
     private String surname = null;
-    @JoinColumn(name = "jobtitle_id", referencedColumnName = "id", nullable =false)
+    @JoinColumn(name = "JOBTITLE_ID", referencedColumnName = "ID", nullable =false)
     private JobTitle jobTitle = null;
 
     public Long getId() {

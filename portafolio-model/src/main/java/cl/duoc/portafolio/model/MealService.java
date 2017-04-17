@@ -15,20 +15,20 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Matthew
  */
 @Entity
-@Table(name = "mealservice")
+@Table(name = "MEALSERVICE",schema = "PORTAFOLIO")
 public class MealService extends BaseBean{
     private static final long serialVersionUID = 7226055427557870592L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @XmlTransient
-    @Column(name = "id", nullable = false)
+    @Column(name = "ID", nullable = false)
     private Long id = null;
-    @Column(name = "starttime", nullable = false)
+    @Column(name = "STARTTIME", nullable = false)
     private Date startTime = null;
-    @Column(name = "endtime", nullable = false)
+    @Column(name = "ENDTIME", nullable = false)
     private Date endTime = null;
-    @JoinColumn(name = "product_id",referencedColumnName = "id" ,nullable = false)
+    @JoinColumn(name = "PRODUCT_ID",referencedColumnName = "ID" ,nullable = false)
     private Product product = null;
 
     public Long getId() {

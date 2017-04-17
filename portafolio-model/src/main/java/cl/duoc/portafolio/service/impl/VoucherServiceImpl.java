@@ -39,7 +39,7 @@ public class VoucherServiceImpl implements VoucherService, Serializable {
         Voucher voucher = null;
         try {
             if (id != null && id > 0) {
-                voucher = voucherRepository.findById(id);
+                voucher = voucherRepository.findOne(id);
             }
         } catch (Exception e) {
             voucher = null;
@@ -130,7 +130,7 @@ public class VoucherServiceImpl implements VoucherService, Serializable {
         VoucherAmount voucherAmount = null;
         try {
             if (id != null && id > 0) {
-                voucherAmount = voucherAmountRepository.findById(id);
+                voucherAmount = voucherAmountRepository.findOne(id);
             }
         } catch (Exception e) {
             voucherAmount = null;

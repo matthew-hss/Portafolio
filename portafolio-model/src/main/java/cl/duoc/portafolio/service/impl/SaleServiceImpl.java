@@ -44,7 +44,7 @@ public class SaleServiceImpl implements SaleService, Serializable {
         Sale sale = null;
         try {
             if (id != null && id > 0) {
-                sale = saleRepository.findById(id);
+                sale = saleRepository.findOne(id);
             }
         } catch (Exception e) {
             sale = null;
@@ -133,7 +133,7 @@ public class SaleServiceImpl implements SaleService, Serializable {
         Place place = null;
         try {
             if (id != null && id > 0) {
-                place = placeRepository.findById(id);
+                place = placeRepository.findOne(id);
             }
         } catch (Exception e) {
             place = null;
@@ -194,7 +194,7 @@ public class SaleServiceImpl implements SaleService, Serializable {
         Product product = null;
         try {
             if (id != null && id > 0) {
-                product = productRepository.findById(id);
+                product = productRepository.findOne(id);
             }
         } catch (Exception e) {
             product = null;
@@ -255,7 +255,7 @@ public class SaleServiceImpl implements SaleService, Serializable {
         SaleItem saleItem = null;
         try {
             if (id != null && id > 0) {
-                saleItem = saleItemRepository.findById(id);
+                saleItem = saleItemRepository.findOne(id);
             }
         } catch (Exception e) {
             saleItem = null;

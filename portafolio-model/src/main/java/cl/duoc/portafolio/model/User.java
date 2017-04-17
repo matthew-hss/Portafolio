@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author matthew
  */
 @Entity
-@Table(name="users")
+@Table(name="USERS",schema = "PORTAFOLIO")
 public class User extends BaseBean{
     
     private static final long serialVersionUID = 7226055427557870592L;
@@ -23,18 +23,18 @@ public class User extends BaseBean{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @XmlTransient
-    @Column(name = "id", nullable = false)
+    @Column(name = "ID", nullable = false)
     private Long id = null;
-    @Column(name = "rut", nullable = false, unique = true)
+    @Column(name = "RUT", nullable = false, unique = true)
     private Integer rut = null;
-    @Column(name = "name", nullable = false)
+    @Column(name = "NAME", nullable = false)
     private String name = null;
-    @Column(name="password")
+    @Column(name="PASSWORD")
     private String password = null;
-    @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID", nullable = false)
     @ManyToOne(optional = false)
     private Role role = null;
-    @Column(name = "active", nullable = false)
+    @Column(name = "ACTIVE", nullable = false)
     private boolean active = false;
 
     public Long getId() {
