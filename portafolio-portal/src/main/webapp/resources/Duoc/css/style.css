@@ -4,7 +4,7 @@
 */
 
 @charset "UTF-8";
-@import url(https://fonts.googleapis.com/css?family=Play:400,700);
+@import url('https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,600,700');
 
 * {
     margin: 0;
@@ -14,7 +14,7 @@
     -webkit-box-sizing: border-box;
     outline: 0 !important;
     
-    font-family: Play, Verdana, Tahoma, Arial, Helvetica !important;
+    font-family: Rokkitt, Verdana, Tahoma, Arial, Helvetica !important;
     font-size:14px !important;
     line-height: 1.2em;
 
@@ -123,7 +123,7 @@ button,input[type="submit"]{
     color: #fff;
     border: 0;
     width: 100px;
-    font-family: Play;
+    font-family: Rokkitt;
     font-size: 13px;
     margin-bottom: 1px;
 }
@@ -186,7 +186,10 @@ button span{
     font-family: FontAwesome;
     font-size: 2em;
 }
-.ui-message-info, .ui-messages-info{color:#488214;border-color:#488214}
+.ui-message-info, .ui-messages-info{
+    color:#488214;
+    border-color:#488214
+}
 
 .ui-message-info-icon:before, .ui-messages-info-icon:before{content:"\f058";color:#488214;}
 .ui-message-warn-icon:before,.ui-messages-warn-icon:before{content:"\f06a";}
@@ -207,8 +210,13 @@ input.ui-state-error, .ui-widget-content input.ui-state-error, .ui-widget-header
 }
 
 .ui-fileupload-simple .ui-button{
+  background: #ff9900;
+  color: #ffffff;
     height: 35px;
     padding: .3em 1em;
+}
+.ui-fileupload-simple .ui-button.ui-state-hover {
+  background: #333333;
 }
 
 .ui-fileupload-simple .ui-button .ui-button-text{
@@ -332,6 +340,16 @@ input{
     border: 1px solid #cccccc;
 }
 
+.ui-panel {
+  border: 1px solid #cccccc;
+  background: #f2f2f2;
+}
+.ui-panel-titlebar {
+  background: #333333;
+  color: #ffffff;
+  font-weight: bold;
+}
+
 input.hasDatepicker{
     text-align: center;
 }
@@ -391,10 +409,16 @@ input.hasDatepicker{
 }
 
 .ui-selectonemenu{
+  background: #ffffff;
+  border: 1px solid #cccccc;
     width: 100% !important;
     height: 36px;
     line-height: 25px;
     margin-bottom: 5px;
+}
+
+.ui-selectonemenu.ui-state-disabled {
+  background: #cccccc;
 }
 
 .ui-selectonemenu .ui-selectonemenu-label{
@@ -424,6 +448,9 @@ input.hasDatepicker{
     background: #cccccc;
     color: #ffffff;
     cursor: default;
+}
+.ui-selectonemenu .ui-selectonemenu-item.ui-state-disabled {
+  color: #cccccc;
 }
 
 .ui-selectonemenu .ui-selectonemenu-trigger{
@@ -595,6 +622,11 @@ input.hasDatepicker{
     content:"\f101";
 }
 
+.ui-dialog {
+  background: #ffffff;
+  border: 1px solid #cccccc;
+}
+
 /* LOGIN */
 
 #loginWrap{
@@ -689,6 +721,9 @@ input.hasDatepicker{
 
 #footer{
     padding-top: 20px;
+  background: #333333;
+  color: #ffffff;
+  border-top: 5px solid #ff9900;
 }
 
 /* STYCKY FOOTER - DO NOT REMOVE */
