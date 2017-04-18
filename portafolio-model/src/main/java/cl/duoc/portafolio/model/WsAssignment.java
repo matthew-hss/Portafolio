@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
@@ -18,7 +19,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "WSASSIGNMENT",schema = "PORTAFOLIO")
-public class WSAssignment extends BaseBean{
+public class WsAssignment extends BaseBean{
     private static final long serialVersionUID = 7226055427557870592L;
     
     @Id
@@ -29,14 +30,14 @@ public class WSAssignment extends BaseBean{
     @JoinColumn(name = "WORKSHIFT_ID", referencedColumnName = "ID", nullable = false)
     @ManyToOne(optional = false)
     private Workshift workshift = null;
-    @JoinColumn(name = "FUNCTIONARY_ID", referencedColumnName = "ID", nullable = false, unique = true)
+    @JoinColumn(name = "FUNCTIONARY_ID", referencedColumnName = "ID", nullable = false)
     @ManyToOne(optional = false)
     private Functionary functionary = null;
     @Column(name = "STARTDATE", nullable = false)
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     private Date startDate = null;
     @Column(name = "ENDDATE", nullable = false)
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     private Date endDate = null;
 
     public Long getId() {

@@ -15,13 +15,11 @@ public interface WorkshiftRepository extends JpaRepository<Workshift, Long>{
     
     /**
      *
-     * @param startDate Fecha inicial, la startDate de los beneficios debe ser
-     * igual o mayor
-     * @param endDate Fecha final, la endDate de los beneficios debe ser igual o
-     * menor
+     * @param startTime Hora inicial del turno
+     * @param endTime Hora final del turno
      * @return Una lista de cl.duoc.portafolio.model.Workshift con todos los
      * turnos buscados.
      */
-    public List<Workshift> findByStartDateGreaterThanEqualAndEndDateLessThanEqualOrderByEndDateDesc(Date startDate, Date endDate);
+    public List<Workshift> findByStartTimeGreaterThanEqualAndEndTimeLessThanEqualOrderByStartTimeAsc(Date startTime, Date endTime);
 
 }

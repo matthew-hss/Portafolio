@@ -2,7 +2,7 @@ package cl.duoc.portafolio.service;
 
 import cl.duoc.portafolio.model.JobTitle;
 import cl.duoc.portafolio.model.Functionary;
-import cl.duoc.portafolio.model.WSAssignment;
+import cl.duoc.portafolio.model.WsAssignment;
 import cl.duoc.portafolio.model.Workshift;
 import java.util.List;
 
@@ -30,17 +30,17 @@ public interface FunctionaryService {
     
     public boolean delete(final Workshift workshift);
     
-    public WSAssignment getWSAssignment(final Long id);
+    public WsAssignment getWsAssignment(final Long id);
     
-    public List<WSAssignment> getWSAssignments();
+    public List<WsAssignment> getWsAssignments();
     
-    public List<WSAssignment> getWSAssignments(final Functionary functionary);
+    public List<WsAssignment> getWsAssignments(final Functionary functionary);
     
-    public List<WSAssignment> getWSAssignments(final Workshift workshift);
+    public List<WsAssignment> getWsAssignments(final Workshift workshift);
     
-    public WSAssignment save(final WSAssignment wsassignment);
+    public WsAssignment save(final WsAssignment wsassignment);
     
-    public boolean delete(final WSAssignment wsassignment);
+    public boolean delete(final WsAssignment wsassignment);
     
     public JobTitle getJobTitle(final Long id);
     

@@ -2,10 +2,9 @@ package cl.duoc.portafolio.service.impl;
 
 import cl.duoc.portafolio.model.JobTitle;
 import cl.duoc.portafolio.model.Functionary;
-import cl.duoc.portafolio.model.WSAssignment;
+import cl.duoc.portafolio.model.WsAssignment;
 import cl.duoc.portafolio.model.Workshift;
 import cl.duoc.portafolio.repository.FunctionaryRepository;
-import cl.duoc.portafolio.repository.WSAssignmentRepository;
 import cl.duoc.portafolio.repository.WorkshiftRepository;
 import cl.duoc.portafolio.service.FunctionaryService;
 import java.io.Serializable;
@@ -17,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import cl.duoc.portafolio.repository.JobTitleRepository;
+import cl.duoc.portafolio.repository.WsAssignmentRepository;
 
 /**
  *
@@ -31,8 +31,8 @@ public class FunctionaryServiceImpl implements FunctionaryService, Serializable 
     private FunctionaryRepository functionaryRepository;
     @Resource(name = "workshiftRepository")
     private WorkshiftRepository workshiftRepository;
-    @Resource(name = "wsassignmentRepository")
-    private WSAssignmentRepository wsassignmentRepository;
+    @Resource(name = "wsAssignmentRepository")
+    private WsAssignmentRepository wsAssignmentRepository;
     @Resource(name = "jobTitleRepository")
     private JobTitleRepository jobTitleRepository;
 
@@ -176,11 +176,11 @@ public class FunctionaryServiceImpl implements FunctionaryService, Serializable 
     }
 
     @Override
-    public WSAssignment getWSAssignment(Long id) {
-        WSAssignment wsa = null;
+    public WsAssignment getWsAssignment(Long id) {
+        WsAssignment wsa = null;
         try {
             if (id != null && id > 0) {
-                wsa = wsassignmentRepository.findOne(id);
+                wsa = wsAssignmentRepository.findOne(id);
             }
         } catch (Exception e) {
             wsa = null;
@@ -191,10 +191,10 @@ public class FunctionaryServiceImpl implements FunctionaryService, Serializable 
     }
 
     @Override
-    public List<WSAssignment> getWSAssignments() {
-        List<WSAssignment> wsas = new ArrayList<>();
+    public List<WsAssignment> getWsAssignments() {
+        List<WsAssignment> wsas = new ArrayList<>();
         try {
-            wsas = wsassignmentRepository.findAll();
+            wsas = wsAssignmentRepository.findAll();
         } catch (Exception e) {
             wsas = new ArrayList<>();
             LOGGER.error("Error al obtener asignaciones de turno de trabajo: {}", e.toString());
@@ -204,11 +204,11 @@ public class FunctionaryServiceImpl implements FunctionaryService, Serializable 
     }
 
     @Override
-    public List<WSAssignment> getWSAssignments(Functionary functionary) {
-        List<WSAssignment> wsas = new ArrayList<>();
+    public List<WsAssignment> getWsAssignments(Functionary functionary) {
+        List<WsAssignment> wsas = new ArrayList<>();
         try {
             if (functionary != null) {
-                wsas = wsassignmentRepository.findByFunctionary(functionary);
+                wsas = wsAssignmentRepository.findByFunctionary(functionary);
             }
         } catch (Exception e) {
             wsas = new ArrayList<>();
@@ -219,11 +219,11 @@ public class FunctionaryServiceImpl implements FunctionaryService, Serializable 
     }
 
     @Override
-    public List<WSAssignment> getWSAssignments(Workshift workshift) {
-        List<WSAssignment> wsas = new ArrayList<>();
+    public List<WsAssignment> getWsAssignments(Workshift workshift) {
+        List<WsAssignment> wsas = new ArrayList<>();
         try {
             if (workshift != null) {
-                wsas = wsassignmentRepository.findByWorkshift(workshift);
+                wsas = wsAssignmentRepository.findByWorkshift(workshift);
             }
         } catch (Exception e) {
             wsas = new ArrayList<>();
@@ -235,11 +235,11 @@ public class FunctionaryServiceImpl implements FunctionaryService, Serializable 
 
     @Override
     @Transactional
-    public WSAssignment save(WSAssignment wsassignment) {
-        WSAssignment saved = null;
+    public WsAssignment save(WsAssignment wsassignment) {
+        WsAssignment saved = null;
         try {
             if (wsassignment != null) {
-                saved = wsassignmentRepository.save(wsassignment);
+                saved = wsAssignmentRepository.save(wsassignment);
             }
         } catch (Exception e) {
             saved = null;
@@ -251,11 +251,11 @@ public class FunctionaryServiceImpl implements FunctionaryService, Serializable 
 
     @Override
     @Transactional
-    public boolean delete(WSAssignment wsassignment) {
+    public boolean delete(WsAssignment wsassignment) {
         boolean deleted = false;
         try {
             if (wsassignment != null) {
-                wsassignmentRepository.delete(wsassignment);
+                wsAssignmentRepository.delete(wsassignment);
                 deleted = true;
             }
         } catch (Exception e) {

@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -29,10 +30,10 @@ public class Workshift extends BaseBean{
     @Column(name = "ID", nullable = false)
     private Long id = null;
     @Column(name = "STARTTIME", nullable = false)
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date startTime = null;
     @Column(name = "ENDTIME", nullable = false)
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date endTime = null;
 
     public Long getId() {
