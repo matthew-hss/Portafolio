@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -32,6 +33,7 @@ public class Functionary extends BaseBean{
     @Column(name = "SURNAME", nullable =false)
     private String surname = null;
     @JoinColumn(name = "JOBTITLE_ID", referencedColumnName = "ID", nullable =false)
+    @ManyToOne(optional = false)
     private JobTitle jobTitle = null;
 
     public Long getId() {

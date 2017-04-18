@@ -7,7 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
@@ -25,10 +27,13 @@ public class MealService extends BaseBean{
     @Column(name = "ID", nullable = false)
     private Long id = null;
     @Column(name = "STARTTIME", nullable = false)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date startTime = null;
     @Column(name = "ENDTIME", nullable = false)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date endTime = null;
     @JoinColumn(name = "PRODUCT_ID",referencedColumnName = "ID" ,nullable = false)
+    @ManyToOne(optional = false)
     private Product product = null;
 
     public Long getId() {

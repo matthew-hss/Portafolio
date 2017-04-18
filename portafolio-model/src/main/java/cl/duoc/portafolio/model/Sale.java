@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -26,8 +27,10 @@ public class Sale extends BaseBean{
     @Column(name = "TOTAL", nullable = false)
     private Long total = null;
     @JoinColumn(name = "PLACE_ID", referencedColumnName = "ID", nullable = false)
+    @ManyToOne(optional = false)
     private Place place = null;
     @JoinColumn(name = "VOUCHER_ID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
     private Voucher voucher = null;
 
     public Long getId() {
