@@ -7,7 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
@@ -25,12 +27,16 @@ public class WSAssignment extends BaseBean{
     @Column(name = "ID", nullable = false)
     private Long id = null;
     @JoinColumn(name = "WORKSHIFT_ID", referencedColumnName = "ID", nullable = false)
+    @ManyToOne(optional = false)
     private Workshift workshift = null;
     @JoinColumn(name = "FUNCTIONARY_ID", referencedColumnName = "ID", nullable = false, unique = true)
+    @ManyToOne(optional = false)
     private Functionary functionary = null;
     @Column(name = "STARTDATE", nullable = false)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date startDate = null;
     @Column(name = "ENDDATE", nullable = false)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date endDate = null;
 
     public Long getId() {

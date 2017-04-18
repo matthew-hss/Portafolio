@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -24,8 +25,10 @@ public class SaleItem extends BaseBean{
     @Column(name = "ID", nullable = false)
     private Long id = null;
     @JoinColumn(name = "PRODUCT_ID", referencedColumnName = "ID", nullable = false)
+    @ManyToOne(optional = false)
     private Product product = null;
     @JoinColumn(name = "SALE_ID", referencedColumnName = "ID", nullable = false)
+    @ManyToOne(optional = false)
     private Sale sale = null;
     @Column(name = "QUANTITY", nullable = false)
     private Integer quantity = null;

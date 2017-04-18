@@ -1,5 +1,6 @@
 package cl.duoc.portafolio.model;
 
+import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -27,9 +29,11 @@ public class Workshift extends BaseBean{
     @Column(name = "ID", nullable = false)
     private Long id = null;
     @Column(name = "STARTTIME", nullable = false)
-    private Long startTime = null;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date startTime = null;
     @Column(name = "ENDTIME", nullable = false)
-    private Long endTime = null;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date endTime = null;
 
     public Long getId() {
         return id;
@@ -39,19 +43,19 @@ public class Workshift extends BaseBean{
         this.id = id;
     }
 
-    public Long getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Long startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public Long getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Long endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 
