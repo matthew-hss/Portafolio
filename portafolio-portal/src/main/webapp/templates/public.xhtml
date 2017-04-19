@@ -19,7 +19,6 @@
 
             <h:outputStylesheet library="Duoc" name="css/bootstrap-grid.css" />
             <h:outputStylesheet library="Duoc" name="css/style.css" />
-            <h:outputStylesheet library="Duoc" name="css/variables.css" />
             <h:outputStylesheet library="Duoc" name="css/font-awesome.css" />
 
             <!--[if lt IE 9]>
@@ -32,10 +31,9 @@
             <h:outputScript library="Duoc" name="js/pf_calendar_es.js" />
 
             <div class="wrapper">
-                <section id="header" class="wrap">
-                    <h:graphicImage id="header-outside" alt="outside"  library="Duoc" name="img/fondo-outside.png" />
-                    <div class="col-md-3" style="padding-left: 0px;">
-                        <h:graphicImage id="header-logo" alt="logo" library="Duoc" name="img/fondo-logo.png" />
+                <section id="header" class="col-xs-12">
+                    <div id="header-logo" class="col-xs-8 col-xs-offset-2 col-md-6 col-md-offset-3">
+                        <h:graphicImage alt="logo" library="Duoc" name="img/fondo-logo.png" />
                     </div>
                 </section>
 

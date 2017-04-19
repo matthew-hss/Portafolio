@@ -6,12 +6,12 @@
 
     <ui:composition template="/templates/public.xhtml">
         <ui:define name="content">
-            <section id="loginWrap" class="wrap">
+            <section id="loginWrap" class="col-xs-12">
                 <h1 id="mainTitle"><h:outputText value="${msg.welcome}" /></h1>
                 <div>
                     <h:form id="loginForm" prependId="false">
                         <!-- formulario de login -->
-                        <p:outputPanel id="panelLogin" styleClass="col-xs-12 col-sm-6">
+                        <p:outputPanel id="panelLogin" styleClass="col-xs-12 col-sm-6 col-sm-offset-3">
                             <p:inputText id="username" value="#{loginBean.rut}" converter="RutConverter"
                                          placeholder="${msg.rut}" required="true">
                                 <p:ajax event="change" update="@this msgUsername" />
