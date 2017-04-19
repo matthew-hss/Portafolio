@@ -42,8 +42,8 @@
                     <div class="col-md-9">
                         <h:form id="menuBar">
                             <!-- Menú -->
-                            <!--
                             <p:menubar rendered="#{sessionBean.admin}">
+                                <!--
                                 <p:submenu label="${msg.company}">
                                     <p:menuitem value="${msg.company}" url="/pages/admin/company.jsf" update=":menuBar"/>
                                     <p:menuitem value="${msg.information}" url="/pages/admin/information.jsf" update=":menuBar"/>
@@ -61,10 +61,12 @@
                                     <p:menuitem value="${msg.beneficiary}" url="/pages/admin/beneficiary.jsf" update=":menuBar"/>
                                 </p:submenu>
                                 <p:menuitem value="${msg.user}" url="/pages/admin/user.jsf" update=":menuBar" />
-                                <p:menuitem icon="ui-icon-power" value="${msg.logout}" url="/logout" />
+                                -->
+                                <p:menuitem icon="ui-icon-power" value="${msg.logout} ADMIN" url="/logout" />
                             </p:menubar>
 
                             <p:menubar rendered="#{sessionBean.staff}">
+                                <!--
                                 <p:submenu label="${msg.company}">
                                     <p:menuitem value="${msg.information}" url="/pages/staff/information.jsf" update=":menuBar"/>
                                     <p:menuitem value="${msg.category}" url="/pages/staff/category.jsf" update=":menuBar"/>
@@ -82,9 +84,33 @@
                                     <p:menuitem value="${msg.beneficiary}" url="/pages/staff/beneficiary.jsf" update=":menuBar"/>
                                     <p:menuitem value="${msg.massive}" url="/pages/staff/beneficiaryMassive.jsf" update=":menuBar" />
                                 </p:submenu>
-                                <p:menuitem icon="ui-icon-power" value="${msg.logout}" url="/logout" />
+                                -->
+                                <p:menuitem icon="ui-icon-power" value="${msg.logout} STAFF" url="/logout" />
                             </p:menubar>
-                            -->
+
+                            <p:menubar rendered="#{sessionBean.general}">
+                                <!--
+                                <p:submenu label="${msg.company}">
+                                    <p:menuitem value="${msg.information}" url="/pages/staff/information.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.category}" url="/pages/staff/category.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.events}" url="/pages/staff/event.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.notification}" url="/pages/staff/notification.jsf" update=":menuBar"/>
+                                </p:submenu>
+                                <p:submenu label="${msg.benefit}">
+                                    <p:menuitem value="${msg.benefit}" url="/pages/staff/benefit.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.usedBenefits}" url="/pages/staff/usedbenefit.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.ranking}" url="/pages/staff/ranking.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.history}" url="/pages/staff/history.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.report}" url="/pages/staff/benefitsReport.jsf" update=":menuBar" />
+                                </p:submenu>
+                                <p:submenu label="${msg.beneficiary}">
+                                    <p:menuitem value="${msg.beneficiary}" url="/pages/staff/beneficiary.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.massive}" url="/pages/staff/beneficiaryMassive.jsf" update=":menuBar" />
+                                </p:submenu>
+                                -->
+                                <p:menuitem icon="ui-icon-power" value="${msg.logout} PUBLIC" url="/logout" />
+                            </p:menubar>
+                            
                         </h:form>  
                     </div>
                 </section>

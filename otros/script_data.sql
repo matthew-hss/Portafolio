@@ -4,7 +4,7 @@
 
 	INSERT INTO ROLE (NAME) VALUES ('ADMIN');
 	INSERT INTO ROLE (NAME) VALUES ('STAFF');
-	INSERT INTO ROLE (NAME) VALUES ('PUBLIC');
+	INSERT INTO ROLE (NAME) VALUES ('GENERAL');
 
 
 --------------------------------------------------------

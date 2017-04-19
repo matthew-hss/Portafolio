@@ -24,6 +24,7 @@ public class SessionBean implements Serializable {
     private static final Gender FEMALE = Gender.FEMALE;
     private boolean admin = false;
     private boolean staff = false;
+    private boolean general = false;
     private User user = null;
 
     @PostConstruct
@@ -31,6 +32,7 @@ public class SessionBean implements Serializable {
         user = AuthUtils.getAuthenticateUser();
         admin = AuthUtils.isUserInRole("ROLE_ADMIN");
         staff = AuthUtils.isUserInRole("ROLE_STAFF");
+        general = AuthUtils.isUserInRole("ROLE_GENERAL");
     }
 
     public boolean isAdmin() {
@@ -39,6 +41,10 @@ public class SessionBean implements Serializable {
 
     public boolean isStaff() {
         return staff;
+    }
+
+    public boolean isGeneral() {
+        return general;
     }
 
     public User getUser() {
