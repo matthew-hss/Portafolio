@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/templates/main.xhtml">
         <ui:define name="content">
-            Hola Usuario autenticado
+            <p:outputPanel id="panelIndexAdmin" rendered="#{sessionBean.admin}" styleClass="col-xs-12">
+                Hola Usuario Administrador
+            </p:outputPanel>
+            <p:outputPanel id="panelIndexStaff" rendered="#{sessionBean.staff}" styleClass="col-xs-12">
+                Hola Usuario Staff
+            </p:outputPanel>
+            <p:outputPanel id="panelIndexGeneral" rendered="#{sessionBean.general}" styleClass="col-xs-12">
+                Hola Usuario General
+            </p:outputPanel>
         </ui:define>
     </ui:composition>
 </html>

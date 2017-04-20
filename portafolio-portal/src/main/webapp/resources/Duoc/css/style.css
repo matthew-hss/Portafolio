@@ -280,12 +280,24 @@ input.ui-state-error, .ui-widget-content input.ui-state-error, .ui-widget-header
 #header #menuBar .ui-menubar{
     padding: 0px;
     float: right;
-    background: transparent;
-    border: 0;
 }
 
 #header #menuBar .ui-menubar .ui-menuitem{
     margin-left: 10px;
+}
+
+#header #menuBar .ui-menubar .ui-menuitem.menuUsername:before{
+    content:'\f2bd';
+    font-family: FontAwesome;
+    color: #FF9900;
+    width: 1.25rem;
+    display: inline-block;
+    padding-top: 5px;
+    float: left;
+}
+
+#header #menuBar .ui-menubar .ui-menuitem.menuUsername:hover:before{
+    color: #FF9900;
 }
 
 #header #menuBar .ui-menubar .ui-menu-child{
@@ -310,11 +322,19 @@ input.ui-state-error, .ui-widget-content input.ui-state-error, .ui-widget-header
 
 #header #menuBar .ui-menubar .ui-menuitem-link{
     padding: 5px 0px;
+    color: #9CC63D
+}
+
+#header #menuBar .ui-menubar .ui-menuitem-link.menuLogout:before{
+    content:'\f011';
+    font-family: FontAwesome;
+    width: 1.25rem;
+    float: left;
 }
 
 #header #menuBar .ui-menubar .ui-menuitem-link.ui-state-hover{
     background: transparent;
-    color: #333333;
+    color: #FF9900;
     border-bottom: 3px solid #ff9900;
 }
 

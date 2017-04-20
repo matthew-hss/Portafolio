@@ -40,7 +40,7 @@
                         <h:graphicImage alt="logo" library="Duoc" name="img/fondo-logo.png" />
                     </div>
                     <div class="col-md-9">
-                        <h:form id="menuBar">
+                        <h:form id="menuBar" prependId="false">
                             <!-- Menú -->
                             <p:menubar rendered="#{sessionBean.admin}">
                                 <!--
@@ -89,26 +89,15 @@
                             </p:menubar>
 
                             <p:menubar rendered="#{sessionBean.general}">
-                                <!--
-                                <p:submenu label="${msg.company}">
-                                    <p:menuitem value="${msg.information}" url="/pages/staff/information.jsf" update=":menuBar"/>
-                                    <p:menuitem value="${msg.category}" url="/pages/staff/category.jsf" update=":menuBar"/>
-                                    <p:menuitem value="${msg.events}" url="/pages/staff/event.jsf" update=":menuBar"/>
-                                    <p:menuitem value="${msg.notification}" url="/pages/staff/notification.jsf" update=":menuBar"/>
+                                <p:submenu label="MENU UNO">
+                                    <p:menuitem styleClass="menuLogout" value="${msg.logout}" url="/logout" />
+                                    <p:menuitem styleClass="menuLogout" value="${msg.logout}" url="/logout" />
                                 </p:submenu>
-                                <p:submenu label="${msg.benefit}">
-                                    <p:menuitem value="${msg.benefit}" url="/pages/staff/benefit.jsf" update=":menuBar"/>
-                                    <p:menuitem value="${msg.usedBenefits}" url="/pages/staff/usedbenefit.jsf" update=":menuBar"/>
-                                    <p:menuitem value="${msg.ranking}" url="/pages/staff/ranking.jsf" update=":menuBar"/>
-                                    <p:menuitem value="${msg.history}" url="/pages/staff/history.jsf" update=":menuBar"/>
-                                    <p:menuitem value="${msg.report}" url="/pages/staff/benefitsReport.jsf" update=":menuBar" />
+                                <p:submenu label="MENU DOS">
                                 </p:submenu>
-                                <p:submenu label="${msg.beneficiary}">
-                                    <p:menuitem value="${msg.beneficiary}" url="/pages/staff/beneficiary.jsf" update=":menuBar"/>
-                                    <p:menuitem value="${msg.massive}" url="/pages/staff/beneficiaryMassive.jsf" update=":menuBar" />
+                                <p:submenu styleClass="menuUsername" label="${sessionBean.user.name}">
+                                    <p:menuitem styleClass="menuLogout" value="${msg.logout}" url="/logout" />
                                 </p:submenu>
-                                -->
-                                <p:menuitem icon="ui-icon-power" value="${msg.logout} PUBLIC" url="/logout" />
                             </p:menubar>
                             
                         </h:form>  
