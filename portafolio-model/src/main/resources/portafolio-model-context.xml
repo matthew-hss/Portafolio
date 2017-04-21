@@ -45,8 +45,8 @@
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
           p:dataSource-ref="dataSource"
           p:jpaVendorAdapter-ref="jpaAdapter">
-        <property name="persistenceUnitName" value="portafolioPU" />
-        <property name="persistenceXmlLocation" value="classpath*:META-INF/persistence.xml" />
+        <property name="persistenceUnitName" value="portafolioPU"/>
+        <property name="persistenceXmlLocation" value="classpath*:META-INF/persistence.xml"/>
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.format_sql">${jpa.format.sql}</prop>
