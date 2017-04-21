@@ -1,5 +1,4 @@
 /* 
-    Created on : 26-ene-2016, 11:05:49
     Author     : Javier González M | jaa.gonzalezm@alumnos.duoc.cl
 */
 
@@ -66,6 +65,10 @@ input, button{
     border-radius: 1rem;
 }
 
+input{
+    border: 1px solid #cccccc;
+}
+
 button span{
     font-size: 1.5rem;
     font-weight: 300;
@@ -112,7 +115,7 @@ button,input[type="submit"]{
 }
 
 button:hover,input[type="submit"]:hover{
-    background: #9CC63D;
+    background: #98C936;
     cursor: pointer;
 }
 
@@ -140,7 +143,6 @@ button:hover,input[type="submit"]:hover{
 .ui-radiobutton .ui-radiobutton-box:before,
 .ui-chkbox .ui-chkbox-box:before{
     font-family: 'FontAwesome';
-    color: #333;
     width: 1.25rem;
     display: inline-block;
     vertical-align: middle;
@@ -257,7 +259,7 @@ input.ui-state-error, .ui-widget-content input.ui-state-error, .ui-widget-header
     overflow: hidden;
 }
 
-/* CONTENT */
+/***** HEADER *****/
 
 #header{
     margin: 20px 0 50px;
@@ -279,15 +281,21 @@ input.ui-state-error, .ui-widget-content input.ui-state-error, .ui-widget-header
 
 #header #menuBar .ui-menubar{
     padding: 0px;
-    float: right;
+    display: flex;
+    justify-content: center;
+}
+
+@media only screen and (min-width: 992px) {
+    #header #menuBar .ui-menubar{
+        justify-content: flex-end;
+    }
 }
 
 #header #menuBar .ui-menubar .ui-menuitem{
-    margin-left: 10px;
+    margin-left: 20px;
 }
 
-#header #menuBar .ui-menubar .ui-menuitem.menuUsername:before{
-    content:'\f2bd';
+#header #menuBar .ui-menubar .ui-menuitem:before{
     font-family: FontAwesome;
     color: #FF9900;
     width: 1.25rem;
@@ -296,8 +304,20 @@ input.ui-state-error, .ui-widget-content input.ui-state-error, .ui-widget-header
     float: left;
 }
 
-#header #menuBar .ui-menubar .ui-menuitem.menuUsername:hover:before{
-    color: #FF9900;
+#header #menuBar .ui-menubar .ui-menuitem.menuAccount:before{
+    content:'\f2bd';
+}
+
+#header #menuBar .ui-menubar .ui-menuitem.menuVouchers:before{
+    content:'\f145';
+}
+
+#header #menuBar .ui-menubar .ui-menuitem.menuSales:before{
+    content:'\f080';
+}
+
+#header #menuBar .ui-menubar .ui-menuitem.menuUsers:before{
+    content:'\f0c0';
 }
 
 #header #menuBar .ui-menubar .ui-menu-child{
@@ -308,7 +328,7 @@ input.ui-state-error, .ui-widget-content input.ui-state-error, .ui-widget-header
 
 #header #menuBar .ui-menubar .ui-menu-child .ui-menuitem{
     /*    border-bottom: 1px solid #ff9900;*/
-    background: #cacaca;
+    background: #98C936;
     border-left: 3px solid transparent;
     margin: 0;
     padding-left: 10px;
@@ -317,12 +337,16 @@ input.ui-state-error, .ui-widget-content input.ui-state-error, .ui-widget-header
 }
 
 #header #menuBar .ui-menubar .ui-menu-child .ui-menuitem:nth-child(even){
-    background: #cfcfcf;
+    background: #C8DE78;
 }
 
 #header #menuBar .ui-menubar .ui-menuitem-link{
     padding: 5px 0px;
-    color: #9CC63D
+    color: #98C936
+}
+
+#header #menuBar .ui-menubar .ui-menu-child .ui-menuitem-link{
+    color: #ffffff;
 }
 
 #header #menuBar .ui-menubar .ui-menuitem-link.menuLogout:before{
@@ -340,8 +364,8 @@ input.ui-state-error, .ui-widget-content input.ui-state-error, .ui-widget-header
 
 #header #menuBar .ui-menubar .ui-menu-child .ui-menuitem.ui-menuitem-active{
     background: #ff9900;
-    color: #fff;
-    border-left: 3px solid #333;
+    color: #ffffff;
+    border-left: 3px solid #313B45;
 }
 
 #header #menuBar .ui-menubar .ui-menu-child .ui-menuitem-link.ui-state-hover{
@@ -358,18 +382,33 @@ input.ui-state-error, .ui-widget-content input.ui-state-error, .ui-widget-header
     background-image: url(/portal/javax.faces.resource/images/ui-icons_222222_256x240.png.jsf?ln=primefaces-home);
 }
 
-input{
-    border: 1px solid #cccccc;
+
+/***** CONTENT *****/
+
+section#content{
+    width: 100%;
+    overflow: hidden;
+    padding-bottom: 30px;
 }
 
 .ui-panel {
-    border: 1px solid #cccccc;
-    background: #f2f2f2;
+    border: 1px solid #98C936;
+    border-radius: 10px;
+    background: #313945;
 }
+
 .ui-panel-titlebar {
-    background: #333333;
+    background: #ff9900;
     color: #ffffff;
-    font-weight: bold;
+}
+
+.ui-panel-titlebar .ui-panel-title {
+    font-size: 30px;
+    line-height: 30px;
+}
+
+.ui-panel .ui-inputfield{
+    margin-top: 0 !important;
 }
 
 input.hasDatepicker{
@@ -437,6 +476,10 @@ input.hasDatepicker{
     height: 36px;
     line-height: 25px;
     margin-bottom: 5px;
+    border-radius: 1rem;
+    color: #313B45;
+    padding-left: 0.5rem;
+    max-width: 500px;
 }
 
 .ui-selectonemenu.ui-state-disabled {
@@ -452,26 +495,34 @@ input.hasDatepicker{
     padding-top: 7px;
 }
 
-.ui-selectonemenu .ui-selectonemenu-items-wrapper, .ui-confirm-dialog{
+.ui-selectonemenu-panel{
+    border-radius: 1rem;
+}
+
+.ui-selectonemenu-items-wrapper, .ui-confirm-dialog{
     min-width: 200px;
     background: #ffffff;
     border: 1px solid #cccccc;
     overflow-x: hidden !important;
+    border-radius: 1rem;
 }
 
-.ui-selectonemenu .ui-selectonemenu-item{ padding-right: 20px !important; }
+.ui-selectonemenu-panel .ui-selectonemenu-item{
+    color: #313B45;
+    padding-right: 20px !important;
+}
 
-.ui-selectonemenu .ui-selectonemenu-item.ui-state-hover{
+.ui-selectonemenu-panel .ui-selectonemenu-item.ui-state-hover{
     background: #ff9900;
     color: #ffffff;
 }
 
-.ui-selectonemenu .ui-selectonemenu-item.ui-state-highlight{
-    background: #cccccc;
+.ui-selectonemenu-panel .ui-selectonemenu-item.ui-state-highlight{
+    background: #98C936;
     color: #ffffff;
     cursor: default;
 }
-.ui-selectonemenu .ui-selectonemenu-item.ui-state-disabled {
+.ui-selectonemenu-panel .ui-selectonemenu-item.ui-state-disabled {
     color: #cccccc;
 }
 
@@ -503,6 +554,13 @@ input.hasDatepicker{
 .ui-selectonemenu-panel .ui-selectonemenu-list{
     background: #ffffff;
     padding: 5px;
+}
+
+@media only screen and (min-width: 768px) {
+    .ui-chkbox{
+        display: block !important;
+        margin: 0.5rem 1rem 1rem;
+    }
 }
 
 .ui-confirm-dialog .ui-dialog-titlebar{ font-weight: bold; }
