@@ -1,4 +1,11 @@
 --------------------------------------------------------
+-- CREATE USER PORTAFOLIO
+--------------------------------------------------------
+
+  CREATE USER portafolio IDENTIFIED BY "Portafolio.2017";
+  GRANT ALL PRIVILEGES TO portafolio;
+
+--------------------------------------------------------
 -- SEQUENCES FOR AUTOINCREMENT ID
 --------------------------------------------------------
 
