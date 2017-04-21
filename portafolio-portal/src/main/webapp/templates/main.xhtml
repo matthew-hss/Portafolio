@@ -43,59 +43,83 @@
                         <h:form id="menuBar" prependId="false">
                             <!-- Menú -->
                             <p:menubar rendered="#{sessionBean.admin}">
-                                <!--
-                                <p:submenu label="${msg.company}">
-                                    <p:menuitem value="${msg.company}" url="/pages/admin/company.jsf" update=":menuBar"/>
-                                    <p:menuitem value="${msg.information}" url="/pages/admin/information.jsf" update=":menuBar"/>
-                                    <p:menuitem value="${msg.category}" url="/pages/admin/category.jsf" update=":menuBar"/>
-                                    <p:menuitem value="${msg.events}" url="/pages/admin/event.jsf" update=":menuBar"/>
-                                    <p:menuitem value="${msg.notification}" url="/pages/admin/notification.jsf" update=":menuBar"/>
+                                <p:submenu label="${msg.users}">
+                                    <p:menuitem value="${msg.users}" url="/pages/system/user.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.roles}" url="/pages/system/role.jsf" update=":menuBar"/>
                                 </p:submenu>
-                                <p:submenu label="${msg.benefit}">
-                                    <p:menuitem value="${msg.benefit}" url="/pages/admin/benefit.jsf" update=":menuBar"/>
-                                    <p:menuitem value="${msg.usedBenefits}" url="/pages/admin/usedbenefit.jsf" update=":menuBar"/>
-                                    <p:menuitem value="${msg.ranking}" url="/pages/admin/ranking.jsf" update=":menuBar"/>
-                                    <p:menuitem value="${msg.history}" url="/pages/admin/history.jsf" update=":menuBar"/>
+                                <p:submenu label="${msg.functionaries}">
+                                    <p:menuitem value="${msg.functionaries}" url="/pages/system/functionary.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.jobtitles}" url="/pages/system/jobtitle.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.workshifts}" url="/pages/system/workshift.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.wsassignments}" url="/pages/system/wsassignment.jsf" update=":menuBar"/>
                                 </p:submenu>
-                                <p:submenu label="${msg.beneficiary}">
-                                    <p:menuitem value="${msg.beneficiary}" url="/pages/admin/beneficiary.jsf" update=":menuBar"/>
+                                <p:submenu label="${msg.sales}">
+                                    <p:menuitem value="${msg.sales}" url="/pages/system/sale.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.products}" url="/pages/system/product.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.mealservices}" url="/pages/system/mealservice.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.places}" url="/pages/system/place.jsf" update=":menuBar"/>
                                 </p:submenu>
-                                <p:menuitem value="${msg.user}" url="/pages/admin/user.jsf" update=":menuBar" />
-                                -->
-                                <p:menuitem icon="ui-icon-power" value="${msg.logout} ADMIN" url="/logout" />
+                                <p:submenu label="${msg.vouchers}">
+                                    <p:menuitem value="${msg.vouchers}" url="/pages/system/voucher.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.voucheramounts}" url="/pages/system/voucheramount.jsf" update=":menuBar"/>
+                                </p:submenu>
+                                <p:submenu styleClass="menuUsername" label="${sessionBean.user.name}">
+                                    <p:menuitem value="${msg.myaccount}" url="/pages/system/account.jsf" update=":menuBar"/>
+                                    <p:menuitem styleClass="menuLogout" value="${msg.logout}" url="/logout" />
+                                </p:submenu>
                             </p:menubar>
 
                             <p:menubar rendered="#{sessionBean.staff}">
-                                <!--
-                                <p:submenu label="${msg.company}">
-                                    <p:menuitem value="${msg.information}" url="/pages/staff/information.jsf" update=":menuBar"/>
-                                    <p:menuitem value="${msg.category}" url="/pages/staff/category.jsf" update=":menuBar"/>
-                                    <p:menuitem value="${msg.events}" url="/pages/staff/event.jsf" update=":menuBar"/>
-                                    <p:menuitem value="${msg.notification}" url="/pages/staff/notification.jsf" update=":menuBar"/>
+                                <p:submenu label="${msg.users}">
+                                    <p:menuitem value="${msg.users}" url="/pages/system/user.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.roles}" url="/pages/system/role.jsf" update=":menuBar"/>
                                 </p:submenu>
-                                <p:submenu label="${msg.benefit}">
-                                    <p:menuitem value="${msg.benefit}" url="/pages/staff/benefit.jsf" update=":menuBar"/>
-                                    <p:menuitem value="${msg.usedBenefits}" url="/pages/staff/usedbenefit.jsf" update=":menuBar"/>
-                                    <p:menuitem value="${msg.ranking}" url="/pages/staff/ranking.jsf" update=":menuBar"/>
-                                    <p:menuitem value="${msg.history}" url="/pages/staff/history.jsf" update=":menuBar"/>
-                                    <p:menuitem value="${msg.report}" url="/pages/staff/benefitsReport.jsf" update=":menuBar" />
+                                <p:submenu label="${msg.functionaries}">
+                                    <p:menuitem value="${msg.functionaries}" url="/pages/system/functionary.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.jobTitles}" url="/pages/system/jobtitle.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.workshifts}" url="/pages/system/workshift.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.wsAssignments}" url="/pages/system/wsassignment.jsf" update=":menuBar"/>
                                 </p:submenu>
-                                <p:submenu label="${msg.beneficiary}">
-                                    <p:menuitem value="${msg.beneficiary}" url="/pages/staff/beneficiary.jsf" update=":menuBar"/>
-                                    <p:menuitem value="${msg.massive}" url="/pages/staff/beneficiaryMassive.jsf" update=":menuBar" />
+                                <p:submenu label="${msg.sales}">
+                                    <p:menuitem value="${msg.sales}" url="/pages/system/sale.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.products}" url="/pages/system/product.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.mealServices}" url="/pages/system/mealservice.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.places}" url="/pages/system/place.jsf" update=":menuBar"/>
                                 </p:submenu>
-                                -->
+                                <p:submenu label="${msg.vouchers}">
+                                    <p:menuitem value="${msg.vouchers}" url="/pages/system/voucher.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.voucherAmounts}" url="/pages/system/voucheramount.jsf" update=":menuBar"/>
+                                </p:submenu>
+                                <p:submenu styleClass="menuUsername" label="${sessionBean.user.name}">
+                                    <p:menuitem value="${msg.myAccount}" url="/pages/system/account.jsf" update=":menuBar"/>
+                                    <p:menuitem styleClass="menuLogout" value="${msg.logout}" url="/logout" />
+                                </p:submenu>
                                 <p:menuitem icon="ui-icon-power" value="${msg.logout} STAFF" url="/logout" />
                             </p:menubar>
 
                             <p:menubar rendered="#{sessionBean.general}">
-                                <p:submenu label="MENU UNO">
-                                    <p:menuitem styleClass="menuLogout" value="${msg.logout}" url="/logout" />
-                                    <p:menuitem styleClass="menuLogout" value="${msg.logout}" url="/logout" />
+                                <p:submenu label="${msg.users}">
+                                    <p:menuitem value="${msg.users}" url="/pages/system/user.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.roles}" url="/pages/system/role.jsf" update=":menuBar"/>
                                 </p:submenu>
-                                <p:submenu label="MENU DOS">
+                                <p:submenu label="${msg.functionaries}">
+                                    <p:menuitem value="${msg.functionaries}" url="/pages/system/functionary.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.jobtitles}" url="/pages/system/jobtitle.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.workshifts}" url="/pages/system/workshift.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.wsassignments}" url="/pages/system/wsassignment.jsf" update=":menuBar"/>
+                                </p:submenu>
+                                <p:submenu label="${msg.sales}">
+                                    <p:menuitem value="${msg.sales}" url="/pages/system/sale.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.products}" url="/pages/system/product.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.mealservices}" url="/pages/system/mealservice.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.places}" url="/pages/system/place.jsf" update=":menuBar"/>
+                                </p:submenu>
+                                <p:submenu label="${msg.vouchers}">
+                                    <p:menuitem value="${msg.vouchers}" url="/pages/system/voucher.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.voucheramounts}" url="/pages/system/voucheramount.jsf" update=":menuBar"/>
                                 </p:submenu>
                                 <p:submenu styleClass="menuUsername" label="${sessionBean.user.name}">
+                                    <p:menuitem value="${msg.myaccount}" url="/pages/system/account.jsf" update=":menuBar"/>
                                     <p:menuitem styleClass="menuLogout" value="${msg.logout}" url="/logout" />
                                 </p:submenu>
                             </p:menubar>
