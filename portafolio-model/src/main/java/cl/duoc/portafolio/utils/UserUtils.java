@@ -44,7 +44,7 @@ public class UserUtils implements Serializable {
      * hasheada en SHA512 con salto aleatorio en función al RUT del usuario.
      */
     public static User hashPasswd(final User user, final String password) {
-        User hasedUser = null;
+        User hashedUser = null;
         if (user != null && StringUtils.isNotBlank(password)) {
             // Salto para hash corresponde a 4 digitos intermedios del rut.
             // Se realiza el cambio de password antes de persistir al usuario.
@@ -52,15 +52,14 @@ public class UserUtils implements Serializable {
             String hasedPassword = CryptoUtils.hashSha512(password, salt);
 
             // Construimos un objeto nuevo
-            hasedUser = new User();
-//            hasedUser.setActive(user.isActive());
-//            hasedUser.setCompany(user.getCompany());
-            hasedUser.setId(user.getId());
-            hasedUser.setName(user.getName());
-            hasedUser.setPassword(hasedPassword);
-            hasedUser.setRole(user.getRole());
-            hasedUser.setRut(user.getRut());
+            hashedUser = new User();
+//            hashedUser.setActive(user.isActive());
+            hashedUser.setId(user.getId());
+            hashedUser.setName(user.getName());
+            hashedUser.setPassword(hasedPassword);
+            hashedUser.setRole(user.getRole());
+            hashedUser.setRut(user.getRut());
         }
-        return hasedUser;
+        return hashedUser;
     }
 }

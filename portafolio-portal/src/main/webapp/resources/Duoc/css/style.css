@@ -56,7 +56,6 @@ h3{
 
 input, button{
     width: 100%;
-    max-width: 500px;
     height: 2.5rem;
     line-height: 2.5rem;
     font-size: 1.5rem;
@@ -132,6 +131,8 @@ button:hover,input[type="submit"]:hover{
 
 .ui-datatable .ui-column-filter{
     width: 96% !important;
+    height: 1.5rem;
+    font-size: 1rem;
 }
 
 .ui-radiobutton .ui-radiobutton-box,
@@ -219,9 +220,7 @@ button:hover,input[type="submit"]:hover{
 .ui-state-warn, .ui-widget-content .ui-state-warn, .ui-widget-header .ui-state-warn,
 .ui-state-info, .ui-widget-content .ui-state-info, .ui-widget-header .ui-state-info,
 .ui-state-fatal, .ui-widget-content .ui-state-fatal, .ui-widget-header .ui-state-fatal{
-    background: transparent;
-    color: #333333;
-    border: 0;
+    border-color: #ff0000;
 }
 
 input.ui-state-error, .ui-widget-content input.ui-state-error, .ui-widget-header input.ui-state-error{
@@ -479,7 +478,6 @@ input.hasDatepicker{
     border-radius: 1rem;
     color: #313B45;
     padding-left: 0.5rem;
-    max-width: 500px;
 }
 
 .ui-selectonemenu.ui-state-disabled {
@@ -636,7 +634,12 @@ input.hasDatepicker{
     bottom: 0;
 }
 
-/* TABLES */
+/***** TABLES *****/
+
+.ui-datatable table td,
+.ui-datatable table th{
+    border-color: #ffffff;
+}
 
 .ui-datatable table td:last-child,
 .ui-datatable table th:last-child{
@@ -657,8 +660,20 @@ input.hasDatepicker{
     color: #ff9900;
 }
 
+.ui-datatable a i{
+    color: #ffffff;
+}
+
+.ui-datatable a:hover i{
+    color: #ff9900;
+}
+
 .ui-paginator span.ui-icon{
     display:none;
+}
+
+.ui-paginator-page{
+    color: #ffffff;
 }
 
 .ui-paginator-page.ui-state-active{
@@ -683,7 +698,7 @@ input.hasDatepicker{
 }
 
 .ui-paginator .ui-state-disabled:before{
-    color: #cccccc;
+    color: #666666;
 }
 
 .ui-paginator .ui-paginator-first:before{
@@ -705,18 +720,19 @@ input.hasDatepicker{
 .ui-dialog {
     background: #ffffff;
     border: 1px solid #cccccc;
+    color: #313B45;
+}
+
+.ui-dialog button{
+    width: 40%;
+    margin: 5%;
 }
 
 /* LOGIN */
 
 #loginWrap{
     text-align: center;
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
+    margin: 20px auto;
 }
 
 #loginForm #panelLogin{
@@ -801,6 +817,8 @@ input.hasDatepicker{
     background: #333333;
     color: #ffffff;
     border-top: 5px solid #ff9900;
+    width: 100%;
+    overflow: hidden;
 }
 
 /* STYCKY FOOTER - DO NOT REMOVE */
