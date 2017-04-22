@@ -49,16 +49,16 @@ public class UserUtils implements Serializable {
             // Salto para hash corresponde a 4 digitos intermedios del rut.
             // Se realiza el cambio de password antes de persistir al usuario.
             String salt = StringUtils.substring(StringUtils.trimToEmpty(Integer.toString(user.getRut())), 2, 6);
-            String hasedPassword = CryptoUtils.hashSha512(password, salt);
+            String hashedPassword = CryptoUtils.hashSha512(password, salt);
 
             // Construimos un objeto nuevo
             hashedUser = new User();
-//            hashedUser.setActive(user.isActive());
             hashedUser.setId(user.getId());
-            hashedUser.setName(user.getName());
-            hashedUser.setPassword(hasedPassword);
-            hashedUser.setRole(user.getRole());
             hashedUser.setRut(user.getRut());
+            hashedUser.setName(user.getName());
+            hashedUser.setPassword(hashedPassword);
+            hashedUser.setRole(user.getRole());
+            hashedUser.setActive(user.isActive());
         }
         return hashedUser;
     }
