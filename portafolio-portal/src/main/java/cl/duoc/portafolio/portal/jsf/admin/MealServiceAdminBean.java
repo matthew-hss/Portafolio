@@ -5,10 +5,12 @@
  */
 package cl.duoc.portafolio.portal.jsf.admin;
 
+import cl.duoc.portafolio.model.MealService;
 import cl.duoc.portafolio.model.Product;
 import cl.duoc.portafolio.portal.utils.FacesUtils;
 import cl.duoc.portafolio.service.SaleService;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -25,68 +27,71 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope("view")
-@Qualifier("productAdminBean")
-public class ProductAdminBean implements Serializable {
+@Qualifier("mealServiceAdminBean")
+public class MealServiceAdminBean implements Serializable {
 
-    private static final long serialVersionUID = 559864478748547255L;
+    private static final long serialVersionUID = 559864478748451255L;
 
     @Resource(name = "saleService")
     private transient SaleService saleService;
 
-    private Product product = null;
+    private MealService mealService = null;
+    private List<MealService> mealServices = null;
     private List<Product> products = null;
     private boolean edit = false;
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProductAdminBean.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MealServiceAdminBean.class);
 
     @PostConstruct
     public void init() {
+        products = saleService.getProducts();
         refresh();
     }
 
     public void refresh() {
+        mealService = new MealService();
         edit = false;
-        product = new Product();
-        products = saleService.getProducts();
+        mealServices = saleService.getMealServices();
     }
 
-    public String editProduct() {
+    public String edit() {
         return StringUtils.EMPTY;
     }
 
-    public String deleteProduct() {
-        if (product != null) {
+    public String process() {
+        if (mealService != null) {
             try {
-                boolean ok = saleService.delete(product);
+                MealService save = saleService.save(mealService);
+                if (save != null) {
+                    refresh();
+                    FacesUtils.infoMessage("mealServiceSaved");
+                } else {
+                    FacesUtils.errorMessage("mealServiceNotSaved");
+                }
+            } catch (Exception e) {
+                LOGGER.debug("Error al agregar servicio de alimento: {}", e.toString(), e);
+                FacesUtils.fatalMessage("mealServiceNotSaved");
+            }
+        }
+        return StringUtils.EMPTY;
+    }
+
+    public String delete() {
+        boolean ok = false;
+        if (mealService != null) {
+            try {
+                ok = saleService.delete(mealService);
                 if (ok) {
                     refresh();
-                    FacesUtils.infoMessage("productDeleted");
+                    FacesUtils.infoMessage("mealServiceDeleted");
                 } else {
-                    FacesUtils.errorMessage("productNotDeleted");
+                    FacesUtils.errorMessage("mealServiceNotDeleted");
                 }
             } catch (Exception e) {
-                LOGGER.debug("Error al eliminar producto: {}", e.toString(), e);
-                FacesUtils.fatalMessage("productNotDeleted");
+                LOGGER.debug("Error al eliminar servicio de alimento: {}", e.toString(), e);
+                FacesUtils.fatalMessage("mealServiceNotDeleted");
             }
         }
         return StringUtils.EMPTY;
-    }
-    
-    public String process(){
-        if(product != null){
-            try {
-                Product save = saleService.save(product);
-                if(save!=null){
-                    refresh();
-                    FacesUtils.infoMessage("productSaved");
-                }else{
-                    FacesUtils.infoMessage("productNotSaved");
-                }
-            } catch (Exception e) {
-                LOGGER.debug("Error al grabar producto: {}", e.toString(), e);
-                FacesUtils.fatalMessage("productNotSaved");
-            }
-        }
-        return StringUtils.EMPTY;                
     }
 
     public SaleService getSaleService() {
@@ -97,12 +102,20 @@ public class ProductAdminBean implements Serializable {
         this.saleService = saleService;
     }
 
-    public Product getProduct() {
-        return product;
+    public MealService getMealService() {
+        return mealService;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setMealService(MealService mealService) {
+        this.mealService = mealService;
+    }
+
+    public List<MealService> getMealServices() {
+        return mealServices;
+    }
+
+    public void setMealServices(List<MealService> mealServices) {
+        this.mealServices = mealServices;
     }
 
     public List<Product> getProducts() {
@@ -120,5 +133,5 @@ public class ProductAdminBean implements Serializable {
     public void setEdit(boolean edit) {
         this.edit = edit;
     }
-    
+
 }

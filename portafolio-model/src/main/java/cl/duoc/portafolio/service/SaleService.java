@@ -1,5 +1,6 @@
 package cl.duoc.portafolio.service;
 
+import cl.duoc.portafolio.model.MealService;
 import cl.duoc.portafolio.model.Place;
 import cl.duoc.portafolio.model.Product;
 import cl.duoc.portafolio.model.Sale;
@@ -52,4 +53,14 @@ public interface SaleService {
     public SaleItem save(final SaleItem saleItem);
     
     public boolean delete(final SaleItem saleItem);
+    
+    public MealService getMealService(final Long id);
+    
+    public List<MealService> getMealServices();
+    
+    public MealService getMealService(final Product product);
+    
+    public MealService save(final MealService mealService);
+    
+    public boolean delete(final MealService mealService);
 }

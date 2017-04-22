@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,7 +26,8 @@ public class Workshift extends BaseBean{
     private static final long serialVersionUID = 7226055427557870592L;
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "workshift_seq_gen")
+    @SequenceGenerator(name = "workshift_seq_gen", sequenceName = "WORKSHIFT_SEQ")
     @XmlTransient
     @Column(name = "ID", nullable = false)
     private Long id = null;

@@ -1,10 +1,12 @@
 package cl.duoc.portafolio.service.impl;
 
+import cl.duoc.portafolio.model.MealService;
 import cl.duoc.portafolio.model.Place;
 import cl.duoc.portafolio.model.Product;
 import cl.duoc.portafolio.model.Sale;
 import cl.duoc.portafolio.model.SaleItem;
 import cl.duoc.portafolio.model.Voucher;
+import cl.duoc.portafolio.repository.MealServiceRepository;
 import cl.duoc.portafolio.repository.PlaceRepository;
 import cl.duoc.portafolio.repository.ProductRepository;
 import cl.duoc.portafolio.repository.SaleItemRepository;
@@ -36,6 +38,8 @@ public class SaleServiceImpl implements SaleService, Serializable {
     private ProductRepository productRepository;
     @Resource(name = "saleItemRepository")
     private SaleItemRepository saleItemRepository;
+    @Resource(name = "mealServiceRepository")
+    private MealServiceRepository mealServiceRepository;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SaleServiceImpl.class);
 
@@ -313,7 +317,7 @@ public class SaleServiceImpl implements SaleService, Serializable {
     public SaleItem save(SaleItem saleItem) {
         SaleItem saved = null;
         try {
-            if(saleItem!=null){
+            if (saleItem != null) {
                 saved = saleItemRepository.save(saleItem);
             }
         } catch (Exception e) {
@@ -329,7 +333,7 @@ public class SaleServiceImpl implements SaleService, Serializable {
     public boolean delete(SaleItem saleItem) {
         boolean deleted = false;
         try {
-            if(saleItem != null){
+            if (saleItem != null) {
                 saleItemRepository.delete(saleItem);
                 deleted = true;
             }
@@ -339,6 +343,80 @@ public class SaleServiceImpl implements SaleService, Serializable {
             LOGGER.debug("Error al eliminar item de venta: {}", e.toString());
         }
         return deleted;
+    }
+
+    @Override
+    public MealService getMealService(Long id) {
+        MealService mealService = null;
+        try {
+            if (id != null && id > 0) {
+                mealService = mealServiceRepository.getOne(id);
+            }
+        } catch (Exception e) {
+            mealService = null;
+            LOGGER.error("Error al obtener servicio de comida: {}", e.toString());
+            LOGGER.debug("Error al obtener servicio de comida: {}", e.toString());
+        }
+        return mealService;
+    }
+
+    @Override
+    public List<MealService> getMealServices() {
+        List<MealService> mealServices = new ArrayList<>();
+        try {
+            mealServices = mealServiceRepository.findAll();
+        } catch (Exception e) {
+            mealServices = new ArrayList<>();
+            LOGGER.error("Error al obtener servicios de comida: {}", e.toString());
+            LOGGER.debug("Error al obtener servicios de comida: {}", e.toString());
+        }
+        return mealServices;
+    }
+
+    @Override
+    public MealService getMealService(Product product) {
+        MealService mealService= null;
+        try {
+            if (product != null) {
+                mealService = mealServiceRepository.findByProduct(product);
+            }
+        } catch (Exception e) {
+            mealService = null;
+            LOGGER.error("Error al obtener servicios de comida: {}", e.toString());
+            LOGGER.debug("Error al obtener servicios de comida: {}", e.toString());
+        }
+        return mealService;
+    }
+
+    @Override
+    public MealService save(MealService mealService) {
+        MealService save = null;
+        try {
+            if(mealService!=null){
+                save = mealServiceRepository.save(mealService);
+            }
+        } catch (Exception e) {
+            save = null;
+            LOGGER.error("Error al guardar servicio de comida: {}", e.toString());
+            LOGGER.debug("Error al guardar servicio de comida: {}", e.toString());
+        }
+        return save;
+    }
+
+    @Override
+    public boolean delete(MealService mealService) {
+        boolean ok = false;
+        try {
+            if(mealService!=null){
+                mealServiceRepository.delete(mealService);
+                ok = true;
+            }
+        } catch (Exception e) {
+            ok = false;
+            LOGGER.error("Error al eliminar servicio de comida: {}", e.toString());
+            LOGGER.debug("Error al eliminar servicio de comida: {}", e.toString());            
+        }
+        return ok;
     }
 
 }
