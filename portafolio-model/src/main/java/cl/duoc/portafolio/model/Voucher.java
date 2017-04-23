@@ -23,7 +23,7 @@ public class Voucher extends BaseBean{
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "voucher_seq_gen")
-    @SequenceGenerator(name = "voucher_seq_gen", sequenceName = "VOUCHER_SEQ")
+    @SequenceGenerator(name = "voucher_seq_gen", sequenceName = "VOUCHER_SEQ", allocationSize = 1)
     @XmlTransient
     @Column(name = "ID", nullable = false)
     private Long id = null;

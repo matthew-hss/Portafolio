@@ -27,7 +27,7 @@ public class Workshift extends BaseBean{
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "workshift_seq_gen")
-    @SequenceGenerator(name = "workshift_seq_gen", sequenceName = "WORKSHIFT_SEQ")
+    @SequenceGenerator(name = "workshift_seq_gen", sequenceName = "WORKSHIFT_SEQ", allocationSize = 1)
     @XmlTransient
     @Column(name = "ID", nullable = false)
     private Long id = null;

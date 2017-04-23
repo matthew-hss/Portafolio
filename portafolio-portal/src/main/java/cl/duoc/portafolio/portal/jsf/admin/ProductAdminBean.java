@@ -49,11 +49,12 @@ public class ProductAdminBean implements Serializable {
         products = saleService.getProducts();
     }
 
-    public String editProduct() {
+    public String edit() {
+        edit = true;
         return StringUtils.EMPTY;
     }
 
-    public String deleteProduct() {
+    public String delete() {
         if (product != null) {
             try {
                 boolean ok = saleService.delete(product);
@@ -87,6 +88,11 @@ public class ProductAdminBean implements Serializable {
             }
         }
         return StringUtils.EMPTY;                
+    }
+
+    public String cancel() {
+        refresh();
+        return StringUtils.EMPTY;
     }
 
     public SaleService getSaleService() {

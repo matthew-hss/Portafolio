@@ -23,7 +23,7 @@ public class Sale extends BaseBean{
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sale_seq_gen")
-    @SequenceGenerator(name = "sale_seq_gen", sequenceName = "SALE_SEQ")
+    @SequenceGenerator(name = "sale_seq_gen", sequenceName = "SALE_SEQ", allocationSize = 1)
     @XmlTransient
     @Column(name = "ID", nullable = false)
     private Long id = null;

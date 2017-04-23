@@ -23,7 +23,7 @@ public class Product extends BaseBean{
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     //---OJO aquí!!!! IDENTITY no es soportado por ORACLE, por lo que cambiamos a sequencias y asociamos a las ya existentes en la DB.---
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_seq_gen")
-    @SequenceGenerator(name = "product_seq_gen", sequenceName = "PRODUCT_SEQ")
+    @SequenceGenerator(name = "product_seq_gen", sequenceName = "PRODUCT_SEQ", allocationSize = 1)
     @XmlTransient
     @Column(name = "ID", nullable = false)
     private Long id = null;

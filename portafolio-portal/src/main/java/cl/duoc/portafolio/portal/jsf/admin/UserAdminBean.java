@@ -86,9 +86,9 @@ public class UserAdminBean implements Serializable {
                     User saved = userService.save(user);
                     if (saved != null) {
                         refresh();
-                        FacesUtils.infoMessage("saveUserOk");
+                        FacesUtils.infoMessage("userSaved");
                     } else {
-                        FacesUtils.errorMessage("saveUserNOK");
+                        FacesUtils.errorMessage("userNotSaved");
                     }
                 } else {
                     // Si no persisto es porque las contraseñas no cuadran
@@ -104,7 +104,7 @@ public class UserAdminBean implements Serializable {
         return StringUtils.EMPTY;
     }
 
-    public String editUser() {
+    public String edit() {
         edit = true;
         return StringUtils.EMPTY;
     }
@@ -114,15 +114,15 @@ public class UserAdminBean implements Serializable {
         return StringUtils.EMPTY;
     }
 
-    public String deleteUser() {
+    public String delete() {
         try {
             if (user != null) {
                 boolean ok = userService.delete(user);
                 if (ok) {
                     refresh();
-                    FacesUtils.infoMessage("deleteUserOk");
+                    FacesUtils.infoMessage("userDeleted");
                 } else {
-                    FacesUtils.errorMessage("deleteUserNOK");
+                    FacesUtils.errorMessage("userNotDeleted");
                 }
             }
         } catch (Exception e) {

@@ -1,9 +1,10 @@
 package cl.duoc.portafolio.portal.jsf.admin;
 
-import cl.duoc.portafolio.model.JobTitle;
 import cl.duoc.portafolio.model.Functionary;
+import cl.duoc.portafolio.model.JobTitle;
 import cl.duoc.portafolio.portal.utils.FacesUtils;
 import cl.duoc.portafolio.service.FunctionaryService;
+import cl.duoc.portafolio.utils.FunctionaryUtils;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -21,18 +22,19 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope("view")
-@Qualifier("functionaryAdminBean")
+@Qualifier("userAdminBean")
 public class FunctionaryAdminBean implements Serializable {
 
-    private static final long serialVersionUID = 559864478748531255L;
+    private static final long serialVersionUID = 2377930989521500160L;
 
     @Resource(name = "functionaryService")
     private transient FunctionaryService functionaryService;
-
     private Functionary functionary = null;
     private List<Functionary> functionaries = null;
-    private boolean edit = false;
     private List<JobTitle> jobTitles = null;
+    private boolean edit = false;
+    private String passOne = null;
+    private String passTwo = null;
     private static final Logger LOGGER = LoggerFactory.getLogger(FunctionaryAdminBean.class);
 
     @PostConstruct
@@ -42,47 +44,92 @@ public class FunctionaryAdminBean implements Serializable {
     }
 
     private void refresh() {
-        edit = false;
         functionary = new Functionary();
         functionaries = functionaryService.getFunctionaries();
-    }
-
-    public String editBeneficiary() {
-        return StringUtils.EMPTY;
-    }
-
-    public String deleteFunctionary() {
-        if (functionary != null) {
-            boolean ok = functionaryService.delete(functionary);
-            if (ok) {
-                refresh();
-                FacesUtils.infoMessage("functionaryDeleted");
-            } else {
-                FacesUtils.errorMessage("functionaryNotDeleted");
-            }
-        }
-        return StringUtils.EMPTY;
+        edit = false;
+        passOne = StringUtils.EMPTY;
+        passTwo = StringUtils.EMPTY;
     }
 
     public String process() {
-        if (functionary != null) {
-            try {
-                Functionary save = functionaryService.save(functionary);
-                if (save != null) {
-                    refresh();
-                    FacesUtils.infoMessage("functionarySaved");
+        try {
+            if (functionary != null) {
+                // Esta variable la usaremos para ver si persistimos o no al usuario
+                boolean persist = false;
+                /**
+                 * Lo primero es determinar si el usuario es nuevo o se está
+                 * editando.
+                 */
+                if (edit) {
+                    // Es un usuario antiguo
+                    if (StringUtils.isNotBlank(passOne) || StringUtils.isNotBlank(passTwo)) {
+                        // Ha modificado la contraseña, deberíamos hashear
+                        if (StringUtils.equals(passOne, passTwo)) {
+                            persist = true;
+                            functionary = FunctionaryUtils.hashPasswd(functionary, passOne);
+                        }
+                    } else {
+                        // Quiere decir que no se han cambiado las contraseñas, pero igual persisto
+                        persist = true;
+                    }
+
                 } else {
-                    FacesUtils.errorMessage("functionaryNotSaved");
+                    // Es un usuario nuevo
+                    if (StringUtils.isNotBlank(passOne) && StringUtils.equals(passOne, passTwo)) {
+                        // Las contraseñas deben existir y ser iguales
+                        persist = true;
+                        functionary = FunctionaryUtils.hashPasswd(functionary, passOne);
+                    }
                 }
-            } catch (Exception e) {
-                LOGGER.debug("Error al insertar el funcionario: {}", e.toString(), e);
-                FacesUtils.fatalMessage("functionaryNotSaved");
+
+                if (persist) {
+                    Functionary saved = functionaryService.save(functionary);
+                    if (saved != null) {
+                        refresh();
+                        FacesUtils.infoMessage("functionarySaved");
+                    } else {
+                        FacesUtils.errorMessage("functionaryNotSaved");
+                    }
+                } else {
+                    // Si no persisto es porque las contraseñas no cuadran
+                    FacesUtils.errorMessage("passwordNotEquals");
+                }
+            } else {
+                FacesUtils.errorMessage("genericSaveError");
             }
+        } catch (Exception e) {
+            LOGGER.error("Error al intentar persistir funcionario: {}", e.toString());
+            FacesUtils.fatalMessage("genericSaveError");
         }
         return StringUtils.EMPTY;
     }
-    
-    
+
+    public String edit() {
+        edit = true;
+        return StringUtils.EMPTY;
+    }
+
+    public String cancel() {
+        refresh();
+        return StringUtils.EMPTY;
+    }
+
+    public String delete() {
+        try {
+            if (functionary != null) {
+                boolean ok = functionaryService.delete(functionary);
+                if (ok) {
+                    refresh();
+                    FacesUtils.infoMessage("functionaryDeleted");
+                } else {
+                    FacesUtils.errorMessage("functionaryNotDeleted");
+                }
+            }
+        } catch (Exception e) {
+            LOGGER.error("Error al intentar eliminar funcionario: {}", e.toString());
+        }
+        return StringUtils.EMPTY;
+    }
 
     public Functionary getFunctionary() {
         return functionary;
@@ -106,6 +153,22 @@ public class FunctionaryAdminBean implements Serializable {
 
     public void setEdit(boolean edit) {
         this.edit = edit;
+    }
+
+    public String getPassOne() {
+        return passOne;
+    }
+
+    public void setPassOne(String passOne) {
+        this.passOne = passOne;
+    }
+
+    public String getPassTwo() {
+        return passTwo;
+    }
+
+    public void setPassTwo(String passTwo) {
+        this.passTwo = passTwo;
     }
 
     public List<JobTitle> getJobTitles() {

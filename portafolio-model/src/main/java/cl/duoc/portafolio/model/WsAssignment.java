@@ -26,7 +26,7 @@ public class WsAssignment extends BaseBean{
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "wsassignment_seq_gen")
-    @SequenceGenerator(name = "wsassignment_seq_gen", sequenceName = "WSASSIGNMENT_SEQ")
+    @SequenceGenerator(name = "wsassignment_seq_gen", sequenceName = "WSASSIGNMENT_SEQ", allocationSize = 1)
     @XmlTransient
     @Column(name = "ID", nullable = false)
     private Long id = null;

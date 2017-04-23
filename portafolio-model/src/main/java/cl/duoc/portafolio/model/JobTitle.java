@@ -22,7 +22,7 @@ public class JobTitle implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "jobtitle_seq_gen")
-    @SequenceGenerator(name = "jobtitle_seq_gen", sequenceName = "JOBTITLE_SEQ")
+    @SequenceGenerator(name = "jobtitle_seq_gen", sequenceName = "JOBTITLE_SEQ", allocationSize = 1)
     @XmlTransient
     @Column(name = "ID", nullable = false)
     private Long id = null;

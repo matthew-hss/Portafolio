@@ -24,7 +24,7 @@ public class User extends BaseBean {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq_gen")
-    @SequenceGenerator(name = "user_seq_gen", sequenceName = "USERS_SEQ")
+    @SequenceGenerator(name = "user_seq_gen", sequenceName = "USERS_SEQ", allocationSize = 1)
     @XmlTransient
     @Column(name = "ID", nullable = false)
     private Long id = null;

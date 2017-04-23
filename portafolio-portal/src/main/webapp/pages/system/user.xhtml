@@ -59,12 +59,15 @@
                                     <p:selectBooleanCheckbox id="active" value="#{userAdminBean.user.active}" />
                                     <p:message for="active" display="tooltip"/>
                                 </div>
-                                <div class="col-xs-6 col-sm-4">
-                                    <p:commandButton action="#{userAdminBean.cancel}" value="${msg.cancel}" update=":formUser :panelData" />
-                                </div>
-                                <div class="col-xs-6 col-sm-4 col-sm-offset-right-4">
+                                <p:outputPanel class="col-xs-6 col-sm-4 col-sm-offset-right-8" rendered="#{!userAdminBean.edit}">
+                                    <p:commandButton action="#{userAdminBean.process}" value="${msg.add}" update=":formUser :panelData" />
+                                </p:outputPanel>
+                                <p:outputPanel class="col-xs-6 col-sm-4" rendered="#{userAdminBean.edit}">
                                     <p:commandButton action="#{userAdminBean.process}" value="${msg.save}" update=":formUser :panelData" />
-                                </div>
+                                </p:outputPanel>
+                                <p:outputPanel class="col-xs-6 col-sm-4 col-sm-offset-right-4" rendered="#{userAdminBean.edit}">
+                                    <p:commandButton styleClass="cancelButton" action="#{userAdminBean.cancel}" value="${msg.cancel}" update=":formUser :panelData" />
+                                </p:outputPanel>
                                 <div class="col-xs-12 col-sm-6 col-sm-offset-right-3 col-sm-offset-3">
                                     <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
                                 </div>
@@ -89,7 +92,7 @@
                                     </p:column>
 
                                     <p:column headerText="${msg.actions}">
-                                        <p:commandLink ajax="false" update=":formUser :panelData" actionListener="#{userAdminBean.editUser}" title="Editar">
+                                        <p:commandLink ajax="false" update=":formUser :panelData" actionListener="#{userAdminBean.edit}" title="Editar">
                                             <f:setPropertyActionListener value="#{currentRow}" target="#{userAdminBean.user}" />
                                             <i class="fa fa-edit" aria-hidden="true"></i>
                                         </p:commandLink>
@@ -104,9 +107,9 @@
 
                                 <p:dialog id="dialogoEliminar" widgetVar="deletePopUp" header="${msg.delete}" modal="true">
                                     <h:outputText value="${msg.deleteUser}" />
-                                    <p:commandButton value="${msg.yes}" action="#{userAdminBean.deleteUser}" update=":formUser :panelData" />
+                                    <p:commandButton value="${msg.yes}" action="#{userAdminBean.delete}" update=":formUser :panelData" />
 
-                                    <p:commandButton value="${msg.no}">
+                                    <p:commandButton value="${msg.no}" styleClass="cancelButton">
                                         <p:ajax event="click" oncomplete="PF('deletePopUp').hide();" />
                                     </p:commandButton>
                                 </p:dialog>

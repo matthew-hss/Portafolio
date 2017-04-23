@@ -54,6 +54,7 @@ public class MealServiceAdminBean implements Serializable {
     }
 
     public String edit() {
+        edit = true;
         return StringUtils.EMPTY;
     }
 
@@ -72,6 +73,11 @@ public class MealServiceAdminBean implements Serializable {
                 FacesUtils.fatalMessage("mealServiceNotSaved");
             }
         }
+        return StringUtils.EMPTY;
+    }
+
+    public String cancel() {
+        refresh();
         return StringUtils.EMPTY;
     }
 

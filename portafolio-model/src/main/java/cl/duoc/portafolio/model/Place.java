@@ -21,7 +21,7 @@ public class Place extends BaseBean{
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "place_seq_gen")
-    @SequenceGenerator(name = "place_seq_gen", sequenceName = "PLACE_SEQ")
+    @SequenceGenerator(name = "place_seq_gen", sequenceName = "PLACE_SEQ", allocationSize = 1)
     @XmlTransient
     @Column(name = "ID", nullable = false)
     private Long id = null;

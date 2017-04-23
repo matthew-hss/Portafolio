@@ -23,7 +23,7 @@ public class Functionary extends BaseBean{
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "functionary_seq_gen")
-    @SequenceGenerator(name = "functionary_seq_gen", sequenceName = "FUNCTIONARY_SEQ")
+    @SequenceGenerator(name = "functionary_seq_gen", sequenceName = "FUNCTIONARY_SEQ", allocationSize = 1)
     @XmlTransient
     @Column(name = "ID", nullable = false)
     private Long id = null;

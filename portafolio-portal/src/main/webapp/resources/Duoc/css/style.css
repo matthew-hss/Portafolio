@@ -105,7 +105,7 @@ button span{
 
 button,input[type="submit"]{
     text-align: center;
-    background: #ff9900;
+    background: #98C936;
     color: #fff;
     border: 0;
     font-family: Rokkitt;
@@ -113,8 +113,12 @@ button,input[type="submit"]{
     margin-top: 1rem !important;
 }
 
+button.cancelButton,input[type="submit"].cancelButton{
+    background: #b94a48;
+}
+
 button:hover,input[type="submit"]:hover{
-    background: #98C936;
+    background: #ff9900;
     cursor: pointer;
 }
 
@@ -418,6 +422,7 @@ input.hasDatepicker{
     background: #ffffff;
     border: 1px solid #cccccc;
     color: #333333;
+    border-radius: 1rem;
 }
 
 .ui-datepicker-unselectable{
@@ -453,6 +458,20 @@ input.hasDatepicker{
     top: 5px;
     left: 8px;
     color: #333333;
+}
+
+.ui-slider{
+    background: #ff9900;
+    border-radius: 5px;
+    height: 5px !important;
+    margin: 15px 0px;
+}
+
+.ui-slider-handle{
+    background: #98C936;
+    border-radius: 50%;
+    height: 15px !important;
+    width: 15px !important;
 }
 
 .ui-messages span.ui-icon{

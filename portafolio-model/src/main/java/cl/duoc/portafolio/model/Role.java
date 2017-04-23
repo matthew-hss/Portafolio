@@ -21,7 +21,7 @@ public class Role extends BaseBean{
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_seq_gen")
-    @SequenceGenerator(name = "role_seq_gen", sequenceName = "ROLE_SEQ")
+    @SequenceGenerator(name = "role_seq_gen", sequenceName = "ROLE_SEQ", allocationSize = 1)
     @XmlTransient
     @Column(name = "ID", nullable = false)
     private Long id = null;

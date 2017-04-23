@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
@@ -25,15 +26,15 @@ public class MealService extends BaseBean{
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mealService_seq_gen")
-    @SequenceGenerator(name = "mealService_seq_gen", sequenceName = "MEALSERVICE_SEQ")
+    @SequenceGenerator(name = "mealService_seq_gen", sequenceName = "MEALSERVICE_SEQ", allocationSize = 1)
     @XmlTransient
     @Column(name = "ID", nullable = false)
     private Long id = null;
     @Column(name = "STARTTIME", nullable = false)
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date startTime = null;
     @Column(name = "ENDTIME", nullable = false)
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date endTime = null;
     @JoinColumn(name = "PRODUCT_ID",referencedColumnName = "ID" ,nullable = false)
     @ManyToOne(optional = false)
