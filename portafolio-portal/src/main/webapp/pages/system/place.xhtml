@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/templates/main.xhtml">
+        <ui:define name="content">
+            <p:outputPanel id="panelPlaceAdmin" styleClass="col-xs-12">
+                <p:panel id="panelPlace" style="overflow: hidden;" header="${msg.places}">
+                    <div>
+                        <p:outputPanel id="panelForm">
+                            <h:form id="formPlace">
+                                <div class="col-xs-12">
+                                    <h2>
+                                        <h:outputText value="${msg.add}" rendered="#{!placeAdminBean.edit}" />
+                                        <h:outputText value="${msg.edit}" rendered="#{placeAdminBean.edit}" />
+                                    </h2>
+                                </div>
+                                <div class="col-xs-12 col-sm-4">
+                                    <p:outputLabel for="name" value="${msg.name}" />
+                                    <p:inputText id="name" value="#{placeAdminBean.place.name}" converter="TrimConverter" validatorMessage="${msg.invalidName}">
+                                        <f:validateRegex pattern="#{regexBean.title}"/>
+                                    </p:inputText>
+                                    <p:message for="name" display="tooltip"/>
+                                </div>
+                                <p:outputPanel style="padding-top: 11px;" class="col-xs-6 col-sm-4 col-sm-offset-right-4" rendered="#{!placeAdminBean.edit}">
+                                    <p:commandButton action="#{placeAdminBean.process}" value="${msg.add}" update=":formPlace :panelData" />
+                                </p:outputPanel>
+                                <p:outputPanel style="padding-top: 11px;" class="col-xs-6 col-sm-4" rendered="#{placeAdminBean.edit}">
+                                    <p:commandButton action="#{placeAdminBean.process}" value="${msg.save}" update=":formPlace :panelData" />
+                                </p:outputPanel>
+                                <p:outputPanel style="padding-top: 11px;" class="col-xs-6 col-sm-4" rendered="#{placeAdminBean.edit}">
+                                    <p:commandButton styleClass="cancelButton" action="#{placeAdminBean.cancel}" value="${msg.cancel}" update=":formPlace :panelData" />
+                                </p:outputPanel>
+                                <div class="col-xs-12 col-sm-6 col-sm-offset-right-3 col-sm-offset-3">
+                                    <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+                                </div>
+                            </h:form>
+                        </p:outputPanel>
+                    </div>
+
+                    <div class="col-xs-12">
+                        <p:outputPanel id="panelData">
+                            <h:form>
+                                <p:dataTable value="#{placeAdminBean.places}" var="currentRow" rows="10" paginator="true" paginatorPosition="bottom">
+
+                                    <p:column headerText="${msg.name}" filterBy="#{currentRow.name}" filterMatchMode="contains">
+                                        <h:outputText value="#{currentRow.name}" />
+                                    </p:column>
+
+                                    <p:column headerText="${msg.actions}">
+                                        <p:commandLink ajax="false" update=":formPlace :panelData" actionListener="#{placeAdminBean.edit}" title="${msg.edit}">
+                                            <f:setPropertyActionListener value="#{currentRow}" target="#{placeAdminBean.place}" />
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </p:commandLink>
+
+                                        <p:commandLink title="${msg.delete}">
+                                            <f:setPropertyActionListener value="#{currentRow}" target="#{placeAdminBean.place}"/>
+                                            <p:ajax event="click" oncomplete="PF('deletePopUp').show();" />
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </p:commandLink>
+                                    </p:column> 
+                                </p:dataTable>
+
+                                <p:dialog id="deleteDialog" widgetVar="deletePopUp" header="${msg.delete}" modal="true">
+                                    <h:outputText value="${msg.deletePlace}" />
+                                    <p:commandButton value="${msg.yes}" action="#{placeAdminBean.delete}" update=":formPlace :panelData" />
+
+                                    <p:commandButton value="${msg.no}" styleClass="cancelButton">
+                                        <p:ajax event="click" oncomplete="PF('deletePopUp').hide();" />
+                                    </p:commandButton>
+                                </p:dialog>
+
+                            </h:form>
+                        </p:outputPanel>
+                    </div>
+                </p:panel>
+            </p:outputPanel>
+            <!--
+            <p:outputPanel id="panelPlaceStaff" rendered="#{sessionBean.staff}" styleClass="col-xs-12">
+                Error 403
+            </p:outputPanel>
+            <p:outputPanel id="panelPlaceGeneral" rendered="#{sessionBean.general}" styleClass="col-xs-12">
+                Error 403
+            </p:outputPanel -->
+        </ui:define>
+    </ui:composition>
+</html>

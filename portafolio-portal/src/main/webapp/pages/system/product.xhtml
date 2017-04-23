@@ -8,7 +8,7 @@
     <ui:composition template="/templates/main.xhtml">
         <ui:define name="content">
             <p:outputPanel id="panelProductAdmin" styleClass="col-xs-12">
-                <p:panel id="panelProduct" style="overflow: hidden;" header="${msg.product}">
+                <p:panel id="panelProduct" style="overflow: hidden;" header="${msg.products}">
                     <div>
                         <p:outputPanel id="panelForm">
                             <h:form id="formProduct">
@@ -57,7 +57,9 @@
                                     </p:column>
 
                                     <p:column headerText="${msg.price}">
-                                        <h:outputText value="#{currentRow.price}" />
+                                        <h:outputText value="#{currentRow.price}">
+                                            <f:convertNumber type="currency" currencySymbol="$ " maxFractionDigits="0" />
+                                        </h:outputText>
                                     </p:column>
 
                                     <p:column headerText="${msg.actions}">
@@ -74,7 +76,7 @@
                                     </p:column> 
                                 </p:dataTable>
 
-                                <p:dialog id="dialogoEliminar" widgetVar="deletePopUp" header="${msg.delete}" modal="true">
+                                <p:dialog id="deleteDialog" widgetVar="deletePopUp" header="${msg.delete}" modal="true">
                                     <h:outputText value="${msg.deleteProduct}" />
                                     <p:commandButton value="${msg.yes}" action="#{productAdminBean.delete}" update=":formProduct :panelData" />
 

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/templates/main.xhtml">
+        <ui:define name="content">
+            <p:outputPanel id="panelRoleAdmin" styleClass="col-xs-12">
+                <p:panel id="panelRole" style="overflow: hidden;" header="${msg.roles}">
+                    <div>
+                        <p:outputPanel id="panelForm">
+                            <h:form id="formRole">
+                                <div class="col-xs-12">
+                                    <h2>
+                                        <h:outputText value="${msg.add}" rendered="#{!roleAdminBean.edit}" />
+                                        <h:outputText value="${msg.edit}" rendered="#{roleAdminBean.edit}" />
+                                    </h2>
+                                </div>
+                                <div class="col-xs-12 col-sm-4">
+                                    <p:outputLabel for="name" value="${msg.name}" />
+                                    <p:inputText id="name" value="#{roleAdminBean.role.name}" converter="TrimConverter" validatorMessage="${msg.invalidName}">
+                                        <f:validateRegex pattern="#{regexBean.title}"/>
+                                    </p:inputText>
+                                    <p:message for="name" display="tooltip"/>
+                                </div>
+                                <p:outputPanel style="padding-top: 11px;" class="col-xs-6 col-sm-4 col-sm-offset-right-4" rendered="#{!roleAdminBean.edit}">
+                                    <p:commandButton action="#{roleAdminBean.process}" value="${msg.add}" update=":formRole :panelData" />
+                                </p:outputPanel>
+                                <p:outputPanel style="padding-top: 11px;" class="col-xs-6 col-sm-4" rendered="#{roleAdminBean.edit}">
+                                    <p:commandButton action="#{roleAdminBean.process}" value="${msg.save}" update=":formRole :panelData" />
+                                </p:outputPanel>
+                                <p:outputPanel style="padding-top: 11px;" class="col-xs-6 col-sm-4" rendered="#{roleAdminBean.edit}">
+                                    <p:commandButton styleClass="cancelButton" action="#{roleAdminBean.cancel}" value="${msg.cancel}" update=":formRole :panelData" />
+                                </p:outputPanel>
+                                <div class="col-xs-12 col-sm-6 col-sm-offset-right-3 col-sm-offset-3">
+                                    <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+                                </div>
+                            </h:form>
+                        </p:outputPanel>
+                    </div>
+
+                    <div class="col-xs-12">
+                        <p:outputPanel id="panelData">
+                            <h:form>
+                                <p:dataTable value="#{roleAdminBean.roles}" var="currentRow" rows="10" paginator="true" paginatorPosition="bottom">
+
+                                    <p:column headerText="${msg.name}" filterBy="#{currentRow.name}" filterMatchMode="contains">
+                                        <h:outputText value="#{currentRow.name}" />
+                                    </p:column>
+
+                                    <p:column headerText="${msg.actions}">
+                                        <p:commandLink ajax="false" update=":formRole :panelData" actionListener="#{roleAdminBean.edit}" title="${msg.edit}">
+                                            <f:setPropertyActionListener value="#{currentRow}" target="#{roleAdminBean.role}" />
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </p:commandLink>
+
+                                        <p:commandLink title="${msg.delete}">
+                                            <f:setPropertyActionListener value="#{currentRow}" target="#{roleAdminBean.role}"/>
+                                            <p:ajax event="click" oncomplete="PF('deletePopUp').show();" />
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </p:commandLink>
+                                    </p:column> 
+                                </p:dataTable>
+
+                                <p:dialog id="deleteDialog" widgetVar="deletePopUp" header="${msg.delete}" modal="true">
+                                    <h:outputText value="${msg.deleteRole}" />
+                                    <p:commandButton value="${msg.yes}" action="#{roleAdminBean.delete}" update=":formRole :panelData" />
+
+                                    <p:commandButton value="${msg.no}" styleClass="cancelButton">
+                                        <p:ajax event="click" oncomplete="PF('deletePopUp').hide();" />
+                                    </p:commandButton>
+                                </p:dialog>
+
+                            </h:form>
+                        </p:outputPanel>
+                    </div>
+                </p:panel>
+            </p:outputPanel>
+            <!--
+            <p:outputPanel id="panelRoleStaff" rendered="#{sessionBean.staff}" styleClass="col-xs-12">
+                Error 403
+            </p:outputPanel>
+            <p:outputPanel id="panelRoleGeneral" rendered="#{sessionBean.general}" styleClass="col-xs-12">
+                Error 403
+            </p:outputPanel -->
+        </ui:define>
+    </ui:composition>
+</html>

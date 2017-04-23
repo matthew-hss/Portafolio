@@ -92,12 +92,12 @@
                                     </p:column>
 
                                     <p:column headerText="${msg.actions}">
-                                        <p:commandLink ajax="false" update=":formUser :panelData" actionListener="#{userAdminBean.edit}" title="Editar">
+                                        <p:commandLink ajax="false" update=":formUser :panelData" actionListener="#{userAdminBean.edit}" title="${msg.edit}">
                                             <f:setPropertyActionListener value="#{currentRow}" target="#{userAdminBean.user}" />
                                             <i class="fa fa-edit" aria-hidden="true"></i>
                                         </p:commandLink>
 
-                                        <p:commandLink title="Eliminar">
+                                        <p:commandLink title="${msg.delete}">
                                             <f:setPropertyActionListener value="#{currentRow}" target="#{userAdminBean.user}"/>
                                             <p:ajax event="click" oncomplete="PF('deletePopUp').show();" />
                                             <i class="fa fa-times" aria-hidden="true"></i>
@@ -105,7 +105,7 @@
                                     </p:column>
                                 </p:dataTable>
 
-                                <p:dialog id="dialogoEliminar" widgetVar="deletePopUp" header="${msg.delete}" modal="true">
+                                <p:dialog id="deleteDialog" widgetVar="deletePopUp" header="${msg.delete}" modal="true">
                                     <h:outputText value="${msg.deleteUser}" />
                                     <p:commandButton value="${msg.yes}" action="#{userAdminBean.delete}" update=":formUser :panelData" />
 
