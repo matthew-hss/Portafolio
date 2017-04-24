@@ -141,46 +141,46 @@ public class VoucherServiceImpl implements VoucherService, Serializable {
     }
 
     @Override
-    public List<VoucherAmount> getVouchersAmount() {
-        List<VoucherAmount> vouchersAmounts = new ArrayList<>();
+    public List<VoucherAmount> getVoucherAmounts() {
+        List<VoucherAmount> voucherAmounts = new ArrayList<>();
         try {
-            vouchersAmounts = voucherAmountRepository.findAll();
+            voucherAmounts = voucherAmountRepository.findAll();
         } catch (Exception e) {
-            vouchersAmounts = new ArrayList<>();
+            voucherAmounts = new ArrayList<>();
             LOGGER.error("Error al obtener montos de vales: {}", e.toString());
             LOGGER.debug("Error al obtener montos de vales: {}", e.toString());
         }
-        return vouchersAmounts;
+        return voucherAmounts;
     }
 
     @Override
-    public List<VoucherAmount> getVouchersAmount(JobTitle jobTitle) {
-        List<VoucherAmount> vouchersAmounts = new ArrayList<>();
+    public List<VoucherAmount> getVoucherAmounts(JobTitle jobTitle) {
+        List<VoucherAmount> voucherAmounts = new ArrayList<>();
         try {
             if (jobTitle != null) {
-                vouchersAmounts = voucherAmountRepository.findByJobTitle(jobTitle);
+                voucherAmounts = voucherAmountRepository.findByJobTitle(jobTitle);
             }
         } catch (Exception e) {
-            vouchersAmounts = new ArrayList<>();
+            voucherAmounts = new ArrayList<>();
             LOGGER.error("Error al obtener montos de vales: {}", e.toString());
             LOGGER.debug("Error al obtener montos de vales: {}", e.toString());
         }
-        return vouchersAmounts;
+        return voucherAmounts;
     }
 
     @Override
-    public List<VoucherAmount> getVouchersAmount(MealService mealService) {
-        List<VoucherAmount> vouchersAmounts = new ArrayList<>();
+    public List<VoucherAmount> getVoucherAmounts(MealService mealService) {
+        List<VoucherAmount> voucherAmounts = new ArrayList<>();
         try {
             if (mealService != null) {
-                vouchersAmounts = voucherAmountRepository.findByMealService(mealService);
+                voucherAmounts = voucherAmountRepository.findByMealService(mealService);
             }
         } catch (Exception e) {
-            vouchersAmounts = new ArrayList<>();
+            voucherAmounts = new ArrayList<>();
             LOGGER.error("Error al obtener montos de vales: {}", e.toString());
             LOGGER.debug("Error al obtener montos de vales: {}", e.toString());
         }
-        return vouchersAmounts;
+        return voucherAmounts;
     }
 
     @Override

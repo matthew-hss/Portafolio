@@ -7,7 +7,7 @@
 
     <ui:composition template="/templates/main.xhtml">
         <ui:define name="content">
-            <p:outputPanel id="panelMealServiceAdmin" styleClass="col-xs-12">
+            <p:outputPanel id="panelMealServiceAdmin" rendered="#{sessionBean.admin || sessionBean.staff}" styleClass="col-xs-12">
                 
                 <p:panel id="panelMealService" style="overflow: hidden;" header="${msg.mealServices}">
                     <div>
@@ -100,13 +100,11 @@
                     </div>
                 </p:panel>
             </p:outputPanel>
-            <!--
-            <p:outputPanel id="panelMealServiceStaff" rendered="#{sessionBean.staff}" styleClass="col-xs-12">
-                Error 403
+            <p:outputPanel id="panelFunctionaryGeneral" rendered="#{sessionBean.general}" styleClass="col-xs-12">
+                <div style="text-align:center;">
+                    <h1>Error 403</h1><h2>Acceso no permitido</h2>
+                </div>
             </p:outputPanel>
-            <p:outputPanel id="panelMealServiceGeneral" rendered="#{sessionBean.general}" styleClass="col-xs-12">
-                Error 403
-            </p:outputPanel -->
         </ui:define>
     </ui:composition>
 </html>

@@ -28,11 +28,11 @@ public interface VoucherService {
     
     public VoucherAmount getVoucherAmount(final Long id);
     
-    public List<VoucherAmount> getVouchersAmount();
+    public List<VoucherAmount> getVoucherAmounts();
     
-    public List<VoucherAmount> getVouchersAmount(final JobTitle jobTitle);
+    public List<VoucherAmount> getVoucherAmounts(final JobTitle jobTitle);
     
-    public List<VoucherAmount> getVouchersAmount(final MealService mealService);
+    public List<VoucherAmount> getVoucherAmounts(final MealService mealService);
     
     public VoucherAmount save(final VoucherAmount voucherAmount);
     

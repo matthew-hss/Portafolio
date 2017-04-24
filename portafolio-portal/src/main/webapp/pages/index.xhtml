@@ -6,13 +6,19 @@
     <ui:composition template="/templates/main.xhtml">
         <ui:define name="content">
             <p:outputPanel id="panelIndexAdmin" rendered="#{sessionBean.admin}" styleClass="col-xs-12">
-                Hola Usuario Administrador
+                <div style="text-align:center;">
+                    <h1>Autenticación exitosa</h1><h2>Usuario ADMIN</h2>
+                </div>
             </p:outputPanel>
             <p:outputPanel id="panelIndexStaff" rendered="#{sessionBean.staff}" styleClass="col-xs-12">
-                Hola Usuario Staff
+                <div style="text-align:center;">
+                    <h1>Autenticación exitosa</h1><h2>Usuario STAFF</h2>
+                </div>
             </p:outputPanel>
             <p:outputPanel id="panelIndexGeneral" rendered="#{sessionBean.general}" styleClass="col-xs-12">
-                Hola Usuario General
+                <div style="text-align:center;">
+                    <h1>Autenticación exitosa</h1><h2>Usuario GENERAL</h2>
+                </div>
             </p:outputPanel>
         </ui:define>
     </ui:composition>

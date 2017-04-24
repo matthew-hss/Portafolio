@@ -1,6 +1,8 @@
 package cl.duoc.portafolio.portal.jsf.admin;
 
+import cl.duoc.portafolio.model.Functionary;
 import cl.duoc.portafolio.model.Workshift;
+import cl.duoc.portafolio.model.WsAssignment;
 import cl.duoc.portafolio.portal.utils.FacesUtils;
 import cl.duoc.portafolio.service.FunctionaryService;
 import java.io.Serializable;
@@ -20,27 +22,31 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope("view")
-@Qualifier("workshiftAdminBean")
-public class WorkshiftAdminBean implements Serializable {
+@Qualifier("wsAssignmentAdminBean")
+public class WsAssignmentAdminBean implements Serializable {
 
     private static final long serialVersionUID = 559864478748451255L;
 
     @Resource(name = "functionaryService")
     private transient FunctionaryService functionaryService;
 
-    private Workshift workshift = null;
+    private WsAssignment wsAssignment = null;
+    private List<WsAssignment> wsAssignments = null;
+    private List<Functionary> functionaries = null;
     private List<Workshift> workshifts = null;
     private boolean edit = false;
-    private static final Logger LOGGER = LoggerFactory.getLogger(WorkshiftAdminBean.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(WsAssignmentAdminBean.class);
 
     @PostConstruct
     public void init() {
+        functionaries = functionaryService.getFunctionaries();
+        workshifts = functionaryService.getWorkshifts();
         refresh();
     }
 
     public void refresh() {
-        workshift = new Workshift();
-        workshifts = functionaryService.getWorkshifts();
+        wsAssignment = new WsAssignment();
+        wsAssignments = functionaryService.getWsAssignments();
         edit = false;
     }
 
@@ -50,18 +56,18 @@ public class WorkshiftAdminBean implements Serializable {
     }
 
     public String process() {
-        if (workshift != null) {
+        if (wsAssignment != null) {
             try {
-                Workshift save = functionaryService.save(workshift);
+                WsAssignment save = functionaryService.save(wsAssignment);
                 if (save != null) {
                     refresh();
-                    FacesUtils.infoMessage("workshiftSaved");
+                    FacesUtils.infoMessage("wsAssignmentSaved");
                 } else {
-                    FacesUtils.errorMessage("workshiftNotSaved");
+                    FacesUtils.errorMessage("wsAssignmentNotSaved");
                 }
             } catch (Exception e) {
-                LOGGER.debug("Error al agregar turno: {}", e.toString(), e);
-                FacesUtils.fatalMessage("workshiftNotSaved");
+                LOGGER.debug("Error al agregar asignación: {}", e.toString(), e);
+                FacesUtils.fatalMessage("wsAssignmentNotSaved");
             }
         }
         return StringUtils.EMPTY;
@@ -74,29 +80,45 @@ public class WorkshiftAdminBean implements Serializable {
 
     public String delete() {
         boolean ok = false;
-        if (workshift != null) {
+        if (wsAssignment != null) {
             try {
-                ok = functionaryService.delete(workshift);
+                ok = functionaryService.delete(wsAssignment);
                 if (ok) {
                     refresh();
-                    FacesUtils.infoMessage("workshiftDeleted");
+                    FacesUtils.infoMessage("wsAssignmentDeleted");
                 } else {
-                    FacesUtils.errorMessage("workshiftNotDeleted");
+                    FacesUtils.errorMessage("wsAssignmentNotDeleted");
                 }
             } catch (Exception e) {
-                LOGGER.debug("Error al eliminar turno: {}", e.toString(), e);
-                FacesUtils.fatalMessage("workshiftNotDeleted");
+                LOGGER.debug("Error al eliminar asignación: {}", e.toString(), e);
+                FacesUtils.fatalMessage("wsAssignmentNotDeleted");
             }
         }
         return StringUtils.EMPTY;
     }
 
-    public Workshift getWorkshift() {
-        return workshift;
+    public WsAssignment getWsAssignment() {
+        return wsAssignment;
     }
 
-    public void setWorkshift(Workshift workshift) {
-        this.workshift = workshift;
+    public void setWsAssignment(WsAssignment wsAssignment) {
+        this.wsAssignment = wsAssignment;
+    }
+
+    public List<WsAssignment> getWsAssignments() {
+        return wsAssignments;
+    }
+
+    public void setWsAssignments(List<WsAssignment> wsAssignments) {
+        this.wsAssignments = wsAssignments;
+    }
+
+    public List<Functionary> getFunctionaries() {
+        return functionaries;
+    }
+
+    public void setFunctionaries(List<Functionary> functionaries) {
+        this.functionaries = functionaries;
     }
 
     public List<Workshift> getWorkshifts() {

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/templates/main.xhtml">
+        <ui:define name="content">
+            <p:outputPanel id="panelWsAssignmentAdmin" rendered="#{sessionBean.admin}" styleClass="col-xs-12">
+                
+                <p:panel id="panelWsAssignment" style="overflow: hidden;" header="${msg.wsAssignments}">
+                    <div>
+                        <p:outputPanel id="panelForm" >
+                            <h:form id="formWsAssignment" enctype="multipart/form-data">
+                                <div class="col-xs-12">
+                                    <h2>
+                                        <h:outputText value="${msg.add}" rendered="#{!wsAssignmentAdminBean.edit}" />
+                                        <h:outputText value="${msg.edit}" rendered="#{wsAssignmentAdminBean.edit}" />
+                                    </h2>
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    <p:outputLabel for="functionary" value="${msg.functionary}" />
+                                    <p:selectOneMenu id="functionary" value="#{wsAssignmentAdminBean.wsAssignment.functionary}" converter="BaseBeanConverter">
+                                        <f:selectItems value="#{wsAssignmentAdminBean.functionaries}" var="f" itemLabel="#{f.name} #{f.surname}" itemValue="#{f}"/>
+                                    </p:selectOneMenu>
+                                    <p:message for="functionary" display="tooltip"/>
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    <p:outputLabel for="workshift" value="${msg.workshift}" />
+                                    <p:selectOneMenu id="workshift" value="#{wsAssignmentAdminBean.wsAssignment.workshift}" converter="BaseBeanConverter">
+                                        <f:selectItems value="#{wsAssignmentAdminBean.workshifts}" var="w" itemLabel="Turno #{w.id}" itemValue="#{w}"/>
+                                    </p:selectOneMenu>
+                                    <p:message for="workshift" display="tooltip"/>                          
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    <p:outputLabel for="startDate" value="${msg.dateBegin}" />
+                                    <p:calendar id="startDate" value="${wsAssignmentAdminBean.wsAssignment.startDate}" pattern="dd/MM/yyyy" timeZone="America/Santiago" required="true"/>
+                                    <p:message for="startDate" display="tooltip"/>
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    <p:outputLabel for="endDate" value="${msg.dateEnd}" />
+                                    <p:calendar id="endDate" value="${wsAssignmentAdminBean.wsAssignment.endDate}" pattern="dd/MM/yyyy" timeZone="America/Santiago" required="true"/>
+                                    <p:message for="endDate" display="tooltip"/>                          
+                                </div>
+                                <p:outputPanel style="padding-top: 11px;" class="col-xs-6 col-sm-4 col-sm-offset-right-8" rendered="#{!wsAssignmentAdminBean.edit}">
+                                    <p:commandButton action="#{wsAssignmentAdminBean.process}" value="${msg.add}" update=":formWsAssignment :panelData" />
+                                </p:outputPanel>
+                                <p:outputPanel style="padding-top: 11px;" class="col-xs-6 col-sm-4" rendered="#{wsAssignmentAdminBean.edit}">
+                                    <p:commandButton action="#{wsAssignmentAdminBean.process}" value="${msg.save}" update=":formWsAssignment :panelData" />
+                                </p:outputPanel>
+                                <p:outputPanel style="padding-top: 11px;" class="col-xs-6 col-sm-4 col-sm-offset-right-4" rendered="#{wsAssignmentAdminBean.edit}">
+                                    <p:commandButton styleClass="cancelButton" action="#{wsAssignmentAdminBean.cancel}" value="${msg.cancel}" update=":formWsAssignment :panelData" />
+                                </p:outputPanel>
+                                <div class="col-xs-12 col-sm-6 col-sm-offset-right-3 col-sm-offset-3">
+                                    <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+                                </div>
+                            </h:form>
+                        </p:outputPanel>
+                    </div>
+                    <div class="col-xs-12">
+                        <p:outputPanel id="panelData">
+                            <h:form>
+                                <p:dataTable value="#{wsAssignmentAdminBean.wsAssignments}" var="currentRow" rows="10" paginator="true" paginatorPosition="bottom">
+                                    <p:column headerText="${msg.functionary}">
+                                        <h:outputText value="#{currentRow.functionary.name} #{currentRow.functionary.surname}" />
+                                    </p:column>
+
+                                    <p:column headerText="${msg.workshift}" style="text-align: center;">
+                                        <h:outputText value="#{currentRow.workshift.startTime}" >
+                                            <f:convertDateTime pattern="HH:mm" timeZone="America/Santiago"  />
+                                        </h:outputText>
+                                        <h:outputText value=" - " />
+                                        <h:outputText value="#{currentRow.workshift.endTime}" >
+                                            <f:convertDateTime pattern="HH:mm" timeZone="America/Santiago"  />
+                                        </h:outputText>
+                                    </p:column>
+
+                                    <p:column headerText="${msg.dateBegin}" style="text-align: center;" filterBy="#{currentRow.startDate}" filterMatchMode="contains">
+                                        <h:outputText value="#{currentRow.startDate}">
+                                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Santiago" />
+                                        </h:outputText>
+                                    </p:column>
+
+                                    <p:column headerText="${msg.dateEnd}" style="text-align: center;" filterBy="#{currentRow.endDate}" filterMatchMode="contains">
+                                        <h:outputText value="#{currentRow.endDate}" >
+                                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Santiago"  />
+                                        </h:outputText>
+                                    </p:column>
+
+                                    <p:column headerText="${msg.actions}">
+                                        <p:commandLink ajax="false" update=":formWsAssignment :panelData" actionListener="#{wsAssignmentAdminBean.edit}" title="${msg.edit}">
+                                            <f:setPropertyActionListener value="#{currentRow}" target="#{wsAssignmentAdminBean.wsAssignment}" />
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </p:commandLink>
+
+                                        <p:commandLink title="${msg.delete}">
+                                            <f:setPropertyActionListener value="#{currentRow}" target="#{wsAssignmentAdminBean.wsAssignment}"/>
+                                            <p:ajax event="click" oncomplete="PF('deletePopUp').show();" />
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </p:commandLink>
+                                    </p:column>    
+                                </p:dataTable>
+
+                                <p:dialog id="deleteDialog" widgetVar="deletePopUp" header="${msg.delete}" modal="true">
+                                    <h:outputText value="${msg.deleteWsAssignment}" />
+                                    <p:commandButton value="${msg.yes}" action="#{wsAssignmentAdminBean.delete}" update=":formWsAssignment :panelData" />
+
+                                    <p:commandButton value="${msg.no}" styleClass="cancelButton">
+                                        <p:ajax event="click" oncomplete="PF('deletePopUp').hide();" />
+                                    </p:commandButton>
+                                </p:dialog>
+
+                            </h:form>
+                        </p:outputPanel>        
+                    </div>
+                </p:panel>
+            </p:outputPanel>
+            <p:outputPanel id="panelFunctionaryStaff" rendered="#{sessionBean.staff}" styleClass="col-xs-12">
+                <div style="text-align:center;">
+                    <h1>Error 403</h1><h2>Acceso no permitido</h2>
+                </div>
+            </p:outputPanel>
+            <p:outputPanel id="panelFunctionaryGeneral" rendered="#{sessionBean.general}" styleClass="col-xs-12">
+                <div style="text-align:center;">
+                    <h1>Error 403</h1><h2>Acceso no permitido</h2>
+                </div>
+            </p:outputPanel>
+        </ui:define>
+    </ui:composition>
+</html>
