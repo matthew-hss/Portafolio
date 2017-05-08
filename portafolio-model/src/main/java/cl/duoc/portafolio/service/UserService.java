@@ -1,6 +1,6 @@
 package cl.duoc.portafolio.service;
 
-import cl.duoc.portafolio.model.Role;
+import cl.duoc.portafolio.vo.Role;
 import cl.duoc.portafolio.model.User;
 import java.util.List;
 
@@ -21,14 +21,8 @@ public interface UserService {
     public boolean delete(final User user);
 
     public User save(final User user);
-    
-    public Role getRole(final Long id);
 
     public List<Role> getRoles();
-
-    public boolean delete(final Role role);
-
-    public Role save(final Role role);
     
     public boolean authenticate(final Integer rut, final String password);
 

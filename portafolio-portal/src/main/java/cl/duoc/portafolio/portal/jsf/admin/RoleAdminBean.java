@@ -1,6 +1,6 @@
 package cl.duoc.portafolio.portal.jsf.admin;
 
-import cl.duoc.portafolio.model.Role;
+import cl.duoc.portafolio.vo.Role;
 import cl.duoc.portafolio.portal.utils.FacesUtils;
 import cl.duoc.portafolio.service.UserService;
 import java.io.Serializable;
@@ -40,7 +40,7 @@ public class RoleAdminBean implements Serializable {
 
     public void refresh() {
         edit = false;
-        role = new Role();
+        //role = new Role();
         roles = userService.getRoles();
     }
 
@@ -52,8 +52,8 @@ public class RoleAdminBean implements Serializable {
     public String delete() {
         if (role != null) {
             try {
-                boolean ok = userService.delete(role);
-                if (ok) {
+                //boolean ok = userService.delete(role);
+                if (true) {
                     refresh();
                     FacesUtils.infoMessage("roleDeleted");
                 } else {
@@ -70,8 +70,9 @@ public class RoleAdminBean implements Serializable {
     public String process(){
         if(role != null){
             try {
-                Role save = userService.save(role);
-                if(save!=null){
+                
+                //Role save = userService.save(role);
+                if(role!=null){
                     refresh();
                     FacesUtils.infoMessage("roleSaved");
                 }else{

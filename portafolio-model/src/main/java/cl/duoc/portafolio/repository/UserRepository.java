@@ -1,6 +1,6 @@
 package cl.duoc.portafolio.repository;
 
-import cl.duoc.portafolio.model.Role;
+import cl.duoc.portafolio.vo.Role;
 import cl.duoc.portafolio.model.User;
 import java.util.List;
 import javax.annotation.Resource;

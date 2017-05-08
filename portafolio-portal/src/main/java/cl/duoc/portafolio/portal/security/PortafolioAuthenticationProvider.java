@@ -40,7 +40,7 @@ public class PortafolioAuthenticationProvider implements AuthenticationProvider 
                 User user = userService.getUser(rut);
 
                 List<GrantedAuthority> roles = new ArrayList<>();
-                roles.add(new SimpleGrantedAuthority(StringUtils.trimToEmpty(String.format("ROLE_%s", user.getRole().getName()))));
+                roles.add(new SimpleGrantedAuthority(StringUtils.trimToEmpty(String.format("ROLE_%s", user.getRole().name()))));
 
                 if (!roles.isEmpty()) {
                     auth = new UsernamePasswordAuthenticationToken(user, password, roles);

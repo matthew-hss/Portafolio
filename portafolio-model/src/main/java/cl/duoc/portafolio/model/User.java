@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlTransient;
+import cl.duoc.portafolio.vo.Role;
 
 /**
  *
@@ -34,9 +35,8 @@ public class User extends BaseBean {
     private String name = null;
     @Column(name = "PASSWORD")
     private String password = null;
-    @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID", nullable = false)
-    @ManyToOne(optional = false)
-    private Role role = null;
+    @Column(name = "ROLE_ID", nullable = false)
+    private Role role = Role.USER;
     @Column(name = "ACTIVE", nullable = false)
     private boolean active = false;
 

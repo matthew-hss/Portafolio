@@ -1,6 +1,6 @@
 package cl.duoc.portafolio.service.impl;
 
-import cl.duoc.portafolio.model.Role;
+import cl.duoc.portafolio.vo.Role;
 import cl.duoc.portafolio.model.User;
 import cl.duoc.portafolio.repository.RoleRepository;
 import cl.duoc.portafolio.repository.UserRepository;
@@ -9,6 +9,7 @@ import cl.duoc.portafolio.utils.CryptoUtils;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 import org.apache.commons.lang3.StringUtils;
@@ -27,10 +28,22 @@ public class UserServiceImpl implements UserService, Serializable {
 
     @Resource(name = "userRepository")
     private UserRepository userRepository;
-    @Resource(name = "roleRepository")
-    private RoleRepository roleRepository;
+    
+    private List<Role> roles = null;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
+
+    @PostConstruct
+    public void initService() {
+        /**
+         * @Warning Cargo listado de roles, es una tarea manual, si se agrega un
+         * rol nuevo debe modificarse.
+         */
+        roles = new ArrayList<>();
+        roles.add(Role.USER);
+        roles.add(Role.STAFF);
+        roles.add(Role.ADMIN);
+    }
 
     @Override
     public User getUser(Long id) {
@@ -124,64 +137,8 @@ public class UserServiceImpl implements UserService, Serializable {
     }
 
     @Override
-    public Role getRole(Long id) {
-        Role role = null;
-        try {
-            if (id != null && id > 0) {
-                role = roleRepository.findOne(id);
-            }
-        } catch (Exception e) {
-            role = null;
-            LOGGER.error("Error al obtener rol: {}", e.toString());
-            LOGGER.debug("Error al obtener rol: {}", e.toString());
-        }
-        return role;
-    }
-
-    @Override
     public List<Role> getRoles() {
-        List<Role> roles = new ArrayList<>();
-        try {
-            roles = roleRepository.findAll();
-        } catch (Exception e) {
-            roles = new ArrayList<>();
-            LOGGER.error("Error al obtener roles: {}", e.toString());
-            LOGGER.debug("Error al obtener roles: {}", e.toString());
-        }
-        return roles;
-    }
-
-    @Override
-    @Transactional
-    public boolean delete(Role role) {
-        boolean deleted = false;
-        try {
-            if (role != null) {
-                roleRepository.delete(role);
-                deleted = true;
-            }
-        } catch (Exception e) {
-            deleted = false;
-            LOGGER.error("Error al eliminar rol: {}", e.toString());
-            LOGGER.debug("Error al eliminar rol: {}", e.toString());
-        }
-        return deleted;
-    }
-
-    @Override
-    @Transactional
-    public Role save(Role role) {
-        Role saved = null;
-        try {
-            if(role != null){
-                saved = roleRepository.save(role);
-            }
-        } catch (Exception e) {
-            saved = null;
-            LOGGER.error("Error al guardar rol: {}", e.toString());
-            LOGGER.debug("Error al guardar rol: {}", e.toString());
-        }
-        return saved;
+        return new ArrayList<>(roles);
     }
 
     @Override

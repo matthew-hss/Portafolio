@@ -4,7 +4,7 @@ import cl.duoc.portafolio.model.User;
 import cl.duoc.portafolio.portal.utils.FacesUtils;
 import cl.duoc.portafolio.service.UserService;
 import cl.duoc.portafolio.utils.UserUtils;
-import cl.duoc.portafolio.model.Role;
+import cl.duoc.portafolio.vo.Role;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;

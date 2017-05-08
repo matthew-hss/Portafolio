@@ -32,7 +32,7 @@ public class SessionBean implements Serializable {
         user = AuthUtils.getAuthenticateUser();
         admin = AuthUtils.isUserInRole("ROLE_ADMIN");
         staff = AuthUtils.isUserInRole("ROLE_STAFF");
-        general = AuthUtils.isUserInRole("ROLE_GENERAL");
+        general = AuthUtils.isUserInRole("ROLE_USER");
     }
 
     public boolean isAdmin() {
