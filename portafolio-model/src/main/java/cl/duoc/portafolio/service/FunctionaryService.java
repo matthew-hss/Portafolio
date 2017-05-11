@@ -22,6 +22,8 @@ public interface FunctionaryService {
     
     public boolean delete(final Functionary functionary);
     
+    public boolean authenticate(final Integer rut, final String password);
+    
     public Workshift getWorkshift(final Long id);
     
     public List<Workshift> getWorkshifts();

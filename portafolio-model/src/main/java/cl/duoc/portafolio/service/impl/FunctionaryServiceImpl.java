@@ -17,6 +17,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import cl.duoc.portafolio.repository.JobTitleRepository;
 import cl.duoc.portafolio.repository.WsAssignmentRepository;
+import cl.duoc.portafolio.utils.CryptoUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
@@ -323,6 +325,28 @@ public class FunctionaryServiceImpl implements FunctionaryService, Serializable 
             LOGGER.debug("Error al eliminar funcion: {}", e.toString());
         }
         return deleted;
+    }
+
+    @Override
+    public boolean authenticate(Integer rut, String password) {
+        boolean ok = false;
+        try {
+            if (rut != null && StringUtils.isNotBlank(password)) {
+                // Salto para hash corresponde a 4 digitos intermedios del rut.
+                String salt = StringUtils.substring(Integer.toString(rut), 2, 6);
+                String passwd = CryptoUtils.hashSha512(password, salt);
+                Functionary functionary = functionaryRepository.findByRutAndPassword(rut, passwd);
+
+                if (functionary != null) {
+                    ok = true;
+                }
+            }
+        } catch (Exception e) {
+            ok = false;
+            LOGGER.error("Error al autenticar usuario: {}", e.toString());
+            LOGGER.debug("Error al autenticar usuario: {}", e.toString(), e);
+        }
+        return ok;
     }
 
 }

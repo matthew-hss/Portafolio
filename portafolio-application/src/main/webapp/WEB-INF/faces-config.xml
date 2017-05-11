@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+              version="2.0">
+
+    <application>
+        <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+        <message-bundle>
+            messages
+        </message-bundle>
+        <locale-config>
+            <default-locale>es</default-locale>
+            <!--
+                        <supported-locale>es</supported-locale>
+                        <supported-locale>en</supported-locale>
+            -->
+        </locale-config>
+    </application>
+
+    <!-- Reglas de Navegación -->
+    <!-- -->
+
+    <!-- Convertidores -->
+    <converter id="BaseBeanConverter">
+        <converter-id>BaseBeanConverter</converter-id>
+        <converter-class>cl.duoc.portafolio.application.converter.BaseBeanConverter</converter-class>
+    </converter>
+
+    <converter id="RutConverter">
+        <converter-id>RutConverter</converter-id>
+        <converter-class>cl.duoc.portafolio.application.converter.RutConverter</converter-class>
+    </converter>
+
+    <converter id="SiNoConverter">
+        <converter-id>SiNoConverter</converter-id>
+        <converter-class>cl.duoc.portafolio.application.converter.SiNoConverter</converter-class>
+    </converter>
+    
+    <converter id="GenderConverter">
+        <converter-id>GenderConverter</converter-id>
+        <converter-class>cl.duoc.portafolio.application.converter.GenderConverter</converter-class>
+    </converter>
+
+    <converter id="TrimConverter">
+        <converter-id>TrimConverter</converter-id>
+        <converter-class>cl.duoc.portafolio.application.converter.TrimConverter</converter-class>
+    </converter>
+
+    <converter id="DateCLConverter">
+        <converter-id>DateCLConverter</converter-id>
+        <converter-class>cl.duoc.portafolio.application.converter.DateCLConverter</converter-class>
+    </converter>
+
+    <converter id="FullDateConverter">
+        <converter-id>FullDateConverter</converter-id>
+        <converter-class>cl.duoc.portafolio.application.converter.FullDateConverter</converter-class>
+    </converter>
+
+    <converter id="TimeCLConverter">
+        <converter-id>TimeCLConverter</converter-id>
+        <converter-class>cl.duoc.portafolio.application.converter.TimeCLConverter</converter-class>
+    </converter>
+
+    <converter id="TruncateConverter">
+        <converter-id>TruncateConverter</converter-id>
+        <converter-class>cl.duoc.portafolio.application.converter.TruncateConverter</converter-class>
+    </converter>
+
+    <validator>
+        <validator-id>PhoneValidator</validator-id>
+        <validator-class>cl.duoc.portafolio.application.validator.PhoneValidator</validator-class>
+    </validator>
+</faces-config>
