@@ -28,6 +28,8 @@ public interface VoucherService {
     
     public VoucherAmount getVoucherAmount(final Long id);
     
+    public VoucherAmount getVoucherAmount(final JobTitle jobTitle, final MealService mealService);
+    
     public List<VoucherAmount> getVoucherAmounts();
     
     public List<VoucherAmount> getVoucherAmounts(final JobTitle jobTitle);

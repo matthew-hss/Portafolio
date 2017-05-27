@@ -5,14 +5,22 @@
  */
 package cl.duoc.portafolio.application.jsf.functionary;
 
+import cl.duoc.portafolio.application.jsf.SessionBean;
 import cl.duoc.portafolio.model.Functionary;
 import cl.duoc.portafolio.model.Sale;
 import cl.duoc.portafolio.model.Voucher;
 import cl.duoc.portafolio.application.utils.FacesUtils;
+import cl.duoc.portafolio.model.MealService;
+import cl.duoc.portafolio.model.VoucherAmount;
+import cl.duoc.portafolio.model.Workshift;
+import cl.duoc.portafolio.model.WsAssignment;
 import cl.duoc.portafolio.service.FunctionaryService;
 import cl.duoc.portafolio.service.SaleService;
 import cl.duoc.portafolio.service.VoucherService;
+import cl.duoc.portafolio.utils.CodeUtils;
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -40,39 +48,64 @@ public class VoucherFunctionaryBean implements Serializable {
     private transient FunctionaryService functionaryService;
     @Resource(name = "saleService")
     private transient SaleService saleService;
-
-    private Voucher voucher = null;
-    private List<Voucher> vouchers = null;
-    private List<Functionary> functionaries = null;
-    private List<Sale> sales = null;
-    private boolean edit = false;
+    @Resource(name = "sessionBean")
+    private transient SessionBean sessionBean;
+    
+    
+    private MealService mealService1 = null;
+    private MealService mealService2 = null; 
+    
+    private Functionary functionary = null;
+    private WsAssignment wsAssignment = null;
+    private Workshift workshift = null;
+    private VoucherAmount voucherAmount1 = null;
+    private VoucherAmount voucherAmount2 = null;
+    private Voucher voucher1 = null;
+    private Voucher voucher2 = null;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(VoucherFunctionaryBean.class);
 
     @PostConstruct
     public void init() {
-        functionaries = functionaryService.getFunctionaries();
-        sales = saleService.getSales();
-        refresh();
+        functionary = sessionBean.getFunctionary();
+        wsAssignment = functionaryService.getWsAssignment(functionary);
+        workshift = functionaryService.getWorkshift(wsAssignment.getWorkshift().getId());        
+        loadMealServices();
+        voucherAmount1 = voucherService.getVoucherAmount(functionary.getJobTitle(), mealService1);
+        voucherAmount2 = voucherService.getVoucherAmount(functionary.getJobTitle(), mealService2);
+        voucher1 = new Voucher();
+        voucher2 = new Voucher();
     }
+    
+    public void loadMealServices(){
+//        Calendar startTime = Calendar.getInstance();
+//        Calendar endTime = Calendar.getInstance();
+//        startTime.setTime(workshift.getStartTime());
+//        endTime.setTime(workshift.getEndTime());
+//        int start = startTime.get(Calendar.HOUR_OF_DAY);
+//        int end = endTime.get(Calendar.HOUR_OF_DAY);
+        if(workshift.getId()==1){
+            mealService1 =  saleService.getMealService(Long.parseLong("1"));
+            mealService2 =  saleService.getMealService(Long.parseLong("2"));
+        }else if(workshift.getId()==2){
+            mealService1 =  saleService.getMealService(Long.parseLong("3"));
+            mealService2 =  saleService.getMealService(Long.parseLong("4"));
+        }else if(workshift.getId()==3){
+            mealService1 =  saleService.getMealService(Long.parseLong("5"));
+            mealService2 =  saleService.getMealService(Long.parseLong("1"));            
+        }
+    }    
 
-    public void refresh() {
-        vouchers = voucherService.getVouchers();
-        voucher = new Voucher();
-        edit = false;
-    }
-
-    public String edit() {
-        edit = true;
-        return StringUtils.EMPTY;
-    }
-
-    public String process() {
+    public String process(Voucher voucher) {
         if (voucher != null) {
-            try {
+            try {                
+                voucher.setCode(CodeUtils.generateCode(6));
+                voucher.setFunctionary(functionary);
+                voucher.setUsed(true);
+                voucher.setSale(null);
+                voucher.setDateTime(new Date());
                 Voucher save = voucherService.save(voucher);
                 if (save != null) {
-                    refresh();
                     FacesUtils.infoMessage("voucherSaved");
                 } else {
                     FacesUtils.errorMessage("voucherNotSaved");
@@ -83,63 +116,6 @@ public class VoucherFunctionaryBean implements Serializable {
             }
         }
         return StringUtils.EMPTY;
-    }
-
-    public String delete() {
-        if (voucher != null) {
-            try {
-                boolean ok = voucherService.delete(voucher);
-                if (ok) {
-                    refresh();
-                    FacesUtils.infoMessage("voucherDeleted");
-                } else {
-                    FacesUtils.errorMessage("voucherNotDeleted");
-                }
-            } catch (Exception e) {
-                LOGGER.debug("Error al eliminar vale: {}", e.toString(), e);
-                FacesUtils.fatalMessage("voucherNotDeleted");
-            }
-        }
-        return StringUtils.EMPTY;
-    }
-
-    public Voucher getVoucher() {
-        return voucher;
-    }
-
-    public void setVoucher(Voucher voucher) {
-        this.voucher = voucher;
-    }
-
-    public List<Voucher> getVouchers() {
-        return vouchers;
-    }
-
-    public void setVouchers(List<Voucher> vouchers) {
-        this.vouchers = vouchers;
-    }
-
-    public List<Functionary> getFunctionaries() {
-        return functionaries;
-    }
-
-    public void setFunctionaries(List<Functionary> functionaries) {
-        this.functionaries = functionaries;
-    }
-
-    public List<Sale> getSales() {
-        return sales;
-    }
-
-    public void setSales(List<Sale> sales) {
-        this.sales = sales;
-    }
-
-    public boolean isEdit() {
-        return edit;
-    }
-
-    public void setEdit(boolean edit) {
-        this.edit = edit;
-    }
+    }    
+    
 }

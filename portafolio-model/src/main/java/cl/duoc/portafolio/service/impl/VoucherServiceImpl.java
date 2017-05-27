@@ -154,18 +154,18 @@ public class VoucherServiceImpl implements VoucherService, Serializable {
     }
 
     @Override
-    public List<VoucherAmount> getVoucherAmounts(JobTitle jobTitle) {
-        List<VoucherAmount> voucherAmounts = new ArrayList<>();
+    public VoucherAmount getVoucherAmount(JobTitle jobTitle, MealService mealService) {
+        VoucherAmount voucherAmount = null;
         try {
-            if (jobTitle != null) {
-                voucherAmounts = voucherAmountRepository.findByJobTitle(jobTitle);
+            if (jobTitle != null && mealService != null) {
+                voucherAmount = voucherAmountRepository.findByJobTitleAndMealService(jobTitle, mealService);
             }
         } catch (Exception e) {
-            voucherAmounts = new ArrayList<>();
-            LOGGER.error("Error al obtener montos de vales: {}", e.toString());
-            LOGGER.debug("Error al obtener montos de vales: {}", e.toString());
+            voucherAmount = null;
+            LOGGER.error("Error al obtener monto de vale: {}", e.toString());
+            LOGGER.debug("Error al obtener monto de vale: {}", e.toString());
         }
-        return voucherAmounts;
+        return voucherAmount;
     }
 
     @Override
@@ -215,4 +215,20 @@ public class VoucherServiceImpl implements VoucherService, Serializable {
         }
         return deleted;
     }
+
+    @Override
+    public List<VoucherAmount> getVoucherAmounts(JobTitle jobTitle) {
+        List<VoucherAmount> voucherAmounts = new ArrayList<>();
+        try {
+            if (jobTitle != null) {
+                voucherAmounts = voucherAmountRepository.findByJobTitle(jobTitle);
+            }
+        } catch (Exception e) {
+            voucherAmounts = new ArrayList<>();
+            LOGGER.error("Error al obtener montos de vales: {}", e.toString());
+            LOGGER.debug("Error al obtener montos de vales: {}", e.toString());
+        }
+        return voucherAmounts;
+    }
+
 }

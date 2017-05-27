@@ -14,6 +14,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @Resource(name = "voucherAmountRepository")
 public interface VoucherAmountRepository extends JpaRepository<VoucherAmount, Long>{
     
+    public VoucherAmount findByJobTitleAndMealService(JobTitle function, MealService mealService);
+    
     public List<VoucherAmount> findByJobTitle(JobTitle function);
     
     public List<VoucherAmount> findByMealService(MealService service);

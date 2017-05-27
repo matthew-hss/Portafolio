@@ -14,7 +14,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @Resource(name = "wsAssignmentRepository")
 public interface WsAssignmentRepository extends JpaRepository<WsAssignment, Long>{
     
-    public List<WsAssignment> findByFunctionary(Functionary functionary);
+    public WsAssignment findByFunctionary(Functionary functionary);
+    
+//    public List<WsAssignment> findByFunctionary(Functionary functionary);
     
     public List<WsAssignment> findByWorkshift(Workshift workshift);
 }

@@ -1,5 +1,6 @@
 package cl.duoc.portafolio.model;
 
+import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,6 +32,8 @@ public class Voucher extends BaseBean{
     private String code = null;
     @Column(name = "USED", nullable = false)
     private boolean used = true;
+    @Column(name = "DATETIME", nullable = false)
+    private Date dateTime = null;
     @JoinColumn(name = "FUNCTIONARY_ID", referencedColumnName = "ID" ,nullable = false)
     @ManyToOne(optional = false)
     private Functionary functionary = null;
@@ -62,6 +65,14 @@ public class Voucher extends BaseBean{
         this.used = used;
     }
 
+    public Date getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime;
+    }
+
     public Functionary getFunctionary() {
         return functionary;
     }
@@ -76,7 +87,7 @@ public class Voucher extends BaseBean{
 
     public void setSale(Sale sale) {
         this.sale = sale;
-    }
+    }  
 
     @Override
     public int hashCode() {
@@ -84,6 +95,8 @@ public class Voucher extends BaseBean{
         hash = 37 * hash + Objects.hashCode(this.id);
         return hash;
     }
+    
+    
 
     @Override
     public boolean equals(Object obj) {

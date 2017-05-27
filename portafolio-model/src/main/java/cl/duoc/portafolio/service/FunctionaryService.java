@@ -34,9 +34,11 @@ public interface FunctionaryService {
     
     public WsAssignment getWsAssignment(final Long id);
     
+    public WsAssignment getWsAssignment(final Functionary functionary);
+    
     public List<WsAssignment> getWsAssignments();
     
-    public List<WsAssignment> getWsAssignments(final Functionary functionary);
+    //public List<WsAssignment> getWsAssignments(final Functionary functionary);
     
     public List<WsAssignment> getWsAssignments(final Workshift workshift);
     

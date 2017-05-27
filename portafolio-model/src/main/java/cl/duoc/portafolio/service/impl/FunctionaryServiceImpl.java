@@ -206,18 +206,18 @@ public class FunctionaryServiceImpl implements FunctionaryService, Serializable 
     }
 
     @Override
-    public List<WsAssignment> getWsAssignments(Functionary functionary) {
-        List<WsAssignment> wsas = new ArrayList<>();
+    public WsAssignment getWsAssignment(Functionary functionary) {
+        WsAssignment wsa = null;
         try {
             if (functionary != null) {
-                wsas = wsAssignmentRepository.findByFunctionary(functionary);
+                wsa = wsAssignmentRepository.findByFunctionary(functionary);
             }
         } catch (Exception e) {
-            wsas = new ArrayList<>();
+            wsa = null;
             LOGGER.error("Error al obtener asignaciones de turno de trabajo: {}", e.toString());
             LOGGER.debug("Error al obtener asignaciones de turno de trabajo: {}", e.toString());
         }
-        return wsas;
+        return wsa;
     }
 
     @Override
