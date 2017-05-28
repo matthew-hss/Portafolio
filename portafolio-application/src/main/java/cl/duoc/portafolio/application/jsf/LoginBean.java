@@ -28,7 +28,7 @@ public class LoginBean implements Serializable {
     private static final long serialVersionUID = 3116373434557613568L;
 
     @Resource(name = "functionaryService")
-    private transient FunctionaryService functionaryService;
+    private FunctionaryService functionaryService;
     private Integer rut = null;
     private String password = null;
     private final static Logger LOGGER = LoggerFactory.getLogger(LoginBean.class);

@@ -7,7 +7,7 @@
 
     <ui:composition template="/templates/main.xhtml">
         <ui:define name="content">
-            <p:outputPanel id="panelUserAdmin" rendered="#{sessionBean.admin}" styleClass="col-xs-12">
+            <p:outputPanel id="panelUserAdmin" rendered="#{sessionBean.adminRole}" styleClass="col-xs-12">
 
                 <p:panel id="panelUser" style="overflow: hidden;" header="${msg.users}">
                     <div>
@@ -38,7 +38,7 @@
                                 <div class="col-xs-12 col-sm-4">
                                     <p:outputLabel for="role" value="${msg.role}" />
                                     <p:selectOneMenu id="role" value="#{userAdminBean.user.role}" converter="BaseBeanConverter">
-                                        <f:selectItems value="#{userAdminBean.roles}" var="r" itemLabel="#{r.name}" itemValue="#{r}"/>
+                                        <f:selectItems value="#{userAdminBean.roles}" var="r" itemLabel="#{r}" itemValue="#{r}"/>
                                     </p:selectOneMenu>
                                     <p:message for="role" display="tooltip"/>
                                 </div>
@@ -87,8 +87,13 @@
                                         <h:outputText value="#{currentRow.rut}" converter="RutConverter" />
                                     </p:column>
 
-                                    <p:column headerText="${msg.role}" filterBy="#{currentRow.role.name}" filterMatchMode="contains">
-                                        <h:outputText value="#{currentRow.role.name}" />
+                                    <p:column headerText="${msg.role}" filterBy="#{currentRow.role}" filterMatchMode="contains">
+                                        <h:outputText value="#{currentRow.role}" />
+                                    </p:column>
+
+                                    <p:column headerText="${msg.status}" style="text-align: center;">
+                                        <h:outputText value="#{msg.active}" rendered="#{currentRow.active}" />
+                                        <h:outputText value="#{msg.inactive}" rendered="#{!currentRow.active}" />
                                     </p:column>
 
                                     <p:column headerText="${msg.actions}">
@@ -119,12 +124,12 @@
                     </div>
                 </p:panel>
             </p:outputPanel>
-            <p:outputPanel id="panelFunctionaryStaff" rendered="#{sessionBean.staff}" styleClass="col-xs-12">
+            <p:outputPanel id="panelFunctionaryStaff" rendered="#{sessionBean.staffRole}" styleClass="col-xs-12">
                 <div style="text-align:center;">
                     <h1>Error 403</h1><h2>Acceso no permitido</h2>
                 </div>
             </p:outputPanel>
-            <p:outputPanel id="panelFunctionaryGeneral" rendered="#{sessionBean.general}" styleClass="col-xs-12">
+            <p:outputPanel id="panelFunctionaryGeneral" rendered="#{sessionBean.userRole}" styleClass="col-xs-12">
                 <div style="text-align:center;">
                     <h1>Error 403</h1><h2>Acceso no permitido</h2>
                 </div>

@@ -7,7 +7,7 @@
 
     <ui:composition template="/templates/main.xhtml">
         <ui:define name="content">
-            <p:outputPanel id="panelVoucherAmountAdmin" rendered="#{sessionBean.admin || sessionBean.staff}" styleClass="col-xs-12">
+            <p:outputPanel id="panelVoucherAmountAdmin" rendered="#{sessionBean.adminRole || sessionBean.staffRole}" styleClass="col-xs-12">
                 
                 <p:panel id="panelVoucherAmount" style="overflow: hidden;" header="${msg.voucherAmounts}">
                     <div>
@@ -100,7 +100,7 @@
                     </div>
                 </p:panel>
             </p:outputPanel>
-            <p:outputPanel id="panelFunctionaryGeneral" rendered="#{sessionBean.general}" styleClass="col-xs-12">
+            <p:outputPanel id="panelFunctionaryGeneral" rendered="#{sessionBean.userRole}" styleClass="col-xs-12">
                 <div style="text-align:center;">
                     <h1>Error 403</h1><h2>Acceso no permitido</h2>
                 </div>
