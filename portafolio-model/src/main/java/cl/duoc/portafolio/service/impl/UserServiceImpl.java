@@ -2,7 +2,6 @@ package cl.duoc.portafolio.service.impl;
 
 import cl.duoc.portafolio.vo.Role;
 import cl.duoc.portafolio.model.User;
-import cl.duoc.portafolio.repository.RoleRepository;
 import cl.duoc.portafolio.repository.UserRepository;
 import cl.duoc.portafolio.service.UserService;
 import cl.duoc.portafolio.utils.CryptoUtils;
