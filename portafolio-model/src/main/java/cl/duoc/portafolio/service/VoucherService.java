@@ -6,6 +6,7 @@ import cl.duoc.portafolio.model.Sale;
 import cl.duoc.portafolio.model.MealService;
 import cl.duoc.portafolio.model.Voucher;
 import cl.duoc.portafolio.model.VoucherAmount;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,6 +16,8 @@ import java.util.List;
 public interface VoucherService {
     
     public Voucher getVoucher(final Long id);
+    
+    public List<Voucher> getVouchers(final Date date);
     
     public List<Voucher> getVouchers();
     

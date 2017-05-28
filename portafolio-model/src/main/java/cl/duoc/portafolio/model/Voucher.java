@@ -40,6 +40,17 @@ public class Voucher extends BaseBean{
     @JoinColumn(name = "SALE_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Sale sale = null;
+    @JoinColumn(name = "VOUCHERAMOUNT_ID", referencedColumnName = "ID" ,nullable = false)
+    @ManyToOne(optional = false)
+    private VoucherAmount voucherAmount = null;
+
+    public VoucherAmount getVoucherAmount() {
+        return voucherAmount;
+    }
+
+    public void setVoucherAmount(VoucherAmount voucherAmount) {
+        this.voucherAmount = voucherAmount;
+    }
 
     public Long getId() {
         return id;

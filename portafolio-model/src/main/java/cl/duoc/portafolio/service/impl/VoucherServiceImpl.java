@@ -11,6 +11,8 @@ import cl.duoc.portafolio.repository.VoucherRepository;
 import cl.duoc.portafolio.service.VoucherService;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
@@ -47,6 +49,31 @@ public class VoucherServiceImpl implements VoucherService, Serializable {
             LOGGER.debug("Error al obtener vale: {}", e.toString());
         }
         return voucher;
+    }
+
+    @Override
+    public List<Voucher> getVouchers(Date date) {
+        List<Voucher> vouchers = new ArrayList<>();
+        try {
+            if (date != null) {
+                Calendar start = Calendar.getInstance();
+                Calendar end = Calendar.getInstance();
+                start.setTime(date);
+                end.setTime(date);
+
+                start.setTime(date);
+                start.set(start.get(Calendar.YEAR), start.get(Calendar.MONTH), start.get(Calendar.DATE), 0, 0, 0);                
+                end.setTime(date);
+                end.set(end.get(Calendar.YEAR), end.get(Calendar.MONTH), end.get(Calendar.DATE), 23, 59, 59);
+
+                vouchers = voucherRepository.findByDateTimeGreaterAndDateTimeLessThanEqual(start.getTime(), end.getTime());
+            }
+        } catch (Exception e) {
+            vouchers = new ArrayList<>();
+            LOGGER.error("Error al obtener vale: {}", e.toString());
+            LOGGER.debug("Error al obtener vale: {}", e.toString());
+        }
+        return vouchers;
     }
 
     @Override

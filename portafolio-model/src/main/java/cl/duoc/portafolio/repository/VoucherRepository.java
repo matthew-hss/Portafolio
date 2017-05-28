@@ -3,6 +3,7 @@ package cl.duoc.portafolio.repository;
 import cl.duoc.portafolio.model.Functionary;
 import cl.duoc.portafolio.model.Sale;
 import cl.duoc.portafolio.model.Voucher;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,6 +14,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 @Resource(name = "voucherRepository")
 public interface VoucherRepository extends JpaRepository<Voucher, Long>{
+    
+    public List<Voucher> findByDateTimeGreaterAndDateTimeLessThanEqual(Date start, Date end);
     
     public List<Voucher> findByFunctionary(Functionary functionary);
     
