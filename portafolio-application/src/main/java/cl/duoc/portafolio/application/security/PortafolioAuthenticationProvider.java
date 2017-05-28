@@ -1,7 +1,7 @@
 package cl.duoc.portafolio.application.security;
 
-import cl.duoc.portafolio.model.User;
-import cl.duoc.portafolio.service.UserService;
+import cl.duoc.portafolio.model.Functionary;
+import cl.duoc.portafolio.service.FunctionaryService;
 import cl.duoc.portafolio.utils.RutUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +21,8 @@ import org.springframework.stereotype.Service;
 @Service("portafolioAuthenticationProvider")
 public class PortafolioAuthenticationProvider implements AuthenticationProvider {
 
-    @Resource(name = "userService")
-    private UserService userService;
+    @Resource(name = "functionaryService")
+    private FunctionaryService functionaryService;
     private final static String BAD_USER = "Invalid user or password";
     private final static String INVALID_ACCESS = "You do not have privileges to access the system.";
     private final static Logger LOGGER = LoggerFactory.getLogger(PortafolioAuthenticationProvider.class);
@@ -35,23 +35,30 @@ public class PortafolioAuthenticationProvider implements AuthenticationProvider 
         String password = StringUtils.trimToEmpty((String) authentication.getCredentials());
         if (RutUtils.isRut(rutStr) && StringUtils.isNotBlank(password)) {
             Integer rut = RutUtils.parseRut(rutStr);
-            boolean ok = userService.authenticate(rut, password);
+            boolean ok = functionaryService.authenticate(rut, password);
             if (ok) {
-                User user = userService.getUser(rut);
+                Functionary functionary = functionaryService.getFunctionary(Long.parseLong(rut.toString()));
 
                 List<GrantedAuthority> roles = new ArrayList<>();
-                roles.add(new SimpleGrantedAuthority(StringUtils.trimToEmpty(String.format("ROLE_%s", user.getRole().name()))));
-
-                if (!roles.isEmpty()) {
-                    auth = new UsernamePasswordAuthenticationToken(user, password, roles);
-                    if (auth.isAuthenticated()) {
-                        LOGGER.info("Validación correcta para RUT {}", rut);
-                    } else {
-                        throw new BadCredentialsException(BAD_USER);
-                    }
+                roles.add(new SimpleGrantedAuthority(StringUtils.trimToEmpty(String.format("ROLE_%s", "GENERAL"))));
+//                roles.add(new SimpleGrantedAuthority(StringUtils.trimToEmpty(String.format("ROLE_%s", user.getRole().name()))));
+                auth = new UsernamePasswordAuthenticationToken(functionary, password, roles);
+                if (auth.isAuthenticated()) {
+                    LOGGER.info("Validación correcta para RUT {}", rut);
                 } else {
-                    throw new BadCredentialsException(INVALID_ACCESS);
+                    throw new BadCredentialsException(BAD_USER);
                 }
+
+//                if (!roles.isEmpty()) {
+//                    auth = new UsernamePasswordAuthenticationToken(user, password, roles);
+//                    if (auth.isAuthenticated()) {
+//                        LOGGER.info("Validación correcta para RUT {}", rut);
+//                    } else {
+//                        throw new BadCredentialsException(BAD_USER);
+//                    }
+//                } else {
+//                    throw new BadCredentialsException(INVALID_ACCESS);
+//                }
             } else {
                 throw new BadCredentialsException(BAD_USER);
             }

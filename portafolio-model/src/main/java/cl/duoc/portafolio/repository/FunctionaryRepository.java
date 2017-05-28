@@ -16,4 +16,6 @@ public interface FunctionaryRepository extends JpaRepository<Functionary, Long>{
     public List<Functionary> findByJobTitle(JobTitle jobTitle);
     
     public Functionary findByRutAndPassword(Integer rut, String password);
+    
+    public Functionary findByRut(Integer rut);
 }

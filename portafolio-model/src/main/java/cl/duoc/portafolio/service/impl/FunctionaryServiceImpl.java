@@ -349,4 +349,19 @@ public class FunctionaryServiceImpl implements FunctionaryService, Serializable 
         return ok;
     }
 
+    @Override
+    public Functionary getFunctionary(Integer rut) {
+        Functionary functionary = null;
+        try {
+            if (rut != null && rut > 0) {
+                functionary = functionaryRepository.findByRut(rut);
+            }
+        } catch (Exception e) {
+            functionary = null;
+            LOGGER.error("Error al obtener funcionario: {}", e.toString());
+            LOGGER.debug("Error al obtener funcionario: {}", e.toString());
+        }
+        return functionary;
+    }
+
 }

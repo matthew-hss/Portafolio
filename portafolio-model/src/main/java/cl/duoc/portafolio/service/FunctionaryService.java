@@ -14,6 +14,8 @@ public interface FunctionaryService {
     
     public Functionary getFunctionary(final Long id);
     
+    public Functionary getFunctionary(final Integer rut);
+    
     public List<Functionary> getFunctionaries();
     
     public List<Functionary> getFunctionaries(final JobTitle function);
