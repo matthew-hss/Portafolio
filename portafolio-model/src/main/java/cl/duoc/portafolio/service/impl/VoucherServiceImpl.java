@@ -66,7 +66,7 @@ public class VoucherServiceImpl implements VoucherService, Serializable {
                 end.setTime(date);
                 end.set(end.get(Calendar.YEAR), end.get(Calendar.MONTH), end.get(Calendar.DATE), 23, 59, 59);
 
-                vouchers = voucherRepository.findByDateTimeGreaterAndDateTimeLessThanEqual(start.getTime(), end.getTime());
+                vouchers = voucherRepository.findByDateTimeBetween(start.getTime(), end.getTime());
             }
         } catch (Exception e) {
             vouchers = new ArrayList<>();

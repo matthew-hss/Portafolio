@@ -10,14 +10,13 @@ import cl.duoc.portafolio.model.Functionary;
 import cl.duoc.portafolio.model.Voucher;
 import cl.duoc.portafolio.application.utils.FacesUtils;
 import cl.duoc.portafolio.model.MealService;
-import cl.duoc.portafolio.model.VoucherAmount;
 import cl.duoc.portafolio.model.Workshift;
 import cl.duoc.portafolio.model.WsAssignment;
 import cl.duoc.portafolio.service.FunctionaryService;
 import cl.duoc.portafolio.service.SaleService;
 import cl.duoc.portafolio.service.VoucherService;
-import cl.duoc.portafolio.utils.CodeUtils;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,7 +35,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope("view")
-@Qualifier("voucherAdminBean")
+@Qualifier("voucherFunctionaryBean")
 public class VoucherFunctionaryBean implements Serializable {
 
     private static final long serialVersionUID = 559864478748547445L;
@@ -50,138 +49,96 @@ public class VoucherFunctionaryBean implements Serializable {
     @Resource(name = "sessionBean")
     private transient SessionBean sessionBean;
 
+    private List<MealService> mealServices = null;
+    private List<MealService> availableMealServices = null;
+    private MealService selectedMealService = null;
+
     private MealService mealService1 = null;
     private MealService mealService2 = null;
+    private boolean disableMS1 = false;
+    private boolean disableMS2 = false;
 
     private Functionary functionary = null;
     private WsAssignment wsAssignment = null;
     private Workshift workshift = null;
-    private VoucherAmount voucherAmount1 = null;
-    private VoucherAmount voucherAmount2 = null;
-    private List<Voucher> vouchers = null;
-    private Voucher voucher1 = null;
-    private Voucher voucher2 = null;
     private Date today = null;
+
+    private List<Voucher> vouchers = null;
+    private Voucher generatedVoucher = null;
+    private boolean showVoucher = false;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(VoucherFunctionaryBean.class);
 
     @PostConstruct
     public void init() {
-        today = new Date();
+        functionary = sessionBean.getFunctionary();
+        //wsAssignment = functionaryService.getWsAssignment(functionary);
+        //workshift = wsAssignment.getWorkshift();
+        workshift = functionaryService.getWorkshift(Long.parseLong("2"));
+        mealServices = new ArrayList<>();
+        availableMealServices = new ArrayList<>();
         vouchers = new ArrayList<>();
-        loadVouchers();
+        loadMealServices();
+        refresh();
     }
 
     public void loadMealServices() {
-//        Calendar startTime = Calendar.getInstance();
-//        Calendar endTime = Calendar.getInstance();
-//        startTime.setTime(workshift.getStartTime());
-//        endTime.setTime(workshift.getEndTime());
-//        int start = startTime.get(Calendar.HOUR_OF_DAY);
-//        int end = endTime.get(Calendar.HOUR_OF_DAY);
-        if (workshift.getId() == 1) {
-            mealService1 = saleService.getMealService(Long.parseLong("1"));
-            mealService2 = saleService.getMealService(Long.parseLong("2"));
-        } else if (workshift.getId() == 2) {
-            mealService1 = saleService.getMealService(Long.parseLong("3"));
-            mealService2 = saleService.getMealService(Long.parseLong("4"));
-        } else if (workshift.getId() == 3) {
-            mealService1 = saleService.getMealService(Long.parseLong("5"));
-            mealService2 = saleService.getMealService(Long.parseLong("1"));
+        mealServices = saleService.getMealServices();
+        if (!mealServices.isEmpty()) {
+            for (MealService ms : mealServices) {
+                if ((ms.getStartTime().compareTo(workshift.getStartTime()) >= 0
+                        && ms.getStartTime().compareTo(workshift.getEndTime()) < 0)
+                        || (ms.getEndTime().compareTo(workshift.getStartTime()) > 0
+                        && ms.getEndTime().compareTo(workshift.getEndTime()) <= 0)) {
+                    availableMealServices.add(ms);
+                }
+            }
+        }
+        mealService1 = availableMealServices.get(0);
+        mealService2 = availableMealServices.get(1);
+    }
+
+    public void refresh() {
+        today = new Date();
+        vouchers = voucherService.getVouchers(today);
+        for (Voucher v : vouchers) {
+            if (v.getFunctionary().equals(functionary)) {
+                if (v.getCode().substring(10).equals(mealService1.getId().toString())) {
+                    disableMS1 = true;
+                } else if (v.getCode().substring(10).equals(mealService2.getId().toString())) {
+                    disableMS2 = true;
+                }
+            }
         }
     }
 
-    public void loadVouchers() {
-        functionary = sessionBean.getFunctionary();
-        List<Voucher> lista = voucherService.getVouchers(today);
-        if (!vouchers.isEmpty()) {
-            for (Voucher voucher : lista) {
-                if (voucher.getFunctionary() == functionary) {
-                    vouchers.add(voucher);
-                }
-            }
-        } else {
-            wsAssignment = functionaryService.getWsAssignment(functionary);
-            workshift = functionaryService.getWorkshift(wsAssignment.getWorkshift().getId());
-            loadMealServices();
-            voucherAmount1 = voucherService.getVoucherAmount(functionary.getJobTitle(), mealService1);
-            voucherAmount2 = voucherService.getVoucherAmount(functionary.getJobTitle(), mealService2);
-            voucher1 = new Voucher();
-            voucher1.setVoucherAmount(voucherAmount1);
-            voucher2 = new Voucher();
-            voucher2.setVoucherAmount(voucherAmount2);
-        }
-    }
+    public String process() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        Voucher voucher = new Voucher();
 
-    public String process(Voucher voucher) {
-        if (voucher != null) {
-            try {
-                voucher.setCode(CodeUtils.generateCode(6));
-                voucher.setFunctionary(functionary);
-                voucher.setUsed(true);
-                voucher.setSale(null);
-                voucher.setDateTime(new Date());
+        try {
+            String code = sdf.format(today) + "00" + selectedMealService.getId();
+            voucher.setCode(code);
+            voucher.setFunctionary(functionary);
+            voucher.setVoucherAmount(voucherService.getVoucherAmount(functionary.getJobTitle(), selectedMealService));
+            voucher.setUsed(true);
+            voucher.setDateTime(new Date());
 
-                Voucher save = voucherService.save(voucher);
-                if (save != null) {
-                    FacesUtils.infoMessage("voucherPrinted");
-                } else {
-                    FacesUtils.errorMessage("voucherNotPrinted");
-                }
-            } catch (Exception e) {
-                LOGGER.debug("Error al imprimir vale: {}", e.toString(), e);
-                FacesUtils.fatalMessage("voucherNotPrinted");
+            generatedVoucher = voucherService.save(voucher);
+
+            if (generatedVoucher != null) {
+                refresh();
+                showVoucher = true;
+                FacesUtils.infoMessage("voucherPrinted");
+            } else {
+                FacesUtils.errorMessage("voucherNotPrinted");
             }
+        } catch (Exception e) {
+            LOGGER.debug("Error al imprimir vale: {}", e.toString(), e);
+            FacesUtils.fatalMessage("voucherNotPrinted");
         }
+        
         return StringUtils.EMPTY;
-    }
-
-    public VoucherService getVoucherService() {
-        return voucherService;
-    }
-
-    public void setVoucherService(VoucherService voucherService) {
-        this.voucherService = voucherService;
-    }
-
-    public FunctionaryService getFunctionaryService() {
-        return functionaryService;
-    }
-
-    public void setFunctionaryService(FunctionaryService functionaryService) {
-        this.functionaryService = functionaryService;
-    }
-
-    public SaleService getSaleService() {
-        return saleService;
-    }
-
-    public void setSaleService(SaleService saleService) {
-        this.saleService = saleService;
-    }
-
-    public SessionBean getSessionBean() {
-        return sessionBean;
-    }
-
-    public void setSessionBean(SessionBean sessionBean) {
-        this.sessionBean = sessionBean;
-    }
-
-    public MealService getMealService1() {
-        return mealService1;
-    }
-
-    public void setMealService1(MealService mealService1) {
-        this.mealService1 = mealService1;
-    }
-
-    public MealService getMealService2() {
-        return mealService2;
-    }
-
-    public void setMealService2(MealService mealService2) {
-        this.mealService2 = mealService2;
     }
 
     public Functionary getFunctionary() {
@@ -208,46 +165,6 @@ public class VoucherFunctionaryBean implements Serializable {
         this.workshift = workshift;
     }
 
-    public VoucherAmount getVoucherAmount1() {
-        return voucherAmount1;
-    }
-
-    public void setVoucherAmount1(VoucherAmount voucherAmount1) {
-        this.voucherAmount1 = voucherAmount1;
-    }
-
-    public VoucherAmount getVoucherAmount2() {
-        return voucherAmount2;
-    }
-
-    public void setVoucherAmount2(VoucherAmount voucherAmount2) {
-        this.voucherAmount2 = voucherAmount2;
-    }
-
-    public List<Voucher> getVouchers() {
-        return vouchers;
-    }
-
-    public void setVouchers(List<Voucher> vouchers) {
-        this.vouchers = vouchers;
-    }
-
-    public Voucher getVoucher1() {
-        return voucher1;
-    }
-
-    public void setVoucher1(Voucher voucher1) {
-        this.voucher1 = voucher1;
-    }
-
-    public Voucher getVoucher2() {
-        return voucher2;
-    }
-
-    public void setVoucher2(Voucher voucher2) {
-        this.voucher2 = voucher2;
-    }
-
     public Date getToday() {
         return today;
     }
@@ -256,5 +173,68 @@ public class VoucherFunctionaryBean implements Serializable {
         this.today = today;
     }
 
-    
+    public List<MealService> getAvailableMealServices() {
+        return availableMealServices;
+    }
+
+    public void setAvailableMealServices(List<MealService> availableMealServices) {
+        this.availableMealServices = availableMealServices;
+    }
+
+    public MealService getSelectedMealService() {
+        return selectedMealService;
+    }
+
+    public void setSelectedMealService(MealService selectedMealService) {
+        this.selectedMealService = selectedMealService;
+    }
+
+    public MealService getMealService1() {
+        return mealService1;
+    }
+
+    public void setMealService1(MealService mealService1) {
+        this.mealService1 = mealService1;
+    }
+
+    public MealService getMealService2() {
+        return mealService2;
+    }
+
+    public void setMealService2(MealService mealService2) {
+        this.mealService2 = mealService2;
+    }
+
+    public boolean isDisableMS1() {
+        return disableMS1;
+    }
+
+    public void setDisableMS1(boolean disableMS1) {
+        this.disableMS1 = disableMS1;
+    }
+
+    public boolean isDisableMS2() {
+        return disableMS2;
+    }
+
+    public void setDisableMS2(boolean disableMS2) {
+        this.disableMS2 = disableMS2;
+    }
+
+    public Voucher getGeneratedVoucher() {
+        return generatedVoucher;
+    }
+
+    public void setGeneratedVoucher(Voucher generatedVoucher) {
+        this.generatedVoucher = generatedVoucher;
+    }
+
+    public boolean isShowVoucher() {
+        return showVoucher;
+    }
+
+    public void setShowVoucher(boolean showVoucher) {
+        this.showVoucher = showVoucher;
+    }
+
 }

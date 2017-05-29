@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope("view")
-@Qualifier("voucherAmountAdminBean")
+@Qualifier("voucherAmountFunctionaryBean")
 public class VoucherAmountFunctionaryBean implements Serializable {
 
     private static final long serialVersionUID = 559864478748451255L;

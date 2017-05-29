@@ -125,6 +125,10 @@ button:hover,input[type="submit"]:hover{
     cursor: pointer;
 }
 
+button.ui-state-disabled,input[type="submit"].ui-state-disabled{
+    background: #999999;
+}
+
 .clear{clear:both;}
 
 .oculto{display:none !important;}

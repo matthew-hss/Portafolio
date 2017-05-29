@@ -15,7 +15,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @Resource(name = "voucherRepository")
 public interface VoucherRepository extends JpaRepository<Voucher, Long>{
     
-    public List<Voucher> findByDateTimeGreaterAndDateTimeLessThanEqual(Date start, Date end);
+    public List<Voucher> findByDateTimeBetween(Date start, Date end);
     
     public List<Voucher> findByFunctionary(Functionary functionary);
     

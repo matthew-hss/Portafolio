@@ -22,7 +22,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "WSASSIGNMENT",schema = "PORTAFOLIO")
 public class WsAssignment extends BaseBean{
-    private static final long serialVersionUID = 7226055427557870592L;
+    
+    private static final long serialVersionUID = 7226076547557870592L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "wsassignment_seq_gen")

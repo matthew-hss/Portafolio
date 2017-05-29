@@ -37,10 +37,10 @@ public class PortafolioAuthenticationProvider implements AuthenticationProvider 
             Integer rut = RutUtils.parseRut(rutStr);
             boolean ok = functionaryService.authenticate(rut, password);
             if (ok) {
-                Functionary functionary = functionaryService.getFunctionary(Long.parseLong(rut.toString()));
+                Functionary functionary = functionaryService.getFunctionary(rut);
 
                 List<GrantedAuthority> roles = new ArrayList<>();
-                roles.add(new SimpleGrantedAuthority(StringUtils.trimToEmpty(String.format("ROLE_%s", "GENERAL"))));
+                roles.add(new SimpleGrantedAuthority(StringUtils.trimToEmpty(String.format("ROLE_%s", "USER"))));
 //                roles.add(new SimpleGrantedAuthority(StringUtils.trimToEmpty(String.format("ROLE_%s", user.getRole().name()))));
                 auth = new UsernamePasswordAuthenticationToken(functionary, password, roles);
                 if (auth.isAuthenticated()) {
