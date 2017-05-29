@@ -1,11 +1,8 @@
 package cl.duoc.portafolio.portal.jsf.admin;
 
-import cl.duoc.portafolio.model.Functionary;
 import cl.duoc.portafolio.model.JobTitle;
 import cl.duoc.portafolio.model.MealService;
 import cl.duoc.portafolio.model.VoucherAmount;
-import cl.duoc.portafolio.model.Workshift;
-import cl.duoc.portafolio.model.WsAssignment;
 import cl.duoc.portafolio.portal.utils.FacesUtils;
 import cl.duoc.portafolio.service.FunctionaryService;
 import cl.duoc.portafolio.service.SaleService;
