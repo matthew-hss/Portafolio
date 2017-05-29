@@ -186,6 +186,7 @@ button.ui-state-disabled,input[type="submit"].ui-state-disabled{
 
 .ui-messages{
     margin-top: 10px;
+    position: relative;
 }
 
 .ui-messages li{
@@ -489,8 +490,8 @@ input.hasDatepicker{
     content:"\f00d";
     font-family: FontAwesome;
     position: absolute;
-    top: 15px;
-    right: 20px;
+    top: 0px;
+    right: 5px;
     color: #333333;
 }
 

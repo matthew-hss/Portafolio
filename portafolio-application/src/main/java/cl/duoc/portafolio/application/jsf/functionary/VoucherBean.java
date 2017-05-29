@@ -72,9 +72,9 @@ public class VoucherBean implements Serializable {
     @PostConstruct
     public void init() {
         functionary = sessionBean.getFunctionary();
-        //wsAssignment = functionaryService.getWsAssignment(functionary);
-        //workshift = wsAssignment.getWorkshift();
-        workshift = functionaryService.getWorkshift(Long.parseLong("2"));
+        wsAssignment = functionaryService.getWsAssignment(functionary);
+        workshift = wsAssignment.getWorkshift();
+        //workshift = functionaryService.getWorkshift(Long.parseLong("2"));
         mealServices = new ArrayList<>();
         availableMealServices = new ArrayList<>();
         vouchers = new ArrayList<>();

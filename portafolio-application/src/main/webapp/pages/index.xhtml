@@ -20,17 +20,20 @@
                             <p:commandButton value="#{voucherBean.mealService2.product.name}" action="#{voucherBean.process}" disabled="#{voucherBean.disableMS2}" update=":voucherForm :voucherPanel">
                                 <f:setPropertyActionListener value="#{voucherBean.mealService2}" target="#{voucherBean.selectedMealService}" />
                             </p:commandButton>
-                            <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+                            
+                            <div><p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" /></div>
                         </h:form>
                     </p:outputPanel>
-                    <p:outputPanel style="padding-top: 11px;" styleClass="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4" rendered="#{voucherBean.showVoucher}">
+                    <p:outputPanel style="padding-top: 11px;" styleClass="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
                         <h:form id="voucherPanel" prependId="false">
-                            <h2>
-                                <h:outputText value="VOUCHER" />
-                            </h2>
-                            <p:outputLabel value="#{voucherBean.generatedVoucher.functionary.name}" /><br/>
-                            <p:outputLabel value="Monto: $#{voucherBean.generatedVoucher.voucherAmount.amount}" /><br/>
-                            <p:outputLabel value="Código: #{voucherBean.generatedVoucher.code}" />
+                            <p:outputPanel rendered="#{voucherBean.showVoucher}">
+                                <h2>
+                                    <h:outputText value="VOUCHER" />
+                                </h2>
+                                <p:outputLabel value="#{voucherBean.generatedVoucher.functionary.name} #{voucherBean.generatedVoucher.functionary.surname}" /><br/>
+                                <p:outputLabel value="Monto: $#{voucherBean.generatedVoucher.voucherAmount.amount}" /><br/>
+                                <p:outputLabel value="Código: #{voucherBean.generatedVoucher.code}" />
+                            </p:outputPanel>
                         </h:form>
                     </p:outputPanel>
                 </div>

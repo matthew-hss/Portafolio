@@ -125,6 +125,10 @@ button:hover,input[type="submit"]:hover{
     cursor: pointer;
 }
 
+button.ui-state-disabled,input[type="submit"].ui-state-disabled{
+    background: #999999;
+}
+
 .clear{clear:both;}
 
 .oculto{display:none !important;}
@@ -182,6 +186,7 @@ button:hover,input[type="submit"]:hover{
 
 .ui-messages{
     margin-top: 10px;
+    position: relative;
 }
 
 .ui-messages li{
@@ -385,7 +390,7 @@ input.ui-state-error, .ui-widget-content input.ui-state-error, .ui-widget-header
 }
 
 #header #menuBar .ui-menubar .ui-menuitem-link.ui-state-hover .ui-icon {
-    background-image: url(/portal/javax.faces.resource/images/ui-icons_222222_256x240.png.jsf?ln=primefaces-home);
+    background-image: url(/application/javax.faces.resource/images/ui-icons_222222_256x240.png.jsf?ln=primefaces-home);
 }
 
 
@@ -485,8 +490,8 @@ input.hasDatepicker{
     content:"\f00d";
     font-family: FontAwesome;
     position: absolute;
-    top: 15px;
-    right: 20px;
+    top: 0px;
+    right: 5px;
     color: #333333;
 }
 
