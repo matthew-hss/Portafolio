@@ -7,7 +7,6 @@ cl/duoc/portafolio/application/vo/LoadVO.class
 cl/duoc/portafolio/application/vo/google/GeoCodeGoogleVO.class
 cl/duoc/portafolio/application/jsf/ViewScope.class
 cl/duoc/portafolio/application/security/PortafolioAuthenticationProvider.class
-cl/duoc/portafolio/application/jsf/functionary/VoucherFunctionaryBean.class
 cl/duoc/portafolio/application/jsf/SessionBean.class
 cl/duoc/portafolio/application/converter/TruncateConverter.class
 cl/duoc/portafolio/application/vo/google/Geometry.class
@@ -24,7 +23,6 @@ cl/duoc/portafolio/application/vo/google/Northeast.class
 cl/duoc/portafolio/application/utils/ImageUtils.class
 cl/duoc/portafolio/application/jsf/functionary/VoucherBean.class
 cl/duoc/portafolio/application/vo/google/Viewport.class
-cl/duoc/portafolio/application/jsf/functionary/VoucherAmountFunctionaryBean.class
 cl/duoc/portafolio/application/converter/TimeCLConverter.class
 cl/duoc/portafolio/application/converter/TrimConverter.class
 cl/duoc/portafolio/application/jsf/LoginBean.class
