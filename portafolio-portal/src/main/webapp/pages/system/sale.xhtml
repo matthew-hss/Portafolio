@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/templates/main.xhtml">
+        <ui:define name="content">
+            <p:outputPanel id="panelSaleAdmin" rendered="#{sessionBean.adminRole || sessionBean.staffRole}" styleClass="col-xs-12">
+                
+                <p:panel id="panelSale" style="overflow: hidden;" header="${msg.sales}">
+                    <div>
+                        <p:outputPanel id="panelForm" >
+                            <h:form id="formSale" enctype="multipart/form-data">
+                                <div class="col-xs-12">
+                                    <h2>
+                                        <h:outputText value="${msg.add}" rendered="#{!saleAdminBean.edit}" />
+                                        <h:outputText value="${msg.edit}" rendered="#{saleAdminBean.edit}" />
+                                    </h2>
+                                </div>
+                                <div class="col-xs-12 col-sm-4 col-sm-offset-right-8">
+                                    <p:outputLabel for="place" value="${msg.place}" />
+                                    <p:selectOneMenu id="place" value="#{saleAdminBean.sale.place}" converter="BaseBeanConverter">
+                                        <f:selectItem itemLabel="${msg.selectPlace}" noSelectionOption="true" value="#{null}"/>
+                                        <f:selectItems value="#{saleAdminBean.places}" var="sale" itemLabel="#{sale.name}" itemValue="#{sale}"/>
+                                    </p:selectOneMenu>
+                                    <p:message for="place" display="tooltip"/>
+                                </div>
+                                <div class="col-xs-12 col-sm-4">
+                                    <p:outputLabel value="${msg.product}" />
+                                </div>
+                                <div class="col-xs-12 col-sm-4 col-sm-offset-right-4">
+                                    <p:outputLabel value="${msg.quantity}" />
+                                </div>
+                                <ui:repeat value="#{saleAdminBean.saleItems}" var="saleItem">
+                                    <div class="col-xs-12 col-sm-4">
+                                        <p:selectOneMenu id="product" value="#{saleItem.product}" converter="BaseBeanConverter">
+                                            <f:selectItem itemLabel="${msg.selectProduct}" noSelectionOption="true" value="#{null}"/>
+                                            <f:selectItems value="#{saleAdminBean.products}" var="product" itemLabel="#{product.name}" itemValue="#{product}"/>
+                                        </p:selectOneMenu>
+                                        <p:message for="product" display="tooltip"/>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <p:inputNumber id="quantity" value="#{saleItem.quantity}" />
+                                        <p:message for="quantity" display="tooltip"/>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <p:commandButton styleClass="circleButton" action="#{saleAdminBean.addItem}" value="+" update=":formSale" rendered="#{saleAdminBean.saleItems.indexOf(saleItem) < 3}" />
+                                        <p:commandButton styleClass="circleButton cancelButton" action="#{saleAdminBean.removeItem}" value="-" update=":formSale" rendered="#{saleAdminBean.saleItems.size() > 1 }">
+                                             <f:setPropertyActionListener value="#{saleItem}" target="#{saleAdminBean.selectedSaleItem}" />
+                                        </p:commandButton>
+                                    </div>
+                                </ui:repeat>
+                                <p:outputPanel class="col-xs-6 col-sm-4 col-sm-offset-right-8" rendered="#{!saleAdminBean.edit}">
+                                    <p:commandButton action="#{saleAdminBean.process}" value="${msg.add}" update=":formSale :panelData" />
+                                </p:outputPanel>
+                                <p:outputPanel class="col-xs-6 col-sm-4" rendered="#{saleAdminBean.edit}">
+                                    <p:commandButton action="#{saleAdminBean.process}" value="${msg.save}" update=":formSale :panelData" />
+                                </p:outputPanel>
+                                <p:outputPanel class="col-xs-6 col-sm-4 col-sm-offset-right-4" rendered="#{saleAdminBean.edit}">
+                                    <p:commandButton styleClass="cancelButton" action="#{saleAdminBean.cancel}" value="${msg.cancel}" update=":formSale :panelData" />
+                                </p:outputPanel>
+                                <div class="col-xs-12 col-sm-6 col-sm-offset-right-3 col-sm-offset-3">
+                                    <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+                                </div>
+                            </h:form>
+                        </p:outputPanel>
+                    </div>
+                    <div class="col-xs-12">
+                        <p:outputPanel id="panelData">
+                            <h:form>
+                                <p:dataTable value="#{saleAdminBean.sales}" var="currentRow" rows="10" paginator="true" paginatorPosition="bottom">
+                                    <p:column headerText="${msg.product}" filterBy="#{currentRow.product.name}" filterMatchMode="contains">
+                                        <h:outputText value="#{currentRow.product.name}" />
+                                    </p:column>
+
+                                    <p:column headerText="${msg.startTime}" style="text-align: center;" filterBy="#{currentRow.startTime}" filterMatchMode="contains">
+                                        <h:outputText value="#{currentRow.startTime}">
+                                            <f:convertDateTime pattern="HH:mm" timeZone="America/Santiago" />
+                                        </h:outputText>
+                                    </p:column>
+
+                                    <p:column headerText="${msg.endTime}" style="text-align: center;" filterBy="#{currentRow.endTime}" filterMatchMode="contains">
+                                        <h:outputText value="#{currentRow.endTime}" >
+                                            <f:convertDateTime pattern="HH:mm" timeZone="America/Santiago"  />
+                                        </h:outputText>
+                                    </p:column>
+
+                                    <p:column headerText="${msg.actions}">
+                                        <p:commandLink ajax="false" update=":formSale :panelData" actionListener="#{saleAdminBean.edit}" title="${msg.edit}">
+                                            <f:setPropertyActionListener value="#{currentRow}" target="#{saleAdminBean.sale}" />
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </p:commandLink>
+
+                                        <p:commandLink title="${msg.delete}">
+                                            <f:setPropertyActionListener value="#{currentRow}" target="#{saleAdminBean.sale}"/>
+                                            <p:ajax event="click" oncomplete="PF('deletePopUp').show();" />
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </p:commandLink>
+                                    </p:column>    
+                                </p:dataTable>
+
+                                <p:dialog id="deleteDialog" widgetVar="deletePopUp" header="${msg.delete}" modal="true">
+                                    <h:outputText value="${msg.deleteSale}" />
+                                    <p:commandButton value="${msg.yes}" action="#{saleAdminBean.delete}" update=":formSale :panelData" />
+
+                                    <p:commandButton value="${msg.no}" styleClass="cancelButton">
+                                        <p:ajax event="click" oncomplete="PF('deletePopUp').hide();" />
+                                    </p:commandButton>
+                                </p:dialog>
+
+                            </h:form>
+                        </p:outputPanel>        
+                    </div>
+                </p:panel>
+            </p:outputPanel>
+            <p:outputPanel id="panelFunctionaryGeneral" rendered="#{sessionBean.userRole}" styleClass="col-xs-12">
+                <div style="text-align:center;">
+                    <h1>Error 403</h1><h2>Acceso no permitido</h2>
+                </div>
+            </p:outputPanel>
+        </ui:define>
+    </ui:composition>
+</html>

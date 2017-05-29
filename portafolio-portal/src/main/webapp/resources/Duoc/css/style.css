@@ -116,6 +116,12 @@ button,input[type="submit"]{
     margin-top: 1rem !important;
 }
 
+button.circleButton,input[type="submit"].circleButton{
+    margin-top: 0 !important;
+    width: 42px !important;
+    margin-right: 10px !important;
+}
+
 button.cancelButton,input[type="submit"].cancelButton{
     background: #b94a48;
 }

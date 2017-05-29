@@ -8,6 +8,7 @@ package cl.duoc.portafolio.portal.jsf.admin;
 import cl.duoc.portafolio.model.Place;
 import cl.duoc.portafolio.model.Product;
 import cl.duoc.portafolio.model.Sale;
+import cl.duoc.portafolio.model.SaleItem;
 import cl.duoc.portafolio.model.Voucher;
 import cl.duoc.portafolio.portal.utils.FacesUtils;
 import cl.duoc.portafolio.service.SaleService;
@@ -41,9 +42,12 @@ public class SaleAdminBean implements Serializable {
     private transient VoucherService voucherService;
     
     private List<Sale> sales = null;
+    private List<SaleItem> saleItems = null;
     private List<Place> places = null;
     private List<Voucher> vouchers = null;
+    private List<Product> products = null;
     private Sale sale = null;
+    private SaleItem selectedSaleItem = null;
     private boolean edit = false;
     
     private static final Logger LOGGER = LoggerFactory.getLogger(SaleAdminBean.class);
@@ -52,13 +56,27 @@ public class SaleAdminBean implements Serializable {
     public void init() {
         places = saleService.getPlaces();
         vouchers = voucherService.getVouchers();
+        products = saleService.getProducts();
         refresh();
     }
     
     public void refresh() {
         sale = new Sale();
         sales = saleService.getSales();
+        //saleItems = saleService.getSaleItems();
+        saleItems = new ArrayList<>(); 
+        saleItems.add(new SaleItem());
         edit = false;
+    }
+    
+    public String addItem() {
+        saleItems.add(new SaleItem());
+        return StringUtils.EMPTY;
+    }
+    
+    public String removeItem() {
+        saleItems.remove(selectedSaleItem);
+        return StringUtils.EMPTY;
     }
     
     public String edit() {
@@ -139,6 +157,30 @@ public class SaleAdminBean implements Serializable {
 
     public void setPlaces(List<Place> places) {
         this.places = places;
+    }
+
+    public List<SaleItem> getSaleItems() {
+        return saleItems;
+    }
+
+    public void setSaleItems(List<SaleItem> saleItems) {
+        this.saleItems = saleItems;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public SaleItem getSelectedSaleItem() {
+        return selectedSaleItem;
+    }
+
+    public void setSelectedSaleItem(SaleItem selectedSaleItem) {
+        this.selectedSaleItem = selectedSaleItem;
     }
     
     
