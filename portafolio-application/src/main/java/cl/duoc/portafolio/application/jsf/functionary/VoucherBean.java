@@ -103,9 +103,9 @@ public class VoucherBean implements Serializable {
         vouchers = voucherService.getVouchers(today);
         for (Voucher v : vouchers) {
             if (v.getFunctionary().equals(functionary)) {
-                if (v.getCode().substring(10).equals(mealService1.getId().toString())) {
+                if (v.getCode().substring(10).equals(mealService1.getId().toString()+functionary.getId())) {
                     disableMS1 = true;
-                } else if (v.getCode().substring(10).equals(mealService2.getId().toString())) {
+                } else if (v.getCode().substring(10).equals(mealService2.getId().toString()+functionary.getId())) {
                     disableMS2 = true;
                 }
             }
@@ -117,7 +117,7 @@ public class VoucherBean implements Serializable {
         Voucher voucher = new Voucher();
 
         try {
-            String code = sdf.format(today) + "00" + selectedMealService.getId();
+            String code = sdf.format(today) + "00" + selectedMealService.getId() + functionary.getId();
             voucher.setCode(code);
             voucher.setFunctionary(functionary);
             voucher.setVoucherAmount(voucherService.getVoucherAmount(functionary.getJobTitle(), selectedMealService));

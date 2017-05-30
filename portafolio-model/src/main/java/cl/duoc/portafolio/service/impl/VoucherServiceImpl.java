@@ -53,6 +53,21 @@ public class VoucherServiceImpl implements VoucherService, Serializable {
     }
 
     @Override
+    public Voucher getVoucher(String code) {
+        Voucher voucher = null;
+        try {
+            if (!code.isEmpty()) {
+                voucher = voucherRepository.findByCode(code);
+            }
+        } catch (Exception e) {
+            voucher = null;
+            LOGGER.error("Error al obtener vale: {}", e.toString());
+            LOGGER.debug("Error al obtener vale: {}", e.toString());
+        }
+        return voucher;
+    }
+
+    @Override
     public List<Voucher> getVouchers(Date date) {
         List<Voucher> vouchers = new ArrayList<>();
         try {

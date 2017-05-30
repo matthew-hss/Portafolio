@@ -17,6 +17,8 @@ public interface VoucherService {
     
     public Voucher getVoucher(final Long id);
     
+    public Voucher getVoucher(final String code);
+    
     public List<Voucher> getVouchers(final Date date);
     
     public List<Voucher> getVouchers();

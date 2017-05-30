@@ -19,6 +19,8 @@ public interface VoucherRepository extends JpaRepository<Voucher, Long>{
     
     public List<Voucher> findByFunctionary(Functionary functionary);
     
+    public Voucher findByCode(String code);
+    
     public List<Voucher> findBySale(Sale sale);
     
 }

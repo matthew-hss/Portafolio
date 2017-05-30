@@ -33,86 +33,118 @@ import org.springframework.stereotype.Component;
 @Scope("view")
 @Qualifier("saleAdminBean")
 public class SaleAdminBean implements Serializable {
-    
+
     private static final long serialVersionUID = 559864478745473255L;
-    
+
     @Resource(name = "saleService")
     private transient SaleService saleService;
     @Resource(name = "voucherService")
     private transient VoucherService voucherService;
-    
+
     private List<Sale> sales = null;
     private List<SaleItem> saleItems = null;
     private List<Place> places = null;
-    private List<Voucher> vouchers = null;
     private List<Product> products = null;
+    private Voucher voucher = null;
     private Sale sale = null;
+    private SaleItem newSaleItem = null;
     private SaleItem selectedSaleItem = null;
-    private boolean edit = false;
-    
+    private SaleItem lastSaleItem = null;
+    private String voucherCode = null;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(SaleAdminBean.class);
-    
+
     @PostConstruct
     public void init() {
         places = saleService.getPlaces();
-        vouchers = voucherService.getVouchers();
         products = saleService.getProducts();
         refresh();
     }
-    
+
     public void refresh() {
         sale = new Sale();
         sales = saleService.getSales();
         //saleItems = saleService.getSaleItems();
-        saleItems = new ArrayList<>(); 
-        saleItems.add(new SaleItem());
-        edit = false;
+        saleItems = new ArrayList<>();
+        newSaleItem = new SaleItem();
+        newSaleItem.setSale(sale);
+        saleItems.add(newSaleItem);
     }
-    
+
     public String addItem() {
-        saleItems.add(new SaleItem());
+        lastSaleItem = saleItems.get(saleItems.size() - 1);
+        if (lastSaleItem.getProduct() != null && lastSaleItem.getQuantity() > 0) {
+            newSaleItem = new SaleItem();
+            newSaleItem.setSale(sale);
+            saleItems.add(newSaleItem);
+        }
         return StringUtils.EMPTY;
     }
-    
+
     public String removeItem() {
         saleItems.remove(selectedSaleItem);
         return StringUtils.EMPTY;
     }
-    
-    public String edit() {
-        edit = true;
-        return StringUtils.EMPTY;
-    }
-    
+
     public String process() {
         if (sale != null) {
             try {
-                Sale save = saleService.save(sale);
-                if (save != null) {
-                    refresh();
-                    FacesUtils.infoMessage("saleSaved");                    
+                lastSaleItem = saleItems.get(saleItems.size() - 1);
+                if (lastSaleItem.getProduct() != null && lastSaleItem.getQuantity() > 0) {
+                    Integer total = 0;
+                    for (SaleItem s : saleItems) {
+                        total += s.getQuantity() * s.getProduct().getPrice();
+                    }
+
+                    if (!voucherCode.trim().equals("")) {
+                        voucher = voucherService.getVoucher(voucherCode);
+                        if (voucher != null && voucher.getSale() == null) {
+                            sale.setVoucher(voucher);
+                            total -= Integer.parseInt(voucher.getVoucherAmount().getAmount().toString());
+                            if (total < 0) {
+                                total = 0;
+                            }
+                            sale.setTotal(Long.parseLong(total.toString()));
+                            Sale save = saleService.save(sale);
+                            if (save != null) {
+                                voucher.setSale(save);
+                                Voucher voucherUpdated = voucherService.save(voucher);
+                                if (voucherUpdated != null) {
+                                    FacesUtils.infoMessage("voucherUsed");
+                                }
+                                SaleItem saveItem = null;
+                                for (SaleItem s : saleItems) {
+                                    s.setSale(save);
+                                    saveItem = saleService.save(s);
+                                }
+                                refresh();
+                                FacesUtils.infoMessage("saleSaved");
+                            } else {
+                                FacesUtils.errorMessage("saleNotSaved");
+                            }
+                        } else {
+                            FacesUtils.errorMessage("voucherNotAvailable");
+                        }
+                    } else {
+                        sale.setTotal(Long.parseLong(total.toString()));
+                        Sale save = saleService.save(sale);
+                        if (save != null) {
+                            SaleItem saveItem = null;
+                            for (SaleItem s : saleItems) {
+                                s.setSale(save);
+                                saveItem = saleService.save(s);
+                            }
+                            refresh();
+                            FacesUtils.infoMessage("saleSaved");
+                        } else {
+                            FacesUtils.errorMessage("saleNotSaved");
+                        }
+                    }
                 } else {
                     FacesUtils.errorMessage("saleNotSaved");
-                }                
+                }
             } catch (Exception e) {
                 LOGGER.debug("Error al guardar venta: {}", e.toString(), e);
-                FacesUtils.fatalMessage("saleNotSaved");
-            }            
-        }
-        return StringUtils.EMPTY;
-    }
-    
-    public String delete(){
-        if(sale != null){
-            try {
-                boolean ok = saleService.delete(sale);
-                if(ok){
-                    refresh();
-                    FacesUtils.infoMessage("saleDeleted");                    
-                }else
-                    FacesUtils.errorMessage("saleNotDeleted");
-            } catch (Exception e) {
-                LOGGER.debug("Error al eliminar venta: {}", e.toString(), e);
                 FacesUtils.fatalMessage("saleNotSaved");
             }
         }
@@ -125,14 +157,6 @@ public class SaleAdminBean implements Serializable {
 
     public void setSales(List<Sale> sales) {
         this.sales = sales;
-    }   
-
-    public List<Voucher> getVouchers() {
-        return vouchers;
-    }
-
-    public void setVouchers(List<Voucher> vouchers) {
-        this.vouchers = vouchers;
     }
 
     public Sale getSale() {
@@ -141,14 +165,6 @@ public class SaleAdminBean implements Serializable {
 
     public void setSale(Sale sale) {
         this.sale = sale;
-    }
-
-    public boolean isEdit() {
-        return edit;
-    }
-
-    public void setEdit(boolean edit) {
-        this.edit = edit;
     }
 
     public List<Place> getPlaces() {
@@ -182,6 +198,37 @@ public class SaleAdminBean implements Serializable {
     public void setSelectedSaleItem(SaleItem selectedSaleItem) {
         this.selectedSaleItem = selectedSaleItem;
     }
-    
-    
+
+    public SaleItem getNewSaleItem() {
+        return newSaleItem;
+    }
+
+    public void setNewSaleItem(SaleItem newSaleItem) {
+        this.newSaleItem = newSaleItem;
+    }
+
+    public SaleItem getLastSaleItem() {
+        return lastSaleItem;
+    }
+
+    public void setLastSaleItem(SaleItem lastSaleItem) {
+        this.lastSaleItem = lastSaleItem;
+    }
+
+    public String getVoucherCode() {
+        return voucherCode;
+    }
+
+    public void setVoucherCode(String voucherCode) {
+        this.voucherCode = voucherCode;
+    }
+
+    public Voucher getVoucher() {
+        return voucher;
+    }
+
+    public void setVoucher(Voucher voucher) {
+        this.voucher = voucher;
+    }
+
 }
