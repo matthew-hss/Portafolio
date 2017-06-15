@@ -1,6 +1,7 @@
 package cl.duoc.portafolio.application.jsf;
 
 import cl.duoc.portafolio.application.utils.FacesUtils;
+import cl.duoc.portafolio.model.WsAssignment;
 import cl.duoc.portafolio.service.FunctionaryService;
 import java.io.Serializable;
 import javax.annotation.Resource;
@@ -39,16 +40,21 @@ public class LoginBean implements Serializable {
             if (rut != null && StringUtils.isNotBlank(password)) {
                 boolean ok = functionaryService.authenticate(rut, password);
                 if (ok) {
-                    ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+                    WsAssignment wsa = functionaryService.getWsAssignment(functionaryService.getFunctionary(rut));
+                    if (wsa != null) {
+                        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
 
-                    String redireccion = "/login";
-                    LOGGER.debug("Redirección: '{}'", redireccion);
+                        String redireccion = "/login";
+                        LOGGER.debug("Redirección: '{}'", redireccion);
 
-                    RequestDispatcher dispatcher = ((ServletRequest) context.getRequest()).getRequestDispatcher(redireccion);
-                    dispatcher.forward((ServletRequest) context.getRequest(),
-                            (ServletResponse) context.getResponse());
+                        RequestDispatcher dispatcher = ((ServletRequest) context.getRequest()).getRequestDispatcher(redireccion);
+                        dispatcher.forward((ServletRequest) context.getRequest(),
+                                (ServletResponse) context.getResponse());
 
-                    FacesContext.getCurrentInstance().responseComplete();
+                        FacesContext.getCurrentInstance().responseComplete();
+                    }else{
+                        FacesUtils.errorMessage("wsaError");
+                    }
                 } else {
                     FacesUtils.errorMessage("invalidLogin");
                 }

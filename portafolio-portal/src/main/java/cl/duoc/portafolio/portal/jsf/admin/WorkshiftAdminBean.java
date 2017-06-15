@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -52,6 +53,9 @@ public class WorkshiftAdminBean implements Serializable {
     public String process() {
         if (workshift != null) {
             try {
+                if(workshift.getEndTime().before(workshift.getStartTime())){
+                    workshift.setEndTime(DateUtils.addDays(workshift.getEndTime(), 1));
+                }
                 Workshift save = functionaryService.save(workshift);
                 if (save != null) {
                     refresh();

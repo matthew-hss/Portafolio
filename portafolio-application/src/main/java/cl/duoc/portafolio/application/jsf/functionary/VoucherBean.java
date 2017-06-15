@@ -83,9 +83,9 @@ public class VoucherBean implements Serializable {
     }
 
     public void loadMealServices() {
-        mealServices = saleService.getMealServices();
+        mealServices = saleService.getMealServices();        
         if (!mealServices.isEmpty()) {
-            for (MealService ms : mealServices) {
+            for (MealService ms : mealServices) {                
                 if ((ms.getStartTime().compareTo(workshift.getStartTime()) >= 0
                         && ms.getStartTime().compareTo(workshift.getEndTime()) < 0)
                         || (ms.getEndTime().compareTo(workshift.getStartTime()) > 0
@@ -103,9 +103,9 @@ public class VoucherBean implements Serializable {
         vouchers = voucherService.getVouchers(today);
         for (Voucher v : vouchers) {
             if (v.getFunctionary().equals(functionary)) {
-                if (v.getCode().substring(10).equals(mealService1.getId().toString()+functionary.getId())) {
+                if (v.getCode().substring(10).equals(mealService1.getId().toString() + functionary.getId())) {
                     disableMS1 = true;
-                } else if (v.getCode().substring(10).equals(mealService2.getId().toString()+functionary.getId())) {
+                } else if (v.getCode().substring(10).equals(mealService2.getId().toString() + functionary.getId())) {
                     disableMS2 = true;
                 }
             }
@@ -137,7 +137,7 @@ public class VoucherBean implements Serializable {
             LOGGER.debug("Error al imprimir vale: {}", e.toString(), e);
             FacesUtils.fatalMessage("voucherNotPrinted");
         }
-        
+
         return StringUtils.EMPTY;
     }
 
