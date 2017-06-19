@@ -36,6 +36,14 @@
                                     <p:message for="surname" display="tooltip"/>
                                 </div>
                                 <div class="col-xs-12 col-sm-4">
+                                    <p:outputLabel for="email" value="${msg.email}" />
+                                    <p:inputText id="email" value="#{functionaryAdminBean.functionary.email}" converter="TrimConverter"
+                                                 required="true" validatorMessage="${msg.invalidEmail}">
+                                        <f:validateRegex pattern="#{regexBean.email}"/>
+                                    </p:inputText>
+                                    <p:message for="email" display="tooltip"/>
+                                </div>
+                                <div class="col-xs-12 col-sm-4">
                                     <p:outputLabel for="rut" value="${msg.rut}" />
                                     <p:inputText id="rut" value="#{functionaryAdminBean.functionary.rut}" converter="RutConverter"
                                                  required="true">
@@ -88,6 +96,10 @@
 
                                     <p:column headerText="${msg.rut}" filterBy="#{currentRow.rut}" filterMatchMode="contains">
                                         <h:outputText value="#{currentRow.rut}" converter="RutConverter" />
+                                    </p:column>
+
+                                    <p:column headerText="${msg.email}" filterBy="#{currentRow.email}" filterMatchMode="contains">
+                                        <h:outputText value="#{currentRow.email}"/>
                                     </p:column>
 
                                     <p:column headerText="${msg.jobTitle}" filterBy="#{currentRow.jobTitle.name}" filterMatchMode="contains">

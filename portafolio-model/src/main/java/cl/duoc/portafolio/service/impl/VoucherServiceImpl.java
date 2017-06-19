@@ -78,7 +78,7 @@ public class VoucherServiceImpl implements VoucherService, Serializable {
                 end.setTime(date);
 
                 start.setTime(date);
-                start.set(start.get(Calendar.YEAR), start.get(Calendar.MONTH), start.get(Calendar.DATE), 0, 0, 0);                
+                start.set(start.get(Calendar.YEAR), start.get(Calendar.MONTH), start.get(Calendar.DATE), 0, 0, 0);
                 end.setTime(date);
                 end.set(end.get(Calendar.YEAR), end.get(Calendar.MONTH), end.get(Calendar.DATE), 23, 59, 59);
 
@@ -272,6 +272,21 @@ public class VoucherServiceImpl implements VoucherService, Serializable {
             LOGGER.debug("Error al obtener montos de vales: {}", e.toString());
         }
         return voucherAmounts;
+    }
+
+    @Override
+    public Integer getVoucherCount(MealService mealService) {
+        Integer count = 0;
+        try {
+            if (mealService != null) {
+                count = Integer.parseInt(voucherRepository.countByMealService(mealService).toString());
+            }
+        } catch (Exception e) {
+            count = 0;
+            LOGGER.error("Error al obtener counteo de vales: {}", e.toString());
+            LOGGER.debug("Error al obtener counteo de vales: {}", e.toString());
+        }
+        return count;
     }
 
 }

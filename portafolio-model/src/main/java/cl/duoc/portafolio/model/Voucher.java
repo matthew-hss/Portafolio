@@ -43,6 +43,9 @@ public class Voucher extends BaseBean{
     @JoinColumn(name = "VOUCHERAMOUNT_ID", referencedColumnName = "ID" ,nullable = false)
     @ManyToOne(optional = false)
     private VoucherAmount voucherAmount = null;
+    @JoinColumn(name = "MEALSERVICE_ID", referencedColumnName = "ID" ,nullable = false)
+    @ManyToOne(optional = false)
+    private MealService mealService = null;
 
     public VoucherAmount getVoucherAmount() {
         return voucherAmount;
@@ -99,6 +102,16 @@ public class Voucher extends BaseBean{
     public void setSale(Sale sale) {
         this.sale = sale;
     }  
+
+    public MealService getMealService() {
+        return mealService;
+    }
+
+    public void setMealService(MealService mealService) {
+        this.mealService = mealService;
+    }
+    
+    
 
     @Override
     public int hashCode() {

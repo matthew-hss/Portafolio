@@ -59,6 +59,7 @@ public class FunctionaryUtils implements Serializable {
             hashedFunctionary.setSurname(functionary.getSurname());
             hashedFunctionary.setPassword(hashedPassword);
             hashedFunctionary.setJobTitle(functionary.getJobTitle());
+            hashedFunctionary.setEmail(functionary.getEmail());
         }
         return hashedFunctionary;
     }

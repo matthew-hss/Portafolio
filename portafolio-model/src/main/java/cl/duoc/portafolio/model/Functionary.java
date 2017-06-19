@@ -17,25 +17,28 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author matthew
  */
 @Entity
-@Table(name = "FUNCTIONARY",schema = "PORTAFOLIO")
-public class Functionary extends BaseBean{
+@Table(name = "FUNCTIONARY", schema = "PORTAFOLIO")
+public class Functionary extends BaseBean {
+
     private static final long serialVersionUID = 7226055427557870592L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "functionary_seq_gen")
     @SequenceGenerator(name = "functionary_seq_gen", sequenceName = "FUNCTIONARY_SEQ", allocationSize = 1)
     @XmlTransient
     @Column(name = "ID", nullable = false)
     private Long id = null;
-    @Column(name = "PASSWORD", nullable =false)
+    @Column(name = "PASSWORD", nullable = false)
     private String password = null;
-    @Column(name = "RUT", nullable =false, unique = true)
+    @Column(name = "RUT", nullable = false, unique = true)
     private Integer rut = null;
-    @Column(name = "NAME", nullable =false)
+    @Column(name = "NAME", nullable = false)
     private String name = null;
-    @Column(name = "SURNAME", nullable =false)
+    @Column(name = "SURNAME", nullable = false)
     private String surname = null;
-    @JoinColumn(name = "JOBTITLE_ID", referencedColumnName = "ID", nullable =false)
+    @Column(name = "EMAIL", nullable = false, unique = true)
+    private String email = null;
+    @JoinColumn(name = "JOBTITLE_ID", referencedColumnName = "ID", nullable = false)
     @ManyToOne(optional = false)
     private JobTitle jobTitle = null;
 
@@ -79,6 +82,14 @@ public class Functionary extends BaseBean{
         this.surname = surname;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public JobTitle getJobTitle() {
         return jobTitle;
     }
@@ -111,5 +122,5 @@ public class Functionary extends BaseBean{
         }
         return true;
     }
-    
+
 }

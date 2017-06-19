@@ -1,6 +1,7 @@
 package cl.duoc.portafolio.repository;
 
 import cl.duoc.portafolio.model.Functionary;
+import cl.duoc.portafolio.model.MealService;
 import cl.duoc.portafolio.model.Sale;
 import cl.duoc.portafolio.model.Voucher;
 import java.util.Date;
@@ -22,5 +23,7 @@ public interface VoucherRepository extends JpaRepository<Voucher, Long>{
     public Voucher findByCode(String code);
     
     public List<Voucher> findBySale(Sale sale);
+    
+    public Long countByMealService(MealService mealService);
     
 }
