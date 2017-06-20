@@ -21,7 +21,7 @@
 --  FUNCTIONARIES
 --------------------------------------------------------
 
-        INSERT INTO "PORTAFOLIO"."FUNCTIONARY" (PASSWORD, JOBTITLE_ID, NAME, SURNAME, RUT, EMAIL) VALUES ('e9bdfe21f395dfaec00aa996bd1009daa7d1c9038963308aa526000c6217ab989ddfb5142faf1738ddd0bbc18fea4087b2a5ea31078fc846a3a9a8dcbab17bc6', 1, 'Javier', 'González M.', 15886654, 'jaa.gonzalezm@alumnos.duoc.cl');
+        INSERT INTO "PORTAFOLIO"."FUNCTIONARY" (RUT, NAME, SURNAME, EMAIL, JOBTITLE_ID, PASSWORD) VALUES (15886654, 'Javier', 'González M.', 'jaa.gonzalezm@alumnos.duoc.cl', 1, 'e9bdfe21f395dfaec00aa996bd1009daa7d1c9038963308aa526000c6217ab989ddfb5142faf1738ddd0bbc18fea4087b2a5ea31078fc846a3a9a8dcbab17bc6');
 
 
 --------------------------------------------------------

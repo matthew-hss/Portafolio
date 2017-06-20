@@ -43,7 +43,7 @@
                                     </p:inputText>
                                     <p:message for="email" display="tooltip"/>
                                 </div>
-                                <div class="col-xs-12 col-sm-4">
+                                <div class="col-xs-12 col-sm-3">
                                     <p:outputLabel for="rut" value="${msg.rut}" />
                                     <p:inputText id="rut" value="#{functionaryAdminBean.functionary.rut}" converter="RutConverter"
                                                  required="true">
@@ -51,20 +51,20 @@
                                     </p:inputText>
                                     <p:message id="msgRut" for="rut" display="tooltip"/>
                                 </div>
-                                <div class="col-xs-12 col-sm-4">
+                                <div class="col-xs-12 col-sm-3">
                                     <p:outputLabel for="jobTitle" value="${msg.jobTitle}" />
                                     <p:selectOneMenu id="jobTitle" value="#{functionaryAdminBean.functionary.jobTitle}" converter="BaseBeanConverter">
                                         <f:selectItems value="#{functionaryAdminBean.jobTitles}" var="j" itemLabel="#{j.name}" itemValue="#{j}"/>
                                     </p:selectOneMenu>
                                     <p:message for="jobTitle" display="tooltip"/>
                                 </div>
-                                <div class="col-xs-12 col-sm-4">
+                                <div class="col-xs-12 col-sm-3">
                                     <p:outputLabel for="passOne" value="${msg.password}" />
                                     <p:password id="passOne" value="#{functionaryAdminBean.passOne}" converter="TrimConverter"
                                                 required="#{!functionaryAdminBean.edit}" />
                                     <p:message for="passOne" display="tooltip"/>
                                 </div>
-                                <div class="col-xs-12 col-sm-4">
+                                <div class="col-xs-12 col-sm-3">
                                     <p:outputLabel for="passTwo" value="${msg.passwordRepeat}" />
                                     <p:password id="passTwo" value="#{functionaryAdminBean.passTwo}" converter="TrimConverter"
                                                 required="#{!functionaryAdminBean.edit}"  />
