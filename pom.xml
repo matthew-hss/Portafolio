@@ -13,6 +13,7 @@
         <!--<module>portafolio-webapp</module>-->
         <module>portafolio-portal</module>
         <module>portafolio-application</module>
+        <module>../../svn/cb_mobile/branches/beneficios-20161219-EVO/web/benefits-scheduler</module>
     </modules>
 
     <properties>
