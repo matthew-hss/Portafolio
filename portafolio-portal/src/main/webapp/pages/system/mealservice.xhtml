@@ -22,7 +22,7 @@
                                 <div class="col-xs-12 col-sm-4">
                                     <p:outputLabel for="product" value="${msg.product}" />
                                     <p:selectOneMenu id="product" value="#{mealServiceAdminBean.mealService.product}" converter="BaseBeanConverter">
-                                        <f:selectItem itemLabel="${msg.selectProduct}" noSelectionOption="true" value="#{null}"/>
+                                        <f:selectItem itemLabel="${msg.selectProduct}" noSelectionOption="true" value="#{null}" itemDisabled="true"/>
                                         <f:selectItems value="#{mealServiceAdminBean.products}" var="mealService" itemLabel="#{mealService.name}" itemValue="#{mealService}"/>
                                     </p:selectOneMenu>
                                     <p:message for="product" display="tooltip"/>
