@@ -21,31 +21,31 @@
                                 <div class="col-xs-12 col-sm-4 col-sm-offset-right-8">
                                     <p:outputLabel for="place" value="${msg.place}" />
                                     <p:selectOneMenu id="place" value="#{saleAdminBean.sale.place}" converter="BaseBeanConverter">
-                                        <f:selectItem itemLabel="${msg.selectPlace}" noSelectionOption="true" value="#{null}"/>
+                                        <f:selectItem itemLabel="${msg.selectPlace}" noSelectionOption="true" value="#{null}" itemDisabled="true"/>
                                         <f:selectItems value="#{saleAdminBean.places}" var="sale" itemLabel="#{sale.name}" itemValue="#{sale}"/>
                                     </p:selectOneMenu>
                                     <p:message for="place" display="tooltip"/>
                                 </div>
-                                <div class="col-xs-12 col-sm-4">
+                                <div class="col-xs-6 col-sm-4">
                                     <p:outputLabel value="${msg.product}" />
                                 </div>
-                                <div class="col-xs-12 col-sm-4 col-sm-offset-right-4">
+                                <div class="col-xs-6 col-sm-4 col-sm-offset-right-4">
                                     <p:outputLabel value="${msg.quantity}" />
                                 </div>
                                 <ui:repeat value="#{saleAdminBean.saleItems}" var="saleItem">
-                                    <div class="col-xs-12 col-sm-4">
+                                    <div class="col-xs-6 col-sm-4">
                                         <p:selectOneMenu id="product" value="#{saleItem.product}" converter="BaseBeanConverter">
-                                            <f:selectItem itemLabel="${msg.selectProduct}" noSelectionOption="true" value="#{null}"/>
+                                            <f:selectItem itemLabel="${msg.selectProduct}" noSelectionOption="true" value="#{null}" itemDisabled="true"/>
                                             <f:selectItems value="#{saleAdminBean.products}" var="product" itemLabel="#{product.name} - $#{product.price}" itemValue="#{product}"/>
                                         </p:selectOneMenu>
                                         <p:message for="product" display="tooltip"/>
                                     </div>
-                                    <div class="col-xs-12 col-sm-4">
+                                    <div class="col-xs-6 col-sm-4">
                                         <p:inputNumber id="quantity" value="#{saleItem.quantity}" />
                                         <p:message for="quantity" display="tooltip"/>
                                     </div>
                                     <div class="col-xs-12 col-sm-4">
-                                        <p:commandButton styleClass="circleButton" action="#{saleAdminBean.addItem}" value="+" update=":formSale"/>
+                                        <p:commandButton styleClass="circleButton addButton" action="#{saleAdminBean.addItem}" value="+" update=":formSale"/>
                                         <p:commandButton styleClass="circleButton cancelButton" action="#{saleAdminBean.removeItem}" value="-" update=":formSale" rendered="#{saleAdminBean.saleItems.size() > 1 }">
                                              <f:setPropertyActionListener value="#{saleItem}" target="#{saleAdminBean.selectedSaleItem}" />
                                         </p:commandButton>

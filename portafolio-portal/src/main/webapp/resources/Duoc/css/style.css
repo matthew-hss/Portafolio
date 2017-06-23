@@ -505,6 +505,7 @@ input.hasDatepicker{
     background: #ffffff;
     border: 1px solid #cccccc;
     width: 100% !important;
+    min-width: 0 !important;
     height: 36px;
     line-height: 25px;
     margin-bottom: 5px;
