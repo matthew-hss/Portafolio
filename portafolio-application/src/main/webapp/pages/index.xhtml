@@ -20,7 +20,6 @@
                             <p:commandButton value="#{voucherBean.mealService2.product.name}" action="#{voucherBean.process}" disabled="#{voucherBean.disableMS2}" update=":voucherForm :voucherPanel">
                                 <f:setPropertyActionListener value="#{voucherBean.mealService2}" target="#{voucherBean.selectedMealService}" />
                             </p:commandButton>
-                            <p:button href="/pages/functionary/specialvoucher.jsf" value="${msg.specialVouchers}" rendered="#{(specialVoucherBean.hasSpecialVouchers) || (sessionBean.functionary.jobTitle.name eq 'Secretaria')}" />
                             
                             <div><p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" /></div>
                         </h:form>

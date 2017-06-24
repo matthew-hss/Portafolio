@@ -13,6 +13,7 @@
         <!--<module>portafolio-webapp</module>-->
         <module>portafolio-portal</module>
         <module>portafolio-application</module>
+        <module>portafolio-scheduler</module>
     </modules>
 
     <properties>

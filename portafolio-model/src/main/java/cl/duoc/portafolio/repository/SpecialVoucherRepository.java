@@ -19,8 +19,6 @@ public interface SpecialVoucherRepository extends JpaRepository<SpecialVoucher, 
     
     public List<SpecialVoucher> findByFunctionary(Functionary functionary);
     
-    public List<SpecialVoucher> findByFunctionaryAndUsed(Functionary functionary, Boolean used);
-    
     public SpecialVoucher findByCode(String code);
     
     public List<SpecialVoucher> findBySale(Sale sale);

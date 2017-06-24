@@ -1,4 +1,4 @@
-package cl.experti.benefits.service;
+package cl.duoc.portafolio.service;
 
 import javax.mail.internet.InternetAddress;
 

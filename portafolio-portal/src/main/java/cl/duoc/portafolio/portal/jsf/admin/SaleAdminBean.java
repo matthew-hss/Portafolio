@@ -151,11 +151,6 @@ public class SaleAdminBean implements Serializable {
         }
         return StringUtils.EMPTY;
     }
-
-    public String cancel() {
-        refresh();
-        return StringUtils.EMPTY;
-    }
     
     public List<Sale> getSales() {
         return sales;

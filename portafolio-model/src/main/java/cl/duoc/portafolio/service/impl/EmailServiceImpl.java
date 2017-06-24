@@ -1,6 +1,6 @@
-package cl.experti.benefits.service.impl;
+package cl.duoc.portafolio.service.impl;
 
-import cl.experti.benefits.service.EmailService;
+import cl.duoc.portafolio.service.EmailService;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;

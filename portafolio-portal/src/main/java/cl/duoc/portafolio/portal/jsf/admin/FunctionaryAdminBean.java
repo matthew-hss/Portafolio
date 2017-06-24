@@ -3,6 +3,7 @@ package cl.duoc.portafolio.portal.jsf.admin;
 import cl.duoc.portafolio.model.Functionary;
 import cl.duoc.portafolio.model.JobTitle;
 import cl.duoc.portafolio.portal.utils.FacesUtils;
+import cl.duoc.portafolio.service.EmailService;
 import cl.duoc.portafolio.service.FunctionaryService;
 import cl.duoc.portafolio.utils.FunctionaryUtils;
 import java.io.Serializable;
@@ -27,6 +28,8 @@ public class FunctionaryAdminBean implements Serializable {
 
     private static final long serialVersionUID = 2377930989521500160L;
 
+    @Resource(name = "emailService")
+    private transient EmailService emailService;
     @Resource(name = "functionaryService")
     private transient FunctionaryService functionaryService;
     private Functionary functionary = null;
@@ -97,10 +100,15 @@ public class FunctionaryAdminBean implements Serializable {
             } else {
                 FacesUtils.errorMessage("genericSaveError");
             }
+            
+            boolean flag = emailService.sendMail("matthew.hss@hotmail.com", "Test", "prueba de correo", false);
+            if(flag == true){
+                return StringUtils.EMPTY;
+            }
         } catch (Exception e) {
             LOGGER.error("Error al intentar persistir funcionario: {}", e.toString());
             FacesUtils.fatalMessage("genericSaveError");
-        }
+        }        
         return StringUtils.EMPTY;
     }
 
