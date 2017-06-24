@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/templates/main.xhtml">
+        <ui:define name="content">
+            <p:outputPanel id="panelSpecialVoucherAdmin" rendered="#{sessionBean.adminRole}" styleClass="col-xs-12">
+                
+                <p:panel id="panelSpecialVoucher" style="overflow: hidden;" header="${msg.specialVouchers}">
+                    <div>
+                        <p:outputPanel id="panelForm" >
+                            <h:form id="formSpecialVoucher" enctype="multipart/form-data">
+                                <div class="col-xs-12">
+                                    <h2>
+                                        <h:outputText value="${msg.create}" />
+                                    </h2>
+                                </div>
+                                <div class="col-xs-12 col-sm-4">
+                                    <p:outputLabel for="functionary" value="${msg.functionary}" />
+                                    <p:selectOneMenu id="functionary" value="#{specialVoucherAdminBean.specialVoucher.functionary}" converter="BaseBeanConverter">
+                                        <f:selectItems value="#{specialVoucherAdminBean.functionaries}" var="f" itemLabel="#{f.name} #{f.surname}" itemValue="#{f}"/>
+                                    </p:selectOneMenu>
+                                    <p:message for="functionary" display="tooltip"/>                          
+                                </div>
+                                <div class="col-xs-12 col-sm-4">
+                                    <p:outputLabel for="amount" value="${msg.amount}" />
+                                    <p:inputNumber id="amount" value="#{specialVoucherAdminBean.specialVoucher.amount}" converter="TrimConverter" validatorMessage="${msg.invalidAmount}"
+                                                    symbol="$ " symbolPosition="p" decimalSeparator="," thousandSeparator="."/>
+                                    <p:message for="amount" display="tooltip"/>
+                                </div>
+                                <p:outputPanel style="padding-top: 11px;" class="col-xs-12 col-sm-4">
+                                    <p:commandButton action="#{specialVoucherAdminBean.process}" value="${msg.create}" update=":formSpecialVoucher :panelData" />
+                                </p:outputPanel>
+                                <div class="col-xs-12 col-sm-6 col-sm-offset-right-3 col-sm-offset-3">
+                                    <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+                                </div>
+                            </h:form>
+                        </p:outputPanel>
+                    </div>
+                    <div class="col-xs-12">
+                        <p:outputPanel id="panelData">
+                            <h:form>
+                                <p:dataTable value="#{specialVoucherAdminBean.specialVouchers}" var="currentRow" rows="10" paginator="true" paginatorPosition="bottom">
+                                    <p:column headerText="${msg.functionary}" filterBy="#{currentRow.functionary.name} || #{currentRow.functionary.surname}" filterMatchMode="contains">
+                                        <h:outputText value="#{currentRow.functionary.name} #{currentRow.functionary.surname}" />
+                                    </p:column>
+
+                                    <p:column headerText="${msg.amount}" filterBy="#{currentRow.amount}" filterMatchMode="contains">
+                                        <h:outputText value="#{currentRow.amount}" >
+                                            <f:convertNumber type="currency" currencySymbol="$ " maxFractionDigits="0" />
+                                        </h:outputText>
+                                    </p:column>
+
+                                    <p:column headerText="${msg.code}" filterBy="#{currentRow.code}" filterMatchMode="contains">
+                                        <h:outputText value="#{currentRow.code}" />
+                                    </p:column>
+
+                                    <p:column headerText="${msg.actions}">
+                                        <p:commandLink title="${msg.delete}">
+                                            <f:setPropertyActionListener value="#{currentRow}" target="#{specialVoucherAdminBean.specialVoucher}"/>
+                                            <p:ajax event="click" oncomplete="PF('deletePopUp').show();" />
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </p:commandLink>
+                                    </p:column>    
+                                </p:dataTable>
+
+                                <p:dialog id="deleteDialog" widgetVar="deletePopUp" header="${msg.delete}" modal="true">
+                                    <h:outputText value="${msg.deleteSpecialVoucher}" />
+                                    <p:commandButton value="${msg.yes}" action="#{specialVoucherAdminBean.delete}" update=":formSpecialVoucher :panelData" />
+
+                                    <p:commandButton value="${msg.no}" styleClass="cancelButton">
+                                        <p:ajax event="click" oncomplete="PF('deletePopUp').hide();" />
+                                    </p:commandButton>
+                                </p:dialog>
+
+                            </h:form>
+                        </p:outputPanel>        
+                    </div>
+                </p:panel>
+            </p:outputPanel>
+            <p:outputPanel id="panelFunctionaryGeneral" rendered="#{sessionBean.userRole || sessionBean.staffRole}" styleClass="col-xs-12">
+                <div style="text-align:center;">
+                    <h1>Error 403</h1><h2>Acceso no permitido</h2>
+                </div>
+            </p:outputPanel>
+        </ui:define>
+    </ui:composition>
+</html>
