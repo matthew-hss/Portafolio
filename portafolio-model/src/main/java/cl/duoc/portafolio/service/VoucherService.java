@@ -4,6 +4,7 @@ import cl.duoc.portafolio.model.JobTitle;
 import cl.duoc.portafolio.model.Functionary;
 import cl.duoc.portafolio.model.Sale;
 import cl.duoc.portafolio.model.MealService;
+import cl.duoc.portafolio.model.SpecialVoucher;
 import cl.duoc.portafolio.model.Voucher;
 import cl.duoc.portafolio.model.VoucherAmount;
 import java.util.Date;
@@ -16,8 +17,6 @@ import java.util.List;
 public interface VoucherService {
     
     public Voucher getVoucher(final Long id);
-    
-    public Integer getVoucherCount(final MealService mealService);
     
     public Voucher getVoucher(final String code);
     
@@ -32,6 +31,24 @@ public interface VoucherService {
     public Voucher save(final Voucher voucher);
     
     public boolean delete(final Voucher voucher);
+    
+    public SpecialVoucher getSpecialVoucher(final Long id);
+    
+    public SpecialVoucher getSpecialVoucher(final String code);
+    
+    public List<SpecialVoucher> getSpecialVouchers(final Date date);
+    
+    public List<SpecialVoucher> getSpecialVouchers();
+    
+    public List<SpecialVoucher> getSpecialVouchers(final Functionary functionary);
+    
+    public List<SpecialVoucher> getSpecialVouchers(final Sale sale);
+    
+    public SpecialVoucher save(final SpecialVoucher specialVoucher);
+    
+    public boolean delete(final SpecialVoucher specialVoucher);
+    
+    public Integer getVoucherCount(final MealService mealService);
     
     public VoucherAmount getVoucherAmount(final Long id);
     
