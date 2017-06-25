@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:loadBundle basename="messages" var="msg" />
+
+    <f:view contentType="text/html">
+        <h:head>
+            <title>
+                <ui:insert name="title">${msg.pageTitle}</ui:insert>
+            </title>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+            <link rel="icon" type="image/png" href="#{request.contextPath}/resources/Duoc/img/favicon.png" />
+
+            <h:outputStylesheet library="Duoc" name="css/bootstrap-grid.css" />
+            <h:outputStylesheet library="Duoc" name="css/style.css" />
+            <h:outputStylesheet library="Duoc" name="css/font-awesome.css" />
+
+            <!--[if lt IE 9]>
+                <script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <![endif]-->
+        </h:head>
+
+        <h:body>
+            <p:tooltip />
+            <h:outputScript library="Duoc" name="js/pf_calendar_es.js" />
+
+            <div class="wrapper">
+                <section id="header" class="col-xs-12">
+                    <div id="header-logo" class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                        <h:graphicImage alt="logo" library="Duoc" name="img/fondo-logo.png" />
+                    </div>
+                </section>
+
+                <ui:insert name="content" />
+
+                <!-- STYCKY FOOTER -->
+                <div class="push"></div>
+            </div>
+
+            <section id="footer">
+                <p>Duoc UC - Analista Programador Computacional - 2017.</p>
+            </section>
+        </h:body>
+    </f:view>
+</html>

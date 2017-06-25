@@ -255,6 +255,21 @@ public class VoucherServiceImpl implements VoucherService, Serializable {
     }
 
     @Override
+    public List<SpecialVoucher> getSpecialVouchers(Functionary functionary, Boolean used) {
+        List<SpecialVoucher> specialVouchers = new ArrayList<>();
+        try {
+            if (functionary != null) {
+                specialVouchers = specialVoucherRepository.findByFunctionaryAndUsed(functionary, used);
+            }
+        } catch (Exception e) {
+            specialVouchers = new ArrayList<>();
+            LOGGER.error("Error al obtener vales especiales: {}", e.toString());
+            LOGGER.debug("Error al obtener vales especiales: {}", e.toString());
+        }
+        return specialVouchers;
+    }
+
+    @Override
     public List<SpecialVoucher> getSpecialVouchers(Sale sale) {
         List<SpecialVoucher> specialVouchers = new ArrayList<>();
         try {

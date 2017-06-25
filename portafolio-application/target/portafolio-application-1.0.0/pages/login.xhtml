@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/templates/public.xhtml">
+        <ui:define name="content">
+            <section id="loginWrap" class="col-xs-12">
+                <h1 id="mainTitle"><h:outputText value="${msg.welcome}" /></h1>
+                <div>
+                    <h:form id="loginForm" prependId="false">
+                        <!-- formulario de login -->
+                        <p:outputPanel id="panelLogin" styleClass="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                            <p:inputText id="username" value="#{loginBean.rut}" converter="RutConverter"
+                                         placeholder="${msg.rut}" required="true">
+                                <p:ajax event="change" update="@this msgUsername" />
+                            </p:inputText>
+                            <p:message id="msgUsername" for="username" display="tooltip" />
+
+                            <p:password id="password" value="#{loginBean.password}"
+                                        converter="TrimConverter" placeholder="${msg.password}" required="true" />
+                            <p:message id="msgPassword" for="password" display="tooltip" />
+
+                            <p:commandButton id="btnlogin" value="${msg.login}" action="#{loginBean.process}" 
+                                             ajax="false" update=":loginForm" />
+
+                            <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+                        </p:outputPanel>
+                    </h:form>
+                </div>
+            </section>
+        </ui:define>
+    </ui:composition>
+</html>

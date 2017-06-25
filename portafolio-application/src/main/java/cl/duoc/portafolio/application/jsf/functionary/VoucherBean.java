@@ -117,7 +117,7 @@ public class VoucherBean implements Serializable {
         Voucher voucher = new Voucher();
 
         try {
-            String code = sdf.format(today) + "00" + selectedMealService.getId() + functionary.getId();
+            String code = "111" + sdf.format(today) + "00" + selectedMealService.getId() + functionary.getId();
             voucher.setCode(code);
             voucher.setFunctionary(functionary);
             voucher.setVoucherAmount(voucherService.getVoucherAmount(functionary.getJobTitle(), selectedMealService));

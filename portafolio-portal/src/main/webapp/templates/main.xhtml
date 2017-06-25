@@ -57,8 +57,8 @@
                                     <p:menuitem value="${msg.places}" url="/pages/system/place.jsf" update=":menuBar"/>
                                 </p:submenu>
                                 <p:submenu styleClass="menuVouchers" label="${msg.vouchers}">
-                                    <!-- p:menuitem value="${msg.vouchers}" url="/pages/system/voucher.jsf" update=":menuBar"/ -->
                                     <p:menuitem value="${msg.voucherAmounts}" url="/pages/system/voucheramount.jsf" update=":menuBar"/>
+                                    <p:menuitem value="${msg.specialVouchers}" url="/pages/system/specialvoucher.jsf" update=":menuBar"/>
                                     <p:menuitem value="${msg.voucherCount}" url="/pages/system/vouchercount.jsf" update=":menuBar"/>
                                 </p:submenu>
                                 <p:submenu styleClass="menuAccount" label="${sessionBean.user.name}">
@@ -75,7 +75,6 @@
                                     <p:menuitem value="${msg.places}" url="/pages/system/place.jsf" update=":menuBar"/>
                                 </p:submenu>
                                 <p:submenu styleClass="menuVouchers" label="${msg.vouchers}">
-                                    <!-- p:menuitem value="${msg.vouchers}" url="/pages/system/voucher.jsf" update=":menuBar"/ -->
                                     <p:menuitem value="${msg.voucherAmounts}" url="/pages/system/voucheramount.jsf" update=":menuBar"/>
                                 </p:submenu>
                                 <p:submenu styleClass="menuAccount" label="${sessionBean.user.name}">

@@ -2,10 +2,6 @@ package cl.duoc.portafolio.service;
 
 import javax.mail.internet.InternetAddress;
 
-/**
- *
- * @author Sebastián Salazar Molina
- */
 public interface EmailService {
 
     /**

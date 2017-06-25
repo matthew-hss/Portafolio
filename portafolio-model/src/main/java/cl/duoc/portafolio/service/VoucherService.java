@@ -42,6 +42,8 @@ public interface VoucherService {
     
     public List<SpecialVoucher> getSpecialVouchers(final Functionary functionary);
     
+    public List<SpecialVoucher> getSpecialVouchers(final Functionary functionary, final Boolean used);
+    
     public List<SpecialVoucher> getSpecialVouchers(final Sale sale);
     
     public SpecialVoucher save(final SpecialVoucher specialVoucher);

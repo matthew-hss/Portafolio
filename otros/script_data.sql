@@ -15,13 +15,16 @@
 	INSERT INTO "PORTAFOLIO"."JOBTITLE" (NAME) VALUES ('Jefe');
 	INSERT INTO "PORTAFOLIO"."JOBTITLE" (NAME) VALUES ('Secretaria');
 	INSERT INTO "PORTAFOLIO"."JOBTITLE" (NAME) VALUES ('Obrero');
+	INSERT INTO "PORTAFOLIO"."JOBTITLE" (NAME) VALUES ('Invitado');
 
 
 --------------------------------------------------------
 --  FUNCTIONARIES
 --------------------------------------------------------
 
+        INSERT INTO "PORTAFOLIO"."FUNCTIONARY" (RUT, NAME, SURNAME, EMAIL, JOBTITLE_ID, PASSWORD) VALUES (99999999, 'Usuario', 'Invitado', 'librosimpresoscl@gmail.com', 5, 'd524e835ab7f9f49473720512c9539e46c5f78cad0f0ba77e0429a46e74831a0dc6ce820730d98f4683580857e5d108fe737986435c8b862d47deeb74ba0c4ec');
         INSERT INTO "PORTAFOLIO"."FUNCTIONARY" (RUT, NAME, SURNAME, EMAIL, JOBTITLE_ID, PASSWORD) VALUES (15886654, 'Javier', 'González M.', 'jaa.gonzalezm@alumnos.duoc.cl', 1, 'e9bdfe21f395dfaec00aa996bd1009daa7d1c9038963308aa526000c6217ab989ddfb5142faf1738ddd0bbc18fea4087b2a5ea31078fc846a3a9a8dcbab17bc6');
+        INSERT INTO "PORTAFOLIO"."FUNCTIONARY" (RUT, NAME, SURNAME, EMAIL, JOBTITLE_ID, PASSWORD) VALUES (11111111, 'Carol', 'Wilson', 'carolwilson@duoc.cl', 3, 'c5009d256794f45002375924904c2b6b4e50b93ce7f4602d2f63446481f6b94b0ab5a80f41f48018d29c0d8f85165a0654a048dff9594d3a9823e7f756e7d5e4');
 
 
 --------------------------------------------------------
@@ -90,4 +93,4 @@
 --  WORKSHIFT ASSIGNMENT
 --------------------------------------------------------
 
-        INSERT INTO PORTAFOLIO.WSASSIGNMENT (STARTDATE,ENDDATE,WORKSHIFT_ID,FUNCTIONARY_ID) values (to_date('01/05/17','DD/MM/RR'),to_date('30/06/17','DD/MM/RR'),'1','1');
+        INSERT INTO PORTAFOLIO.WSASSIGNMENT (STARTDATE,ENDDATE,WORKSHIFT_ID,FUNCTIONARY_ID) values (to_date('01/05/17','DD/MM/RR'),to_date('30/06/17','DD/MM/RR'),'1','2');

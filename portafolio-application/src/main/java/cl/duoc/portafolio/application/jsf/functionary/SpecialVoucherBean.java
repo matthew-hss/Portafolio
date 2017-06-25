@@ -7,16 +7,13 @@ package cl.duoc.portafolio.application.jsf.functionary;
 
 import cl.duoc.portafolio.application.jsf.SessionBean;
 import cl.duoc.portafolio.model.Functionary;
-import cl.duoc.portafolio.model.Voucher;
 import cl.duoc.portafolio.application.utils.FacesUtils;
 import cl.duoc.portafolio.model.SpecialVoucher;
 import cl.duoc.portafolio.service.FunctionaryService;
 import cl.duoc.portafolio.service.SaleService;
 import cl.duoc.portafolio.service.VoucherService;
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:loadBundle basename="messages" var="msg" />
+
+    <f:view contentType="text/html">
+        <h:head>
+            <title>
+                <ui:insert name="title">${msg.pageTitle}</ui:insert>
+            </title>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+            <link rel="icon" type="image/png" href="#{request.contextPath}/resources/Duoc/img/favicon.png" />
+
+            <!--h:outputStylesheet library="Duoc" name="css/bootstrap.css" />
+            <h:outputStylesheet library="Duoc" name="css/bootstrap-theme.css" /-->
+            <h:outputStylesheet library="Duoc" name="css/bootstrap-grid.css" />
+            <h:outputStylesheet library="Duoc" name="css/style.css" />
+
+            <h:outputStylesheet library="Duoc" name="css/font-awesome.css" />
+
+            <!--[if lt IE 9]>
+                <script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <![endif]-->
+
+        </h:head>
+
+        <h:body>
+            <p:tooltip />
+            <h:outputScript library="Duoc" name="js/pf_calendar_es.js" />
+
+            <div class="wrapper">
+                <section id="header" class="col-xs-12">
+                    <div id="header-logo" class="col-md-3">
+                        <h:graphicImage alt="logo" library="Duoc" name="img/fondo-logo.png" />
+                    </div>
+                    <div class="col-md-9">
+                        <h:form id="menuBar" prependId="false">
+                            <!-- Menú -->
+                            <p:menubar>
+                                <p:submenu styleClass="menuAccount" label="${sessionBean.functionary.name} ${sessionBean.functionary.surname}">
+                                    <!-- p:menuitem value="${msg.myAccount}" url="/pages/system/account.jsf" update=":menuBar"/ -->
+                                    <p:menuitem styleClass="menuLogout" value="${msg.logout}" url="/logout" />
+                                </p:submenu>
+                            </p:menubar>
+                        </h:form>  
+                    </div>
+                </section>
+
+                <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                    <p:graphicImage library="Duoc" name="img/ajax-loader.gif" />
+                </p:dialog>
+                <section id="content" class="wrap">
+                    <ui:insert name="content" />
+                </section>
+
+                <!-- STYCKY FOOTER -->
+                <div class="push"></div>
+            </div>
+
+            <section id="footer">
+                <p>Duoc UC - Analista Programador Computacional - 2017.</p>
+            </section>
+        </h:body>
+    </f:view>
+</html>
