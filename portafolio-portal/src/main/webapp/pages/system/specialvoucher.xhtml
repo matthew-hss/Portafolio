@@ -48,14 +48,19 @@
                                         <h:outputText value="#{currentRow.functionary.name} #{currentRow.functionary.surname}" />
                                     </p:column>
 
-                                    <p:column headerText="${msg.amount}" filterBy="#{currentRow.amount}" filterMatchMode="contains">
+                                    <p:column style="text-align: center;" headerText="${msg.amount}" filterBy="#{currentRow.amount}" filterMatchMode="contains">
                                         <h:outputText value="#{currentRow.amount}" >
                                             <f:convertNumber type="currency" currencySymbol="$ " maxFractionDigits="0" />
                                         </h:outputText>
                                     </p:column>
 
-                                    <p:column headerText="${msg.code}" filterBy="#{currentRow.code}" filterMatchMode="contains">
+                                    <p:column style="text-align: center;" headerText="${msg.code}" filterBy="#{currentRow.code}" filterMatchMode="contains">
                                         <h:outputText value="#{currentRow.code}" />
+                                    </p:column>
+
+                                    <p:column style="text-align: center;" headerText="${msg.status}" >
+                                        <h:outputText value="${msg.used}" rendered="#{currentRow.used}" />
+                                        <h:outputText value="${msg.notUsed}" rendered="#{!currentRow.used}" />
                                     </p:column>
 
                                     <p:column headerText="${msg.actions}">

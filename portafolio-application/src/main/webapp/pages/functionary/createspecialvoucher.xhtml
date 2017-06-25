@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/templates/main.xhtml">
+        <ui:define name="content">
+            <p:outputPanel id="panelSpecialVoucher" rendered="#{sessionBean.functionary.jobTitle.name eq 'Secretaria'}" styleClass="col-xs-12">
+                <div style="text-align:center;">
+                    <p:outputPanel id="panelForm" styleClass="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                        <h:form id="formSpecialVoucher" enctype="multipart/form-data">
+                            <div class="col-xs-12">
+                                <h2>
+                                    <h:outputText value="${msg.create}" />
+                                </h2>
+                            </div>
+                            <div class="col-xs-12">
+                                <p:inputNumber id="quantity" value="#{createSpecialVoucherBean.quantity}" converter="TrimConverter" >
+                                    <p:watermark for="quantity" value="${msg.quantity}" id="watermark-qty" />
+                                </p:inputNumber>
+                                <p:message for="quantity" display="tooltip"/>                          
+                            </div>
+                            <div class="col-xs-12">
+                                <p:inputNumber id="amount" value="#{createSpecialVoucherBean.amount}" converter="TrimConverter" validatorMessage="${msg.invalidAmount}"
+                                               symbol="$ " symbolPosition="p" decimalSeparator="," thousandSeparator=".">
+
+                                    <p:watermark for="amount" value="${msg.amount}" id="watermark-amt" />
+                                </p:inputNumber>
+                                <p:message for="amount" display="tooltip"/>
+                            </div>
+                            <p:outputPanel class="col-xs-12">
+                                <p:commandButton action="#{createSpecialVoucherBean.process}" value="${msg.create}" update=":formSpecialVoucher :voucherPanel" />
+                            </p:outputPanel>
+                            <div class="col-xs-12">
+                                <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+                            </div>
+                        </h:form>
+                    </p:outputPanel>
+                    <p:outputPanel style="padding-top: 11px;" styleClass="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                        <h:form id="voucherPanel" prependId="false">
+                            <p:outputPanel rendered="#{createSpecialVoucherBean.showVouchers}">
+                                <h2>
+                                    <h:outputText value="VOUCHERS" /><br/>
+                                    <h:outputText value="Monto: $#{createSpecialVoucherBean.lastAmount}" />
+                                </h2>
+                                <br/><br/>
+                                <ui:repeat value="#{createSpecialVoucherBean.specialVouchers}" var="specialVoucher" varStatus="svStatus">
+                                    <p:outputLabel value="#{specialVoucher.functionary.surname} #{svStatus.index+1}" /><br/>
+                                    <p:outputLabel value="Código: #{specialVoucher.code}" /><br/><br/>
+                                </ui:repeat>
+
+                            </p:outputPanel>
+                        </h:form>
+                    </p:outputPanel>
+                </div>
+            </p:outputPanel>
+            <p:outputPanel id="panelFunctionaryGeneral" rendered="#{sessionBean.functionary.jobTitle.name ne 'Secretaria'}" styleClass="col-xs-12">
+                <div style="text-align:center;">
+                    <h1>Error 403</h1><h2>Acceso no permitido</h2>
+                </div>
+            </p:outputPanel>
+        </ui:define>
+    </ui:composition>
+</html>
