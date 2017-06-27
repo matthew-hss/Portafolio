@@ -94,3 +94,4 @@
 --------------------------------------------------------
 
         INSERT INTO PORTAFOLIO.WSASSIGNMENT (STARTDATE,ENDDATE,WORKSHIFT_ID,FUNCTIONARY_ID) values (to_date('01/05/17','DD/MM/RR'),to_date('30/06/17','DD/MM/RR'),'1','2');
+        INSERT INTO PORTAFOLIO.WSASSIGNMENT (STARTDATE,ENDDATE,WORKSHIFT_ID,FUNCTIONARY_ID) values (to_date('01/05/17','DD/MM/RR'),to_date('30/06/17','DD/MM/RR'),'2','3');

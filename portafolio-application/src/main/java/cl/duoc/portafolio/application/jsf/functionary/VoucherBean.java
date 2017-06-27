@@ -103,9 +103,9 @@ public class VoucherBean implements Serializable {
         vouchers = voucherService.getVouchers(today);
         for (Voucher v : vouchers) {
             if (v.getFunctionary().equals(functionary)) {
-                if (v.getCode().substring(10).equals(mealService1.getId().toString() + functionary.getId())) {
+                if (v.getCode().substring(13).equals(mealService1.getId().toString() + functionary.getId())) {
                     disableMS1 = true;
-                } else if (v.getCode().substring(10).equals(mealService2.getId().toString() + functionary.getId())) {
+                } else if (v.getCode().substring(13).equals(mealService2.getId().toString() + functionary.getId())) {
                     disableMS2 = true;
                 }
             }
