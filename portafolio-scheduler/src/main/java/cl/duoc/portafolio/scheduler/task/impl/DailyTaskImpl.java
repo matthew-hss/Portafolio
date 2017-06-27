@@ -1,6 +1,7 @@
 package cl.duoc.portafolio.scheduler.task.impl;
 
 import cl.duoc.portafolio.model.Functionary;
+import cl.duoc.portafolio.model.SpecialVoucher;
 import cl.duoc.portafolio.model.Voucher;
 import cl.duoc.portafolio.model.WsAssignment;
 import cl.duoc.portafolio.scheduler.task.DailyTask;
@@ -43,13 +44,29 @@ public class DailyTaskImpl implements DailyTask, Serializable {
             LOGGER.info("Inicio de tarea Enviar Correos Electrónicos");
             List<Functionary> functionaries = functionaryService.getFunctionaries();
 
-            for (Functionary functionary : functionaries) {                
+            for (Functionary functionary : functionaries) {
+                int used = 0;
+                int notUsed = 0;
+                if (functionary.getId() == 1) {
+                    List<SpecialVoucher> specialVouchers = voucherService.getSpecialVouchers(functionary);
+
+                    for (SpecialVoucher specialVoucher : specialVouchers) {
+                        if (specialVoucher.isUsed()) {
+                            used++;
+                        } else {
+                            notUsed++;
+                        }
+                    }
+
+                    String message = "Estimado/a Libros Impresos S.A: \nLe informamos que el resumen para ésta semana respecto a sus vales de alimentación es el siguiente: \n\nVales usados: " + used + "\nVales no usados: " + notUsed + "\n\nLe recordamos que los vales que no sean utilizados durante la jornada de trabajo, no podrán ser utilizados, independiente de cual sea el motivo.\n\n\nAtte. Libros Impresos S.A.";
+                    emailService.sendMail(functionary.getEmail(), "Información vales de alimentación", message, false);
+                    LOGGER.info("Email enviado a: {} ", functionary.getName() + " " + functionary.getSurname());
+                } else {
+
                     WsAssignment wsAssignment = functionaryService.getWsAssignment(functionary);
                     if (wsAssignment != null) {
                         List<Voucher> vouchersFunctionary = voucherService.getVouchers(functionary);
-                        int used = 0;
-                        int notUsed = 0;
-                        
+
                         for (Voucher voucher : vouchersFunctionary) {
                             if (voucher.isUsed()) {
                                 used++;
@@ -57,16 +74,17 @@ public class DailyTaskImpl implements DailyTask, Serializable {
                                 notUsed++;
                             }
                         }
-                        
-                        int available = (DateUtils.getWorkingDaysBetweenTwoDates(wsAssignment.getStartDate(), wsAssignment.getEndDate()))*2-(used+notUsed);
-                        
-                        String message = "Estimado/a " + functionary.getName() + " " + functionary.getSurname() + ": \nLe informamos que el resumen para ésta semana respecto a sus vales de alimentación es el siguiente: \n\nVales usados: " + used + "\nVales no usados: " + notUsed + "\nVales disponbles: "+ available + "\n\nLe recordamos que los vales que no sean utilizados durante la jornada de trabajo, no podrán ser utilizados, independendiente de cual sea el motivo.\n\n\nAtte. Libros Impresos S.A.";
+
+                        int available = (DateUtils.getWorkingDaysBetweenTwoDates(wsAssignment.getStartDate(), wsAssignment.getEndDate())) * 2 - (used + notUsed);
+
+                        String message = "Estimado/a " + functionary.getName() + " " + functionary.getSurname() + ": \nLe informamos que el resumen para ésta semana respecto a sus vales de alimentación es el siguiente: \n\nVales usados: " + used + "\nVales no usados: " + notUsed + "\nVales disponbles: " + available + "\n\nLe recordamos que los vales que no sean utilizados durante la jornada de trabajo, no podrán ser utilizados, independiente de cual sea el motivo.\n\n\nAtte. Libros Impresos S.A.";
                         emailService.sendMail(functionary.getEmail(), "Información vales de alimentación", message, false);
                         LOGGER.info("Email enviado a: {} ", functionary.getName() + " " + functionary.getSurname());
                         LOGGER.info("Total Días: {} ", (DateUtils.getWorkingDaysBetweenTwoDates(wsAssignment.getStartDate(), wsAssignment.getEndDate())));
-                        LOGGER.info("Días a restar: {} ", (used+notUsed));
+                        LOGGER.info("Días a restar: {} ", (used + notUsed));
                         LOGGER.info("Disponibles: {} ", available);
                     }
+                }
             }
             LOGGER.info("Término de tarea Enviar Correos Electrónicos");
         } catch (Exception e) {
