@@ -19,7 +19,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "FUNCTIONARY", schema = "PORTAFOLIO")
 public class Functionary extends BaseBean {
-
     private static final long serialVersionUID = 7226055427557870592L;
 
     @Id

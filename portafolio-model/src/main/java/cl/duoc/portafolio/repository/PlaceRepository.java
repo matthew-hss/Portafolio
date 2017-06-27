@@ -1,7 +1,6 @@
 package cl.duoc.portafolio.repository;
 
 import cl.duoc.portafolio.model.Place;
-import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.data.jpa.repository.JpaRepository;
 

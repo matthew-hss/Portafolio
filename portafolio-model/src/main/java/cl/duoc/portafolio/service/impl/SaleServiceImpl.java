@@ -166,14 +166,14 @@ public class SaleServiceImpl implements SaleService, Serializable {
         Place saved = null;
         try {
             if (place != null) {
-                saved = placeRepository.save(saved);
+                saved = placeRepository.save(place);
             }
         } catch (Exception e) {
             saved = null;
             LOGGER.error("Error al guardar lugar: {}", e.toString());
             LOGGER.debug("Error al guardar lugar: {}", e.toString());
         }
-        return place;
+        return saved;
     }
 
     @Override
@@ -193,7 +193,7 @@ public class SaleServiceImpl implements SaleService, Serializable {
         return deleted;
     }
 
-    @Override
+    @Override    
     public Product getProduct(Long id) {
         Product product = null;
         try {
@@ -375,7 +375,7 @@ public class SaleServiceImpl implements SaleService, Serializable {
 
     @Override
     public MealService getMealService(Product product) {
-        MealService mealService= null;
+        MealService mealService = null;
         try {
             if (product != null) {
                 mealService = mealServiceRepository.findByProduct(product);
@@ -392,7 +392,7 @@ public class SaleServiceImpl implements SaleService, Serializable {
     public MealService save(MealService mealService) {
         MealService save = null;
         try {
-            if(mealService!=null){
+            if (mealService != null) {
                 save = mealServiceRepository.save(mealService);
             }
         } catch (Exception e) {
@@ -407,14 +407,14 @@ public class SaleServiceImpl implements SaleService, Serializable {
     public boolean delete(MealService mealService) {
         boolean ok = false;
         try {
-            if(mealService!=null){
+            if (mealService != null) {
                 mealServiceRepository.delete(mealService);
                 ok = true;
             }
         } catch (Exception e) {
             ok = false;
             LOGGER.error("Error al eliminar servicio de comida: {}", e.toString());
-            LOGGER.debug("Error al eliminar servicio de comida: {}", e.toString());            
+            LOGGER.debug("Error al eliminar servicio de comida: {}", e.toString());
         }
         return ok;
     }

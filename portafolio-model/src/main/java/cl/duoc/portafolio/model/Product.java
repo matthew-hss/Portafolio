@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "PRODUCT",schema = "PORTAFOLIO")
 public class Product extends BaseBean{
-    private static final long serialVersionUID = 7226055427557870592L;
+    private static final long serialVersionUID = 7226055427347870592L;
     
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
