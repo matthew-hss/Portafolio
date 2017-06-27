@@ -3,6 +3,7 @@ package cl.duoc.portafolio.model;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,8 +34,13 @@ public class Sale extends BaseBean{
     @ManyToOne(optional = false)
     private Place place = null;
     @JoinColumn(name = "VOUCHER_ID", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch=FetchType.LAZY)
+//    @ManyToOne(optional = false)
     private Voucher voucher = null;
+    @JoinColumn(name = "SPECIALVOUCHER_ID", referencedColumnName = "ID")
+    @ManyToOne(fetch=FetchType.LAZY)
+//    @ManyToOne(optional = false)
+    private SpecialVoucher specialVoucher = null;
 
     public Long getId() {
         return id;
@@ -67,6 +73,14 @@ public class Sale extends BaseBean{
     public void setVoucher(Voucher voucher) {
         this.voucher = voucher;
     }
+
+    public SpecialVoucher getSpecialVoucher() {
+        return specialVoucher;
+    }
+
+    public void setSpecialVoucher(SpecialVoucher specialVoucher) {
+        this.specialVoucher = specialVoucher;
+    }    
 
     @Override
     public int hashCode() {

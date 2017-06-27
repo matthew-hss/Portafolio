@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-/**
- *
- * @author Sebastián Salazar Molina.
- */
+
 @Component
 @Scope("session")
 @Qualifier("regexBean")
